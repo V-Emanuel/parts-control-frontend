@@ -13,6 +13,10 @@ export const SideBarStyles = styled.header`
   position: absolute;
   left: 0px;
   top: 0px;
+  z-index: 99;
+  border-right: 1px;
+  border-style: solid;
+  border-color: #acacac;
 
   .box-title {
     width: 90%;
