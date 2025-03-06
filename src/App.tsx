@@ -2,15 +2,36 @@ import styled from 'styled-components';
 import GlobalStyle from './styles/GlobalStyles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import Login from './pages/Login';
+import { useState } from 'react';
+import UserContext from './Contexts/UserContext';
 function App() {
+  const tokenLS = localStorage.getItem('token');
+  const nameLS = localStorage.getItem('name');
+  const [token, setToken] = useState<string | null>(tokenLS);
+  const [name, setName] = useState<string | null>(nameLS);
+
+  function setTokenLS(t: string) {
+    setToken(t);
+    localStorage.setItem('token', t);
+  }
+
+  function setNameLS(n: string) {
+    setName(n);
+    localStorage.setItem('name', n);
+  }
+
   return (
     <Body>
       <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      <UserContext.Provider value={{ token, setTokenLS, name, setNameLS }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
     </Body>
   );
 }
