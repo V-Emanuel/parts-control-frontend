@@ -9,10 +9,9 @@ import EntryControl from '../components/Tables/EntryControl';
 import CustomerService from '../components/Tables/CustomerService';
 
 export default function Home() {
-  // Estado para armazenar o componente ativo
+
   const [activeTab, setActiveTab] = useState<any>('Dashboard');
 
-  // Mapeamento das abas para os componentes
   const components: any = {
     Dashboard: <DashBoard />,
     Dados: <Data />,

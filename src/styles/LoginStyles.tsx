@@ -4,20 +4,20 @@ import bg from '../assets/imgs/bg.jpg';
 export const LoginStyles = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #f8f8f8;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(${bg});
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 100%, rgba(0, 0, 0, 0.1) 0%),url(${bg});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
 
   .login-content {
-    width: 74%;
-    height: 74%;
+    width: 76%;
+    height: 76%;
     display: flex;
-    border: 1px solid #f8f8f8;
+    border: 1px solid #f4f4f4;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     .left-content {
       width: 60%;
       height: 100%;
@@ -43,7 +43,7 @@ export const LoginStyles = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      background-color: #ffffff;
+      background-color: #f4f4f4;
 
       p {
         font-size: 58px;
@@ -76,7 +76,7 @@ export const LoginStyles = styled.div`
 
         &:focus {
           border: 1px solid #09152f !important;
-          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         }
       }
       button {

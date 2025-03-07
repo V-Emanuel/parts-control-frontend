@@ -1,22 +1,53 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LoginStyles } from '../styles/LoginStyles';
 import UserContext from '../Contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 export default function Login() {
+
   const userContext = useContext(UserContext);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [usage, setUsage] = useState(false);
+  const {token, setNameLS, setTokenLS} = userContext;
 
   if (!userContext) {
     throw new Error('UserContext não encontrado. Verifique o Provider!');
   }
 
-  const { setTokenLS, setNameLS } = userContext;
+  useEffect(() => {
+    if (token) {
+      navigate(`/dashboard`);
+    }
+  }, []);
 
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  // function handleLogout() {
+  //   localStorage.removeItem("token");
+  //   userContext.setTokenLS("");
+  //   navigate("/");
+  // }
+
 
   function handleLogin(e: React.FormEvent) {
+    console.log("entrou aq")
     e.preventDefault();
-    setNameLS('jorgre');
-    setTokenLS('carlos');
+    const URL = "http://localhost:3333/login"
+    const body = {email, password}
+    setUsage(true)
+    console.log("antes da promise", URL, body)
+    const promise = axios.post(URL, body);
+    console.log("dps da promise", promise)
+    promise.then((res) => {
+      setTokenLS(res.data.data.token);
+      setNameLS(res.data.fullName);
+      navigate("/dashboard")
+    })
+    promise.catch((err) => {
+      console.log("entrou no catch")
+      setUsage(false)
+      alert(err.response.data.message)
+    })
   }
 
   return (
@@ -37,6 +68,7 @@ export default function Login() {
             placeholder="Digite seu e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={usage}
             required
           />
           <label>
@@ -47,6 +79,8 @@ export default function Login() {
             placeholder={`Digite sua senha`}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            disabled={usage}
+            required
           />
           <button type="submit">ENTRAR</button>
         </form>
