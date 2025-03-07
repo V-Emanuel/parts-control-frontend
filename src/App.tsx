@@ -5,9 +5,10 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import { useState } from 'react';
 import UserContext from './Contexts/UserContext';
+import { UserContextType } from './types/user';
 function App() {
-  const tokenLS = localStorage.getItem('token');
-  const nameLS = localStorage.getItem('name');
+  const tokenLS: string | null = localStorage.getItem('token');
+  const nameLS: string | null = localStorage.getItem('name');
   const [token, setToken] = useState<string | null>(tokenLS);
   const [name, setName] = useState<string | null>(nameLS);
 
@@ -21,14 +22,21 @@ function App() {
     localStorage.setItem('name', n);
   }
 
+  const userContextValue: UserContextType = {
+    token,
+    setTokenLS,
+    name,
+    setNameLS,
+  };
+
   return (
     <Body>
       <GlobalStyle />
-      <UserContext.Provider value={{ token, setTokenLS, name, setNameLS }}>
+      <UserContext.Provider value={userContextValue}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/dashboard" element={<Home />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

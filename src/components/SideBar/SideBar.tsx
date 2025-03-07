@@ -1,5 +1,5 @@
 import { SideBarStyles } from './SideBarStyles';
-import peugeot from '../../assets/peugeot_icon.svg';
+import peugeot from '../../assets/imgs/peugeot_icon.svg';
 
 export default function SideBar() {
   return (
