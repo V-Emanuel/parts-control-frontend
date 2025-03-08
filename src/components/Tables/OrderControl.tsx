@@ -25,7 +25,7 @@ export default function OrderControl() {
           'dias pendentes',
           'status',
         ]}
-        search={false}
+        search={true}
         sort={true}
       />
     </TableWrapper>

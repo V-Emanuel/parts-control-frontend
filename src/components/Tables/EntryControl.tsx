@@ -22,7 +22,7 @@ export default function EntryControl() {
           'dias tt',
           'dias estoque',
         ]}
-        search={false}
+        search={true}
         sort={true}
       />
     </TableWrapper>

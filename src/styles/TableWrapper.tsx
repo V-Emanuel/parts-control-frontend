@@ -7,7 +7,7 @@ export const TableWrapper = styled.div`
   overflow-x: auto;
   overflow-y: auto;
   width: 100%;
-  height: 84%;
+  height: 90%;
   box-sizing: border-box;
   border-radius: 10px;
   padding: 20px 20px 20px 0px;

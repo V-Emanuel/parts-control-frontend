@@ -25,7 +25,7 @@ export const HomeStyles = styled.section`
 
     .table-options {
       width: 100%;
-      height: 16%;
+      min-height: 8%;
       background-color: #eff3f6;
       box-sizing: border-box;
       margin: 0px;
@@ -48,7 +48,7 @@ export const HomeStyles = styled.section`
           padding: 0px 20px 0px 20px;
           background-color: transparent;
           border-radius: 8px;
-          background-color: ${theme.colors.primary};
+          background-color: #ffffff;
           transition: 300ms;
           color: #000;
           margin-right: 20px;
@@ -56,14 +56,14 @@ export const HomeStyles = styled.section`
 
           &:hover {
             border-top-left-radius: 10px;
-            background-color: ${theme.colors.secondary};
+            background-color: ${theme.colors.fourt};
             color: #ffffff;
             cursor: pointer;
           }
 
           &.active {
             border-top-left-radius: 10px;
-            background-color: ${theme.colors.secondary};
+            background-color: ${theme.colors.fourt};
             color: #ffffff;
           }
         }
@@ -85,7 +85,7 @@ export const HomeStyles = styled.section`
   }
 
   .gridjs-th {
-    background: ${theme.colors.third};
+    background: ${theme.colors.secondary};
     box-sizing: border-box;
     padding: 12px 14px;
     font-size: 14px;
@@ -94,6 +94,10 @@ export const HomeStyles = styled.section`
     white-space: nowrap;
     min-width: 150px;
     height: 20px;
+
+    &:hover {
+      background-color: ${theme.colors.fourt};
+    }
   }
 
   .gridjs-td {
@@ -103,7 +107,6 @@ export const HomeStyles = styled.section`
 
   .gridjs-tr:nth-child(odd) {
     font-size: 14px;
-    background-color: blue;
   }
 
   .gridjs-tr:nth-child(even) {

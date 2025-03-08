@@ -71,7 +71,7 @@ export default function DashBoard() {
           'aplicacoes',
           'obs',
         ]}
-        search={false}
+        search={true}
         sort={true}
       />
     </TableWrapper>

@@ -15,7 +15,7 @@ export default function CustomerService() {
           order.observations,
         ])}
         columns={['prim', 'sec', 'ter', 'aplicacoes', 'obs']}
-        search={false}
+        search={true}
         sort={true}
       />
     </TableWrapper>

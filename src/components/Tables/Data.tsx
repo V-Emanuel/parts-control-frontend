@@ -29,7 +29,7 @@ export default function Data() {
           'Descriçao',
           'quantidade',
         ]}
-        search={false}
+        search={true}
         sort={true}
       />
     </TableWrapper>
