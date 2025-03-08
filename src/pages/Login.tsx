@@ -4,13 +4,12 @@ import UserContext from '../Contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 export default function Login() {
-
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [usage, setUsage] = useState(false);
-  const {token, setNameLS, setTokenLS} = userContext;
+  const { token, setNameLS, setTokenLS } = userContext;
 
   if (!userContext) {
     throw new Error('UserContext não encontrado. Verifique o Provider!');
@@ -28,26 +27,25 @@ export default function Login() {
   //   navigate("/");
   // }
 
-
   function handleLogin(e: React.FormEvent) {
-    console.log("entrou aq")
+    console.log('entrou aq');
     e.preventDefault();
-    const URL = "http://localhost:3333/login"
-    const body = {email, password}
-    setUsage(true)
-    console.log("antes da promise", URL, body)
+    const URL = 'http://localhost:3333/login';
+    const body = { email, password };
+    setUsage(true);
+    console.log('antes da promise', URL, body);
     const promise = axios.post(URL, body);
-    console.log("dps da promise", promise)
+    console.log('dps da promise', promise);
     promise.then((res) => {
       setTokenLS(res.data.data.token);
       setNameLS(res.data.fullName);
-      navigate("/dashboard")
-    })
+      navigate('/dashboard');
+    });
     promise.catch((err) => {
-      console.log("entrou no catch")
-      setUsage(false)
-      alert(err.response.data.message)
-    })
+      console.log('entrou no catch');
+      setUsage(false);
+      alert(err.response.data.message);
+    });
   }
 
   return (

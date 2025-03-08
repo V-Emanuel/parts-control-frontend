@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import bg from '../assets/imgs/bg.jpg';
+import theme from './theme';
 
 export const LoginStyles = styled.div`
   width: 100%;
@@ -7,7 +8,9 @@ export const LoginStyles = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 100%, rgba(0, 0, 0, 0.1) 0%),url(${bg});
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3) 100%, rgba(0, 0, 0, 0.1) 0%),
+    url(${bg});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -17,11 +20,13 @@ export const LoginStyles = styled.div`
     height: 76%;
     display: flex;
     border: 1px solid #f4f4f4;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    box-shadow:
+      rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+      rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     .left-content {
       width: 60%;
       height: 100%;
-      background-color: #09152f;
+      background-color: ${theme.colors.secondary};
       display: flex;
       align-items: center;
       justify-content: center;
@@ -49,7 +54,7 @@ export const LoginStyles = styled.div`
         font-size: 58px;
         font-weight: 800;
         margin-bottom: 30px;
-        color: #09152f;
+        color: ${theme.colors.secondary};
       }
 
       label {
@@ -75,7 +80,7 @@ export const LoginStyles = styled.div`
         transition: 300ms;
 
         &:focus {
-          border: 1px solid #09152f !important;
+          border: 1px solid ${theme.colors.secondary} !important;
           box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         }
       }
@@ -85,7 +90,7 @@ export const LoginStyles = styled.div`
         margin-top: 10px;
         border-radius: 10px;
         border: 1px solid #ffffff;
-        background-color: #09152f;
+        background-color: ${theme.colors.secondary};
         color: #ffffff;
         font-size: 16px;
         font-weight: 800;
@@ -95,8 +100,8 @@ export const LoginStyles = styled.div`
           cursor: pointer;
           scale: 1.06;
           background-color: #ffffff;
-          border-color: #09152f;
-          color: #09152f;
+          border-color: ${theme.colors.secondary};
+          color: ${theme.colors.secondary};
         }
       }
     }

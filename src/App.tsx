@@ -40,9 +40,9 @@ function App() {
       <UserContext.Provider value={userContextValue}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/jorge" element={<Login />} />
             <Route element={<ProtectedRoute />}>
-              <Route path="/dashboard" element={<Home />} />
+              <Route path="/" element={<Home />} />
             </Route>
           </Routes>
         </BrowserRouter>
@@ -55,7 +55,7 @@ export default App;
 
 const Body = styled.div`
   width: 100vw;
-  background-color: #fff;
+  background-color: red;
   position: relative;
   z-index: 1;
 

@@ -9,7 +9,6 @@ import EntryControl from '../components/Tables/EntryControl';
 import CustomerService from '../components/Tables/CustomerService';
 
 export default function Home() {
-
   const [activeTab, setActiveTab] = useState<any>('Dashboard');
 
   const components: any = {

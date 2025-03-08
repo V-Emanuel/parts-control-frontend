@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from './theme';
 
 export const HomeStyles = styled.section`
   display: flex;
@@ -6,7 +7,7 @@ export const HomeStyles = styled.section`
   justify-content: flex-start;
   width: 100%;
   height: 100vh;
-  background-color: #fff;
+  background-color: ${theme.colors.primary};
 
   .table-content {
     width: 100%;
@@ -20,6 +21,7 @@ export const HomeStyles = styled.section`
     align-items: center;
     white-space: nowrap;
     position: relative;
+    margin-bottom: 30px;
 
     .table-options {
       width: 100%;
@@ -33,11 +35,9 @@ export const HomeStyles = styled.section`
 
       .sub-divisions {
         width: 100%;
-        height: 50px;
+        height: 40px;
         background-color: #eff3f6;
         display: flex;
-        box-sizing: border-box;
-        padding-left: 20px;
 
         .sub {
           width: max-content;
@@ -45,25 +45,26 @@ export const HomeStyles = styled.section`
           display: flex;
           align-items: center;
           box-sizing: border-box;
-          padding: 0px 30px 0px 30px;
+          padding: 0px 20px 0px 20px;
           background-color: transparent;
-          border-top-right-radius: 0px;
-          border-top-left-radius: 0px;
-          /* border-top: 2px solid transparent;
-            border-left: 2px solid transparent;
-            border-right: 2px solid transparent;
-            border-bottom: 2px solid #acacac; */
-          background-color: #eff3f6;
+          border-radius: 8px;
+          background-color: ${theme.colors.primary};
+          transition: 300ms;
+          color: #000;
+          margin-right: 20px;
+          font-size: 14px;
 
           &:hover {
-            /* border-top: 2px solid #acacac;
-              border-left: 2px solid #acacac;
-              border-right: 2px solid #acacac;
-              border-bottom: 2px solid transparent; */
-            border-top-right-radius: 10px;
             border-top-left-radius: 10px;
-            background-color: #fff;
+            background-color: ${theme.colors.secondary};
+            color: #ffffff;
             cursor: pointer;
+          }
+
+          &.active {
+            border-top-left-radius: 10px;
+            background-color: ${theme.colors.secondary};
+            color: #ffffff;
           }
         }
       }
@@ -72,6 +73,10 @@ export const HomeStyles = styled.section`
 
   .gridjs-container {
     font-family: Arial, sans-serif;
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+    height: 80%;
   }
 
   .gridjs-table {
@@ -80,14 +85,28 @@ export const HomeStyles = styled.section`
   }
 
   .gridjs-th {
-    background: #4caf50;
+    background: ${theme.colors.third};
+    box-sizing: border-box;
+    padding: 12px 14px;
+    font-size: 14px;
     color: white;
     font-weight: bold;
     white-space: nowrap;
-    min-width: 180px;
+    min-width: 150px;
+    height: 20px;
+  }
+
+  .gridjs-td {
+    box-sizing: border-box;
+    padding: 10px 14px;
+  }
+
+  .gridjs-tr:nth-child(odd) {
+    font-size: 14px;
+    background-color: blue;
   }
 
   .gridjs-tr:nth-child(even) {
-    background-color: #f2f2f2;
+    font-size: 14px;
   }
 `;
