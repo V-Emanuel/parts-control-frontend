@@ -14,6 +14,7 @@ export const HomeStyles = styled.section`
     height: 100%;
     box-sizing: border-box;
     padding-left: 300px;
+    padding-top: 70px;
     flex-wrap: wrap;
     overflow-y: auto;
     display: flex;
@@ -25,13 +26,18 @@ export const HomeStyles = styled.section`
 
     .table-options {
       width: 100%;
-      min-height: 8%;
+      height: 60px;
       background-color: #eff3f6;
       box-sizing: border-box;
+      padding-left: 150px;
       margin: 0px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      position: fixed;
+      top: 0px;
+      z-index: 999;
+      background-color: transparent;
 
       .sub-divisions {
         width: 100%;
