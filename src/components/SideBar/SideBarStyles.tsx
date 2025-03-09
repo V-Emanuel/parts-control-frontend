@@ -84,5 +84,6 @@ export const SideBarStyles = styled.header`
     height: 1px;
     background-color: ${theme.colors.textColor};
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 `;

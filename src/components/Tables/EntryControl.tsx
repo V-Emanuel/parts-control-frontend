@@ -24,6 +24,9 @@ export default function EntryControl() {
         ]}
         search={true}
         sort={true}
+        pagination={{
+          limit: 100,
+        }}
       />
     </TableWrapper>
   );

@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fa';
 import { FiTruck } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { IoFilter } from 'react-icons/io5';
 
 export default function SideBar() {
   return (

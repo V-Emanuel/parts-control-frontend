@@ -9,6 +9,8 @@ import { getNameById } from '../../assets/functions/getName';
 import { Grid } from 'gridjs-react';
 
 export default function DashBoard() {
+  // Filtrando os dados com base nos filtros fornecidos
+
   return (
     <TableWrapper>
       <Grid
@@ -73,6 +75,9 @@ export default function DashBoard() {
         ]}
         search={true}
         sort={true}
+        pagination={{
+          limit: 100,
+        }}
       />
     </TableWrapper>
   );

@@ -17,6 +17,9 @@ export default function CustomerService() {
         columns={['prim', 'sec', 'ter', 'aplicacoes', 'obs']}
         search={true}
         sort={true}
+        pagination={{
+          limit: 100,
+        }}
       />
     </TableWrapper>
   );

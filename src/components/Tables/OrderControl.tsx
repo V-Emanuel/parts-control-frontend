@@ -27,6 +27,9 @@ export default function OrderControl() {
         ]}
         search={true}
         sort={true}
+        pagination={{
+          limit: 100,
+        }}
       />
     </TableWrapper>
   );

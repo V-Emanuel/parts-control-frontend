@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import 'gridjs/dist/theme/mermaid.css';
-import SideBar from '../components/SideBar/SideBar';
 import { HomeStyles } from '../styles/HomeStyles';
 import DashBoard from '../components/Tables/Dashboard';
 import Data from '../components/Tables/Data';
 import OrderControl from '../components/Tables/OrderControl';
 import EntryControl from '../components/Tables/EntryControl';
 import CustomerService from '../components/Tables/CustomerService';
+import SideBar from '../components/SideBar/SideBar';
+import MyRegisters from '../components/Tables/MyRegisters';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<any>('Dashboard');
+  const [activeTab, setActiveTab] = useState('Dashboard');
 
   const components: any = {
     Dashboard: <DashBoard />,
@@ -17,6 +18,7 @@ export default function Home() {
     'Controle Pedidos': <OrderControl />,
     'Controle Entrada - Estoque': <EntryControl />,
     'Relacionamento com cliente': <CustomerService />,
+    'Meus Registros': <MyRegisters/>
   };
 
   return (

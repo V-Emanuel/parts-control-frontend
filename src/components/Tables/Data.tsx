@@ -31,6 +31,9 @@ export default function Data() {
         ]}
         search={true}
         sort={true}
+        pagination={{
+          limit: 100,
+        }}
       />
     </TableWrapper>
   );
