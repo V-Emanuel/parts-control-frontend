@@ -28,23 +28,20 @@ export default function Login() {
   // }
 
   function handleLogin(e: React.FormEvent) {
-    console.log('entrou aq');
     e.preventDefault();
-    const URL = 'http://localhost:3333/login';
+    const URL = 'http://localhost:1234/login';
     const body = { email, password };
     setUsage(true);
-    console.log('antes da promise', URL, body);
     const promise = axios.post(URL, body);
-    console.log('dps da promise', promise);
     promise.then((res) => {
       setTokenLS(res.data.data.token);
       setNameLS(res.data.fullName);
       navigate('/dashboard');
     });
     promise.catch((err) => {
-      console.log('entrou no catch');
       setUsage(false);
-      alert(err.response.data.message);
+      console.log('jorge', err);
+      alert('dados incorretos');
     });
   }
 

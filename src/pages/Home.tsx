@@ -18,7 +18,7 @@ export default function Home() {
     'Controle Pedidos': <OrderControl />,
     'Controle Entrada - Estoque': <EntryControl />,
     'Relacionamento com cliente': <CustomerService />,
-    'Meus Registros': <MyRegisters/>
+    'Meus Registros': <MyRegisters />,
   };
 
   return (

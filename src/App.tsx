@@ -6,7 +6,9 @@ import Login from './pages/Login';
 import { useEffect, useState } from 'react';
 import UserContext from './Contexts/UserContext';
 import { UserContextType } from './types/user';
-import ProtectedRoute from './components/ProtectedRoute';
+// import ProtectedRoute from './components/ProtectedRoute';
+import theme from './styles/theme';
+import OrderRegister from './pages/OrderRegister';
 function App() {
   const tokenLS: string | null = localStorage.getItem('token');
   const nameLS: string | null = localStorage.getItem('name');
@@ -40,10 +42,11 @@ function App() {
       <UserContext.Provider value={userContextValue}>
         <BrowserRouter>
           <Routes>
-            <Route path="/jorge" element={<Login />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<Home />} />
-            </Route>
+            <Route path="/" element={<Login />} />
+            {/* <Route element={<ProtectedRoute />}> */}
+            <Route path="/dashboard" element={<Home />} />
+            <Route path="/novo-registro" element={<OrderRegister />} />
+            {/* </Route> */}
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
@@ -55,7 +58,7 @@ export default App;
 
 const Body = styled.div`
   width: 100vw;
-  background-color: red;
+  background-color: ${theme.colors.primary};
   position: relative;
   z-index: 1;
 

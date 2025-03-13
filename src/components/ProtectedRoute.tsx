@@ -14,9 +14,10 @@ export default function ProtectedRoute() {
       }
 
       try {
-        const res = await axios.get('http://localhost:3333/validate-token', {
+        const res = await axios.get('http://localhost:1234/validate-token', {
           headers: { Authorization: `Bearer ${token}` },
         });
+        console.log(token);
         setNameLS(res.data.fullName);
       } catch (err) {
         console.log('token inválido');
@@ -28,9 +29,11 @@ export default function ProtectedRoute() {
     validateToken();
   }, [token, setTokenLS, setNameLS]);
 
-  if (!token) {
-    navigate('/');
-  }
+  useEffect(() => {
+    if (!token) {
+      navigate('/');
+    }
+  }, [token, setTokenLS, setNameLS]);
 
   return <Outlet />;
 }

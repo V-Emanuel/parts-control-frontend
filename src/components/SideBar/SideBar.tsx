@@ -9,7 +9,6 @@ import {
 } from 'react-icons/fa';
 import { FiTruck } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { IoFilter } from 'react-icons/io5';
 
 export default function SideBar() {
   return (
@@ -19,7 +18,7 @@ export default function SideBar() {
         <p>{`Fulano de Tal`}</p>
       </div>
       <ul className="side-options">
-        <Link to="/" className="option">
+        <Link to="/novo-registro" className="option">
           <FaRegPlusSquare />
           <h1>{`Novo Registro`}</h1>
         </Link>
