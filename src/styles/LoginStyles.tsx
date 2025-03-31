@@ -49,17 +49,42 @@ export const LoginStyles = styled.div`
       align-items: center;
       justify-content: flex-start;
       background-color: #f4f4f4;
+      position: relative;
+
+      .loading-open {
+        display: flex;
+      }
+
+      .loading-close {
+        display: none;
+      }
+
+      .loading {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #000;
+        opacity: 0.5;
+        top: 0px;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 70px;
+        }
+      }
 
       p {
         font-size: 58px;
         font-weight: 800;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
         color: ${theme.colors.secondary};
       }
 
       label {
         width: 380px;
         margin-bottom: 4px;
+        margin-top: 20px;
         font-size: 16px;
 
         strong {
@@ -75,7 +100,7 @@ export const LoginStyles = styled.div`
         background-color: #dddddd;
         box-sizing: border-box;
         padding: 0px 10px 0px 10px;
-        margin-bottom: 26px;
+        margin-bottom: 6px;
         outline: none;
         transition: 300ms;
 
@@ -83,6 +108,23 @@ export const LoginStyles = styled.div`
           border: 1px solid ${theme.colors.secondary} !important;
           box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         }
+      }
+
+      .failed-login {
+        width: 370px;
+        margin-top: 4px;
+        color: #ff0000;
+        font-weight: 500;
+        font-size: 14px;
+        font-style: italic;
+      }
+
+      .text-open {
+        display: block;
+      }
+
+      .text-close {
+        display: none;
       }
       button {
         width: 140px;
@@ -98,7 +140,6 @@ export const LoginStyles = styled.div`
 
         &:hover {
           cursor: pointer;
-          scale: 1.06;
           background-color: #ffffff;
           border-color: ${theme.colors.secondary};
           color: ${theme.colors.secondary};

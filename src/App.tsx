@@ -6,7 +6,7 @@ import Login from './pages/Login';
 import { useEffect, useState } from 'react';
 import UserContext from './Contexts/UserContext';
 import { UserContextType } from './types/user';
-// import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute';
 import theme from './styles/theme';
 import OrderRegister from './pages/OrderRegister';
 function App() {
@@ -43,10 +43,10 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
-            {/* <Route element={<ProtectedRoute />}> */}
-            <Route path="/dashboard" element={<Home />} />
-            <Route path="/novo-registro" element={<OrderRegister />} />
-            {/* </Route> */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<Home />} />
+              <Route path="/novo-registro" element={<OrderRegister />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

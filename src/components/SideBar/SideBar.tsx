@@ -9,6 +9,10 @@ import {
 } from 'react-icons/fa';
 import { FiTruck } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { BiSolidDashboard } from 'react-icons/bi';
+import { HiUsers } from 'react-icons/hi';
+import { BsFillBuildingsFill } from 'react-icons/bs';
+import { MdMoreHoriz } from 'react-icons/md';
 
 export default function SideBar() {
   return (
@@ -18,6 +22,10 @@ export default function SideBar() {
         <p>{`Fulano de Tal`}</p>
       </div>
       <ul className="side-options">
+        <Link to="/dashboard" className="option">
+          <BiSolidDashboard />
+          <h1>{`Dashboard`}</h1>
+        </Link>
         <Link to="/novo-registro" className="option">
           <FaRegPlusSquare />
           <h1>{`Novo Registro`}</h1>
@@ -44,6 +52,20 @@ export default function SideBar() {
         </Link>
       </ul>
       <div className="line"></div>
+      <ul className="side-options">
+        <Link to="/" className="option">
+          <HiUsers />
+          <h1>{`Usuários`}</h1>
+        </Link>
+        <Link to="/" className="option">
+          <BsFillBuildingsFill />
+          <h1>{`Empresas`}</h1>
+        </Link>
+        <Link to="/" className="option">
+          <MdMoreHoriz />
+          <h1>{`Outros Dados`}</h1>
+        </Link>
+      </ul>
     </SideBarStyles>
   );
 }
