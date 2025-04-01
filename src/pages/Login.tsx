@@ -25,12 +25,6 @@ export default function Login() {
     }
   }, []);
 
-  // function handleLogout() {
-  //   localStorage.removeItem("token");
-  //   userContext.setTokenLS("");
-  //   navigate("/");
-  // }
-
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setClosedDiv('loading-open');
@@ -45,7 +39,7 @@ export default function Login() {
       setInvalidLogin('text-close');
       navigate('/dashboard');
     });
-    promise.catch((err) => {
+    promise.catch(() => {
       setUsage(false);
       setClosedDiv('loading-close');
       setInvalidLogin('open');
