@@ -15,7 +15,10 @@ import { HomeStyles } from '../styles/HomeStyles';
 export default function Home() {
   const [orderData, setOrderData] = useState<OrderData[]>([]);
   const { token } = useContext(UserContext);
-  const URL = 'http://localhost:1234/orderdata';
+  const urlData = 'http://localhost:1234/orderdata';
+  const urlControl = 'http://localhost:1234/ordercontrol';
+  const urlStock = 'http://localhost:1234/stockcontrol';
+  const urlRelationship = 'http://localhost:1234/clientrelationship';
 
   const config = {
     headers: {
@@ -44,7 +47,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get(URL, config)
+      .get(urlData, config)
       .then((res) => setOrderData(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -54,7 +57,7 @@ export default function Home() {
       <SideBar />
       <Header />
       <div className="table-content">
-        <table>
+        <table className="dashboard-table">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -70,6 +73,24 @@ export default function Home() {
             ))}
           </thead>
           <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
