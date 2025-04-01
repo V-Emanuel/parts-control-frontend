@@ -1,6 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { OrderData } from '../types/order';
+import {
+  ClientRelationship,
+  OrderControl,
+  OrderData,
+  StockControl,
+} from '../types/order';
 import {
   useReactTable,
   createColumnHelper,
@@ -14,6 +19,12 @@ import { HomeStyles } from '../styles/HomeStyles';
 
 export default function Home() {
   const [orderData, setOrderData] = useState<OrderData[]>([]);
+  const [orderControl, setOrderControl] = useState<OrderControl[]>([]);
+  const [stockControl, setStockControl] = useState<StockControl[]>([]);
+  const [clientRelationship, setClientRelationship] = useState<
+    ClientRelationship[]
+  >([]);
+
   const { token } = useContext(UserContext);
   const urlData = 'http://localhost:1234/orderdata';
   const urlControl = 'http://localhost:1234/ordercontrol';
@@ -49,6 +60,19 @@ export default function Home() {
     axios
       .get(urlData, config)
       .then((res) => setOrderData(res.data))
+      .catch((err) => console.log(err));
+
+    axios
+      .get(urlControl, config)
+      .then((res) => setOrderControl(res.data))
+      .catch((err) => console.log(err));
+    axios
+      .get(urlStock, config)
+      .then((res) => setStockControl(res.data))
+      .catch((err) => console.log(err));
+    axios
+      .get(urlRelationship, config)
+      .then((res) => setClientRelationship(res.data))
       .catch((err) => console.log(err));
   }, []);
 
