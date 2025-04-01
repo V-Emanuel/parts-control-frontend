@@ -1,46 +1,86 @@
-// import { useState } from 'react';
-import 'gridjs/dist/theme/mermaid.css';
-import { HomeStyles } from '../styles/HomeStyles';
-// import DashBoard from '../components/Tables/Dashboard';
-// import Data from '../components/Tables/Data';
-// import OrderControl from '../components/Tables/OrderControl';
-// import EntryControl from '../components/Tables/EntryControl';
-// import CustomerService from '../components/Tables/CustomerService';
+import { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { OrderData } from '../types/order';
+import {
+  useReactTable,
+  createColumnHelper,
+  getCoreRowModel,
+  flexRender,
+} from '@tanstack/react-table';
 import SideBar from '../components/SideBar/SideBar';
-// import MyRegisters from '../components/Tables/MyRegisters';
 import Header from '../components/Header/Header';
+import UserContext from '../Contexts/UserContext';
+import { HomeStyles } from '../styles/HomeStyles';
 
 export default function Home() {
-  // const [activeTab, setActiveTab] = useState('Dashboard');
+  const [orderData, setOrderData] = useState<OrderData[]>([]);
+  const { token } = useContext(UserContext);
+  const URL = 'http://localhost:1234/orderdata';
 
-  // const components: any = {
-  //   Dashboard: <DashBoard />,
-  //   Dados: <Data />,
-  //   'Controle Pedidos': <OrderControl />,
-  //   'Controle Entrada - Estoque': <EntryControl />,
-  //   'Relacionamento com cliente': <CustomerService />,
-  //   'Meus Registros': <MyRegisters />,
-  // };
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const columnHelper = createColumnHelper<OrderData>();
+
+  const columns = [
+    columnHelper.accessor('companyId', { header: 'Empresa ID' }),
+    columnHelper.accessor('osOrc', { header: 'OS/Orçamento' }),
+    columnHelper.accessor('orderDate', { header: 'Data do Pedido' }),
+    columnHelper.accessor('userId', { header: 'Usuário' }),
+    columnHelper.accessor('client', { header: 'Cliente' }),
+    columnHelper.accessor('model', { header: 'Modelo' }),
+    columnHelper.accessor('description', { header: 'Descrição' }),
+    columnHelper.accessor('quantity', { header: 'Quantidade' }),
+  ];
+
+  const table = useReactTable({
+    data: orderData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
+
+  useEffect(() => {
+    axios
+      .get(URL, config)
+      .then((res) => setOrderData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <HomeStyles>
       <SideBar />
       <Header />
       <div className="table-content">
-        {/* <div className="table-options">
-          <ul className="sub-divisions">
-            {Object.keys(components).map((tab) => (
-              <li
-                key={tab}
-                className={`sub ${activeTab === tab ? 'active' : ''}`}
-                onClick={() => setActiveTab(tab)}
-              >
-                {tab}
-              </li>
+        <table>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id}>
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
+                  </th>
+                ))}
+              </tr>
             ))}
-          </ul>
-        </div> */}
-        {/* {components[activeTab]} */}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </HomeStyles>
   );
