@@ -23,7 +23,7 @@ export const HomeStyles = styled.section`
       height: 100%;
       overflow-y: auto;
       overflow-x: auto;
-      border-radius: 20px;
+      border-radius: 10px;
       .dashboard-table {
         background-color: #fff;
         width: 100%;
@@ -31,14 +31,14 @@ export const HomeStyles = styled.section`
         thead {
           tr {
             th {
-              min-width: 200px;
+              min-width: 250px;
               height: max-content;
               box-sizing: border-box;
               padding: 15px 20px 15px 20px;
               background-color: ${theme.colors.secondary};
               color: #fff;
               border: 1px solid #cacaca;
-              font-size: 15px;
+              font-size: 14px;
               font-weight: 700;
             }
           }
@@ -46,16 +46,23 @@ export const HomeStyles = styled.section`
 
         tbody {
           tr {
+            background-color: #fff;
+            transition: 200ms;
             td {
-              width: max-content;
+              width: 200px;
               height: max-content;
               flex-wrap: wrap;
               box-sizing: border-box;
               padding: 15px 10px 15px 10px;
-              background-color: #fff;
+              background-color: transparent;
               border: 1px solid #cacaca;
-              font-size: 15px;
+              font-size: 13px;
               font-weight: 500;
+            }
+
+            &:hover {
+              background: rgba(0, 0, 0, 0.08);
+              cursor: pointer;
             }
           }
         }

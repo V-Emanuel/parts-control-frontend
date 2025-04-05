@@ -1,6 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { MergedData } from '../types/user';
+import { useContext } from 'react';
 import {
   useReactTable,
   createColumnHelper,
@@ -9,59 +7,26 @@ import {
 } from '@tanstack/react-table';
 import SideBar from '../components/SideBar/SideBar';
 import Header from '../components/Header/Header';
-import UserContext from '../Contexts/UserContext';
 import { HomeStyles } from '../styles/HomeStyles';
+import DataContext from '../Contexts/DataContext';
+import { MergedData } from '../types/user';
 
 export default function Home() {
-  const [mergedData, setMergedData] = useState<any[]>([]);
-
-  const { token } = useContext(UserContext);
-  const urls = {
-    orderData: 'http://localhost:1234/orderdata',
-    orderControl: 'http://localhost:1234/ordercontrol',
-    stockControl: 'http://localhost:1234/stockcontrol',
-    clientRelationship: 'http://localhost:1234/clientrelationship',
-  };
-
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-
-  useEffect(() => {
-    Promise.all([
-      axios.get(urls.orderData, config),
-      axios.get(urls.orderControl, config),
-      axios.get(urls.stockControl, config),
-      axios.get(urls.clientRelationship, config),
-    ])
-      .then(([orderRes, controlRes, stockRes, clientRes]) => {
-        const orderData = orderRes.data;
-        const orderControl = controlRes.data;
-        const stockControl = stockRes.data;
-        const clientRelationship = clientRes.data;
-
-        const combinedData = orderData.map((order: any) => ({
-          ...order,
-          orderControl:
-            orderControl.find((oc: any) => oc.orderDataId === order.id) || {},
-          stockControl:
-            stockControl.find((sc: any) => sc.orderDataId === order.id) || {},
-          clientRelationship:
-            clientRelationship.find((cr: any) => cr.orderDataId === order.id) ||
-            {},
-        }));
-
-        setMergedData(combinedData);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const { mergedData, users, statuses, types, companies } =
+    useContext(DataContext);
 
   const columnHelper = createColumnHelper<MergedData>();
   const columns = [
-    columnHelper.accessor('companyId', { header: 'Empresa ID' }),
+    columnHelper.accessor(
+      (row) => companies.find((c) => c.id === row.companyId)?.name || '-',
+      { header: 'Empresa' },
+    ),
     columnHelper.accessor('osOrc', { header: 'OS/Orçamento' }),
     columnHelper.accessor('orderDate', { header: 'Data do Pedido' }),
-    columnHelper.accessor('userId', { header: 'Usuário' }),
+    columnHelper.accessor(
+      (row) => users.find((u) => u.id === row.userId)?.fullName || '-',
+      { header: 'Usuário' },
+    ),
     columnHelper.accessor('client', { header: 'Cliente' }),
     columnHelper.accessor('model', { header: 'Modelo' }),
     columnHelper.accessor('description', { header: 'Descrição' }),
@@ -70,12 +35,19 @@ export default function Home() {
       header: 'Data de Envio',
     }),
     columnHelper.accessor('orderControl.num', { header: 'Número' }),
-    columnHelper.accessor('orderControl.typeId', { header: 'Tipo' }),
+    columnHelper.accessor(
+      (row) => types.find((t) => t.id === row.orderControl.typeId)?.name || '-',
+      { header: 'Tipo' },
+    ),
     columnHelper.accessor('orderControl.branchOrder', {
       header: 'Pedido Filial',
     }),
     columnHelper.accessor('orderControl.guarantee', { header: 'Garantia' }),
-    columnHelper.accessor('orderControl.statusId', { header: 'Status' }),
+    columnHelper.accessor(
+      (row) =>
+        statuses.find((s) => s.id === row.orderControl.statusId)?.name || '-',
+      { header: 'Status' },
+    ),
     columnHelper.accessor('stockControl.nf', { header: 'Nota Fiscal' }),
     columnHelper.accessor('stockControl.nfData', { header: 'Data da NF' }),
     columnHelper.accessor('stockControl.accuracyDate', {

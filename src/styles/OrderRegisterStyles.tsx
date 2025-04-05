@@ -6,13 +6,13 @@ export const OrderRegisterStyles = styled.div`
   height: 100%;
   position: relative;
   box-sizing: border-box;
-  padding-left: 300px;
+  background-color: red;
 
   .form-content {
     width: 100%;
     height: 100vh;
     box-sizing: border-box;
-    padding-top: 50px;
+    padding-top: 100px;
     background-color: #fff;
     overflow-y: auto;
     display: flex;
@@ -20,6 +20,7 @@ export const OrderRegisterStyles = styled.div`
     justify-content: flex-start;
     flex-direction: column;
     padding-bottom: 60px;
+    padding-left: 280px;
 
     h1 {
       font-size: 40px;
@@ -74,7 +75,13 @@ export const OrderRegisterStyles = styled.div`
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
           }
         }
+      }
 
+      .btn-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         button {
           width: 140px;
           height: 50px;

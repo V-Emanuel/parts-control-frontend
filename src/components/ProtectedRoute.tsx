@@ -17,10 +17,8 @@ export default function ProtectedRoute() {
         const res = await axios.get('http://localhost:1234/validate-token', {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log(token);
         setNameLS(res.data.fullName);
       } catch (err) {
-        console.log('token inválido');
         localStorage.removeItem('token');
         setTokenLS('');
       }

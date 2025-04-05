@@ -9,6 +9,7 @@ export interface UserContextType {
 }
 
 export interface MergedData extends OrderData {
+  orderData: Partial<OrderData>;
   orderControl: Partial<OrderControl>;
   stockControl: Partial<StockControl>;
   clientRelationship: Partial<ClientRelationship>;

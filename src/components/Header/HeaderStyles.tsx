@@ -16,4 +16,11 @@ export const HeaderStyles = styled.header`
     font-weight: 600;
     color: #000;
   }
+
+  :nth-child(2) {
+    position: absolute;
+    right: 24px;
+    font-size: 38px;
+    color: #6bc213;
+  }
 `;
