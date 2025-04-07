@@ -11,18 +11,38 @@ import ProtectedRoute from './components/ProtectedRoute';
 import OrderRegister from './pages/OrderRegister';
 import styled from 'styled-components';
 import theme from './styles/theme';
+import Oss from './pages/Oss';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
   const nameLS = localStorage.getItem('name');
+  const companySelectLS = localStorage.getItem('company');
   const [token, setToken] = useState<string | null>(tokenLS);
   const [name, setName] = useState<string | null>(nameLS);
+  const [companySelect, setCompanySelecy] = useState<string | null>(
+    companySelectLS,
+  );
 
   const [mergedData, setMergedData] = useState<any[]>([]);
   const [statuses, setStatuses] = useState<any[]>([]);
   const [types, setTypes] = useState<any[]>([]);
   const [users, setUsers] = useState<any[]>([]);
   const [companies, setCompanies] = useState<any[]>([]);
+
+  function setTokenLS(t: string) {
+    setToken(t);
+    localStorage.setItem('token', t);
+  }
+
+  function setNameLS(n: string) {
+    setName(n);
+    localStorage.setItem('name', n);
+  }
+
+  function setCompanySelectLS(n: string) {
+    setCompanySelecy(n);
+    localStorage.setItem('company', n);
+  }
 
   useEffect(() => {
     if (tokenLS) setTokenLS(tokenLS);
@@ -93,26 +113,19 @@ function App() {
           setStatuses(statusesData);
           setTypes(typesData);
           setCompanies(companiesData);
+          setCompanySelectLS(companiesData[0].name);
         },
       )
       .catch((err) => console.log(err));
   }, [token]);
-
-  function setTokenLS(t: string) {
-    setToken(t);
-    localStorage.setItem('token', t);
-  }
-
-  function setNameLS(n: string) {
-    setName(n);
-    localStorage.setItem('name', n);
-  }
 
   const userContextValue: UserContextType = {
     token,
     setTokenLS,
     name,
     setNameLS,
+    companySelect,
+    setCompanySelectLS,
   };
 
   const dataContextValue = {
@@ -134,6 +147,7 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="/dashboard" element={<Home />} />
                 <Route path="/novo-registro" element={<OrderRegister />} />
+                <Route path="/sempedidos" element={<Oss />} />
               </Route>
             </Routes>
           </BrowserRouter>

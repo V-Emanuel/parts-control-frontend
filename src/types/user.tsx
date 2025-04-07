@@ -6,6 +6,8 @@ export interface UserContextType {
   setTokenLS: (t: string) => void;
   name: string | null;
   setNameLS: (n: string) => void;
+  companySelect: string | null;
+  setCompanySelectLS: (n: string) => void;
 }
 
 export interface MergedData extends OrderData {
