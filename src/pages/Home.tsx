@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   useReactTable,
   createColumnHelper,
@@ -10,10 +10,28 @@ import Header from '../components/Header/Header';
 import { HomeStyles } from '../styles/HomeStyles';
 import DataContext from '../Contexts/DataContext';
 import { MergedData } from '../types/user';
+import UserContext from '../Contexts/UserContext';
 
 export default function Home() {
   const { mergedData, users, statuses, types, companies } =
     useContext(DataContext);
+
+  const { companySelect } = useContext(UserContext);
+
+  const filter = mergedData.filter(
+    (data) => data.companyId === (companySelect?.id ?? companies[0].id),
+  );
+
+  const [filterData, setFilterData] = useState<MergedData | any>(filter);
+
+  console.log();
+
+  useEffect(() => {
+    const newFilter = mergedData.filter(
+      (data) => data.companyId === (companySelect?.id ?? companies[0].id),
+    );
+    setFilterData(newFilter);
+  }, [companySelect, companies]);
 
   const columnHelper = createColumnHelper<MergedData>();
   const columns = [
@@ -77,7 +95,7 @@ export default function Home() {
   ];
 
   const table = useReactTable({
-    data: mergedData,
+    data: filterData,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
