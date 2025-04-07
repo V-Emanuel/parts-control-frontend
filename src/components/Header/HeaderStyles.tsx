@@ -17,10 +17,18 @@ export const HeaderStyles = styled.header`
     color: #000;
   }
 
-  :nth-child(2) {
+  .new-register {
     position: absolute;
     right: 24px;
-    font-size: 38px;
-    color: #6bc213;
+
+    :nth-child(1) {
+      font-size: 38px;
+      color: #6bc213;
+      transition: 200ms;
+      &:hover {
+        scale: 1.04;
+        color: #457c0e;
+      }
+    }
   }
 `;
