@@ -10,9 +10,12 @@ export default function Header() {
   const { companies } = useContext(DataContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log('bombinha agora via', e.target.value);
+
     const selectedCompany = companies.find(
-      (company) => company.id === e.target.value,
+      (el) => el.id === parseInt(e.target.value),
     );
+
     setCompanySelect(selectedCompany);
   };
 
