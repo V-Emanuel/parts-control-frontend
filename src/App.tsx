@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import UserContext from './Contexts/UserContext';
 import DataContext from './Contexts/DataContext';
-import { UserContextType } from './types/user';
+import { Company, UserContextType } from './types/user';
 import GlobalStyle from './styles/GlobalStyles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -16,12 +16,9 @@ import Oss from './pages/Oss';
 function App() {
   const tokenLS = localStorage.getItem('token');
   const nameLS = localStorage.getItem('name');
-  const companySelectLS = localStorage.getItem('company');
   const [token, setToken] = useState<string | null>(tokenLS);
   const [name, setName] = useState<string | null>(nameLS);
-  const [companySelect, setCompanySelecy] = useState<string | null>(
-    companySelectLS,
-  );
+  const [companySelect, setCompanySelect] = useState<Company | null>(null);
 
   const [mergedData, setMergedData] = useState<any[]>([]);
   const [statuses, setStatuses] = useState<any[]>([]);
@@ -37,11 +34,6 @@ function App() {
   function setNameLS(n: string) {
     setName(n);
     localStorage.setItem('name', n);
-  }
-
-  function setCompanySelectLS(n: string) {
-    setCompanySelecy(n);
-    localStorage.setItem('company', n);
   }
 
   useEffect(() => {
@@ -113,7 +105,7 @@ function App() {
           setStatuses(statusesData);
           setTypes(typesData);
           setCompanies(companiesData);
-          setCompanySelectLS(companiesData[0].name);
+          setCompanySelect(companiesData[0]);
         },
       )
       .catch((err) => console.log(err));
@@ -125,7 +117,7 @@ function App() {
     name,
     setNameLS,
     companySelect,
-    setCompanySelectLS,
+    setCompanySelect,
   };
 
   const dataContextValue = {
