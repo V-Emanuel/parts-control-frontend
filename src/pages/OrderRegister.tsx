@@ -1,20 +1,19 @@
 import { useContext, useState } from 'react';
 import SideBar from '../components/SideBar/SideBar';
 import { OrderRegisterStyles } from '../styles/OrderRegisterStyles';
-import DataContext from '../Contexts/DataContext';
 import Header from '../components/Header/Header';
+import UserContext from '../Contexts/UserContext';
 
 export default function OrderRegister() {
-  const [companyId, setCompanyId] = useState('');
   const [osOrc, setOsOrc] = useState('');
-  const [orderDate, setOrderDate] = useState('');
-  const [userId, setUserId] = useState('');
+  // const [orderDate, setOrderDate] = useState('');
+  // const [userId, setUserId] = useState('');
   const [client, setClient] = useState('');
   const [model, setModel] = useState('');
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState('');
 
-  const { companies } = useContext(DataContext);
+  const { companySelect } = useContext(UserContext);
 
   function handleOrder(e: React.FormEvent) {
     e.preventDefault();
@@ -32,18 +31,12 @@ export default function OrderRegister() {
             <label>
               Empresa: <strong>*</strong>
             </label>
-            <select
-              value={companyId}
-              onChange={(e) => setCompanyId(e.target.value)}
+            <input
+              type="text"
+              value={companySelect?.name}
               required
-            >
-              <option value="">Selecione</option>
-              {companies.map((company) => (
-                <option key={company.id} value={company.id}>
-                  {company.code}
-                </option>
-              ))}
-            </select>
+              disabled={true}
+            />
           </div>
           <div className="type-date input-container">
             <label>

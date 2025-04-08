@@ -14,9 +14,33 @@ export const HomeStyles = styled.section`
     height: 100%;
     box-sizing: border-box;
     padding-left: 300px;
-    padding-top: 80px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    padding-top: 106px;
+    padding-right: 14px;
+    padding-bottom: 14px;
+
+    .sub-options {
+      width: 100%;
+      height: max-content;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 60px;
+      box-sizing: border-box;
+      padding-right: 314px;
+
+      .table-option {
+        width: max-content;
+        height: max-content;
+        box-sizing: border-box;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 7px 22px 7px 22px;
+        background-color: #fff;
+        border: 1px solid #fdfdfd;
+        border-radius: 4px;
+      }
+    }
 
     .table-container {
       width: 100%;
