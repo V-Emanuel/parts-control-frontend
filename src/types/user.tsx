@@ -22,3 +22,11 @@ export interface MergedData extends OrderData {
   stockControl: Partial<StockControl>;
   clientRelationship: Partial<ClientRelationship>;
 }
+
+export interface DashboardProps {
+  filterData: MergedData | any;
+  users: any[];
+  statuses: any[];
+  types: any[];
+  companies: any[];
+}

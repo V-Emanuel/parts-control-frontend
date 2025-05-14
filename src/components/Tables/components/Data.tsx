@@ -4,33 +4,9 @@ import {
   getCoreRowModel,
   flexRender,
 } from '@tanstack/react-table';
-
-import { useContext, useEffect, useState } from 'react';
-
-import DataContext from '../../../Contexts/DataContext';
 import { MergedData } from '../../../types/user';
-import UserContext from '../../../Contexts/UserContext';
-
-export default function Data() {
-  const { mergedData, users, companies } = useContext(DataContext);
-
-  const { companySelect } = useContext(UserContext);
-
-  const filter = mergedData.filter(
-    (data) => data.companyId === (companySelect?.id ?? companies[0].id),
-  );
-
-  const [filterData, setFilterData] = useState<MergedData | any>(filter);
-
-  console.log();
-
-  useEffect(() => {
-    const newFilter = mergedData.filter(
-      (data) => data.companyId === (companySelect?.id ?? companies[0].id),
-    );
-    setFilterData(newFilter);
-  }, [companySelect, companies]);
-
+import { DashboardProps } from '../../../types/user';
+export default function Data({ filterData, users, companies }: DashboardProps) {
   const columnHelper = createColumnHelper<MergedData>();
   const columns = [
     columnHelper.accessor(

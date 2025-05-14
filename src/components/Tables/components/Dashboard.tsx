@@ -6,14 +6,7 @@ import {
 } from '@tanstack/react-table';
 
 import { MergedData } from '../../../types/user';
-
-interface DashboardProps {
-  filterData: MergedData | any;
-  users: any[];
-  statuses: any[];
-  types: any[];
-  companies: any[];
-}
+import { DashboardProps } from '../../../types/user';
 
 export default function DashBoard({
   filterData,
