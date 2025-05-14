@@ -6,7 +6,8 @@ import UserContext from '../../Contexts/UserContext';
 import DataContext from '../../Contexts/DataContext';
 
 export default function Header() {
-  const { companySelect, setCompanySelectLS } = useContext(UserContext);
+  const { companySelect, setCompanySelectLS, categories } =
+    useContext(UserContext);
   const { companies } = useContext(DataContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -36,9 +37,14 @@ export default function Header() {
             </option>
           ))}
       </select>
-      <Link className="new-register" to="/novo-registro">
-        <FaSquarePlus />
-      </Link>
+      {Array.isArray(categories) &&
+        categories.some(
+          (category) => category.name === 'Consultor Técnico',
+        ) && (
+          <Link className="new-register" to="/novo-registro">
+            <FaSquarePlus />
+          </Link>
+        )}
     </HeaderStyles>
   );
 }

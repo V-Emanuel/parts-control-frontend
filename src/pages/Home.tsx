@@ -2,12 +2,12 @@ import SideBar from '../components/SideBar/SideBar';
 import Header from '../components/Header/Header';
 import { HomeStyles } from '../styles/HomeStyles';
 import DashBoard from '../components/Tables/components/Dashboard';
-import Data from '../components/Tables/components/Data';
+// import Data from '../components/Tables/components/Data';
 import { useContext, useEffect, useState } from 'react';
 import DataContext from '../Contexts/DataContext';
 import UserContext from '../Contexts/UserContext';
 import { MergedData } from '../types/user';
-import OrderControl from '../components/Tables/components/OrderControl';
+// import OrderControl from '../components/Tables/components/OrderControl';
 
 export default function Home() {
   const { mergedData, users, statuses, types, companies } =

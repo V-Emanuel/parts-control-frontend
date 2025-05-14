@@ -16,6 +16,7 @@ export interface UserContextType {
   setCompanySelectLS: (company: Company) => void;
   userId: string | null;
   setUserIdLS: (id: string) => void;
+  categories: [] | any;
 }
 
 export interface MergedData extends OrderData {

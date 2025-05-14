@@ -10,6 +10,7 @@ const defaultUserContext: UserContextType = {
   setCompanySelectLS: () => {},
   userId: null,
   setUserIdLS: () => {},
+  categories: [],
 };
 
 const UserContext = createContext<UserContextType>(defaultUserContext);

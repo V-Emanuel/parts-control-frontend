@@ -110,7 +110,7 @@ export default function OrderRegister() {
               Modelo: <strong>*</strong>
             </label>
             <input
-              type="number"
+              type="text"
               placeholder="modelo"
               value={model}
               onChange={(e) => setModel(e.target.value)}

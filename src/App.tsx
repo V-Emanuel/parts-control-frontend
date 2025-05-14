@@ -25,6 +25,7 @@ function App() {
   const [companySelect, setCompanySelect] = useState<Company | null>(
     companySelectLS,
   );
+  const [categories, setCategories] = useState<any[]>([]);
 
   const [mergedData, setMergedData] = useState<any[]>([]);
   const [statuses, setStatuses] = useState<any[]>([]);
@@ -67,7 +68,8 @@ function App() {
       usersnames: 'http://localhost:1234/usersnames',
       statusesUrl: 'http://localhost:1234/statuses',
       typesUrl: 'http://localhost:1234/types',
-      companiesUrl: 'http://localhost:1234/company',
+      companiesUrl: 'http://localhost:1234/user-companies',
+      categoriesUrl: 'http://localhost:1234/user-categories',
     };
 
     const config = {
@@ -83,6 +85,7 @@ function App() {
       axios.get(urls.statusesUrl, config),
       axios.get(urls.typesUrl, config),
       axios.get(urls.companiesUrl, config),
+      axios.get(urls.categoriesUrl, config),
     ])
       .then(
         ([
@@ -94,6 +97,7 @@ function App() {
           statusesRes,
           typesRes,
           companiesRes,
+          categoriesRes,
         ]) => {
           const orderData = orderRes.data;
           const orderControl = controlRes.data;
@@ -103,6 +107,7 @@ function App() {
           const statusesData = statusesRes.data;
           const typesData = typesRes.data;
           const companiesData = companiesRes.data;
+          const categoriesData = categoriesRes.data;
 
           const combinedData = orderData.map((order: any) => ({
             ...order,
@@ -121,7 +126,17 @@ function App() {
           setStatuses(statusesData);
           setTypes(typesData);
           setCompanies(companiesData);
-          setCompanySelect(companiesData[0]);
+          setCategories(categoriesData);
+          if (
+            !companySelectLS ||
+            (Array.isArray(companySelectLS) && companySelectLS.length === 0)
+          ) {
+            setCompanySelect(companiesData[0]);
+            localStorage.setItem(
+              'companySelect',
+              JSON.stringify(companiesData[0]),
+            );
+          }
         },
       )
       .catch((err) => console.log(err));
@@ -136,6 +151,7 @@ function App() {
     setCompanySelectLS,
     userId,
     setUserIdLS,
+    categories,
   };
 
   const dataContextValue = {
@@ -156,8 +172,11 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/dashboard" element={<Home />} />
-                <Route path="/novo-registro" element={<OrderRegister />} />
                 <Route path="/sempedidos" element={<Oss />} />
+                {Array.isArray(categories) &&
+                  categories.some((cat) => cat.id === 1) && (
+                    <Route path="/novo-registro" element={<OrderRegister />} />
+                  )}
               </Route>
             </Routes>
           </BrowserRouter>
