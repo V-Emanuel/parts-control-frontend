@@ -17,35 +17,6 @@ export default function DashBoard({
 }: DashboardProps) {
   const columnHelper = createColumnHelper<MergedData>();
 
-  const safeData = filterData.map((row: any) => ({
-    ...row,
-    orderControl: {
-      shippingData: '',
-      num: '',
-      typeId: null,
-      branchOrder: '',
-      guarantee: '',
-      statusId: null,
-      ...(row.orderControl || {}),
-    },
-    stockControl: {
-      nf: '',
-      nfData: '',
-      accuracyDate: '',
-      entryData: '',
-      ...(row.stockControl || {}),
-    },
-    clientRelationship: {
-      firstContact: '',
-      secondContact: '',
-      thirdContact: '',
-      agedaDate: '',
-      applicationDate: '',
-      observations: '',
-      ...(row.clientRelationship || {}),
-    },
-  }));
-
   const columns = [
     columnHelper.accessor(
       (row) => companies.find((c) => c.id === row.companyId)?.name || '-',
@@ -62,54 +33,79 @@ export default function DashBoard({
     columnHelper.accessor('description', { header: 'Descrição' }),
     columnHelper.accessor('quantity', { header: 'Quantidade' }),
 
-    // ✅ Campos aninhados seguros
-    columnHelper.accessor('orderControl.shippingData', {
+    columnHelper.accessor((row) => row.orderControl?.shippingData ?? '-', {
       header: 'Data de Envio',
     }),
-    columnHelper.accessor('orderControl.num', { header: 'Número' }),
-    columnHelper.accessor(
-      (row) => types.find((t) => t.id === row.orderControl.typeId)?.name || '-',
-      { header: 'Tipo' },
-    ),
-    columnHelper.accessor('orderControl.branchOrder', {
-      header: 'Pedido Filial',
+    columnHelper.accessor((row) => row.orderControl?.num ?? '-', {
+      header: 'Número',
     }),
-    columnHelper.accessor('orderControl.guarantee', { header: 'Garantia' }),
     columnHelper.accessor(
       (row) =>
-        statuses.find((s) => s.id === row.orderControl.statusId)?.name || '-',
+        types.find((t) => t.id === row.orderControl?.typeId)?.name || '-',
+      { header: 'Tipo' },
+    ),
+    columnHelper.accessor((row) => row.orderControl?.branchOrder ?? '-', {
+      header: 'Pedido Filial',
+    }),
+    columnHelper.accessor((row) => row.orderControl?.guarantee ?? '-', {
+      header: 'Garantia',
+    }),
+    columnHelper.accessor(
+      (row) =>
+        statuses.find((s) => s.id === row.orderControl?.statusId)?.name || '-',
       { header: 'Status' },
     ),
-    columnHelper.accessor('stockControl.nf', { header: 'Nota Fiscal' }),
-    columnHelper.accessor('stockControl.nfData', { header: 'Data da NF' }),
-    columnHelper.accessor('stockControl.accuracyDate', {
+
+    columnHelper.accessor((row) => row.stockControl?.nf ?? '-', {
+      header: 'Nota Fiscal',
+    }),
+    columnHelper.accessor((row) => row.stockControl?.nfData ?? '-', {
+      header: 'Data da NF',
+    }),
+    columnHelper.accessor((row) => row.stockControl?.accuracyDate ?? '-', {
       header: 'Data de Acerto',
     }),
-    columnHelper.accessor('stockControl.entryData', {
+    columnHelper.accessor((row) => row.stockControl?.entryData ?? '-', {
       header: 'Data de Entrada',
     }),
-    columnHelper.accessor('clientRelationship.firstContact', {
-      header: '1º Contato',
-    }),
-    columnHelper.accessor('clientRelationship.secondContact', {
-      header: '2º Contato',
-    }),
-    columnHelper.accessor('clientRelationship.thirdContact', {
-      header: '3º Contato',
-    }),
-    columnHelper.accessor('clientRelationship.agedaDate', {
+
+    columnHelper.accessor(
+      (row) => row.clientRelationship?.firstContact ?? '-',
+      {
+        header: '1º Contato',
+      },
+    ),
+    columnHelper.accessor(
+      (row) => row.clientRelationship?.secondContact ?? '-',
+      {
+        header: '2º Contato',
+      },
+    ),
+    columnHelper.accessor(
+      (row) => row.clientRelationship?.thirdContact ?? '-',
+      {
+        header: '3º Contato',
+      },
+    ),
+    columnHelper.accessor((row) => row.clientRelationship?.agedaDate ?? '-', {
       header: 'Data Agendada',
     }),
-    columnHelper.accessor('clientRelationship.applicationDate', {
-      header: 'Data de Aplicação',
-    }),
-    columnHelper.accessor('clientRelationship.observations', {
-      header: 'Observações',
-    }),
+    columnHelper.accessor(
+      (row) => row.clientRelationship?.applicationDate ?? '-',
+      {
+        header: 'Data de Aplicação',
+      },
+    ),
+    columnHelper.accessor(
+      (row) => row.clientRelationship?.observations ?? '-',
+      {
+        header: 'Observações',
+      },
+    ),
   ];
 
   const table = useReactTable({
-    data: safeData,
+    data: filterData,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });

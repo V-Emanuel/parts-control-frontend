@@ -173,6 +173,7 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="/dashboard" element={<Home />} />
                 <Route path="/sempedidos" element={<Oss />} />
+                <Route path="/pedido/:id" element={<Oss />} />
                 {Array.isArray(categories) &&
                   categories.some((cat) => cat.id === 1) && (
                     <Route path="/novo-registro" element={<OrderRegister />} />

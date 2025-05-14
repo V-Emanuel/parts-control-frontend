@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { HeaderStyles } from './HeaderStyles';
 import { FaSquarePlus } from 'react-icons/fa6';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import UserContext from '../../Contexts/UserContext';
 import DataContext from '../../Contexts/DataContext';
 
@@ -17,10 +17,6 @@ export default function Header() {
 
     setCompanySelectLS(selectedCompany);
   };
-
-  useEffect(() => {
-    console.log('empresa selef', companySelect);
-  }, [companySelect]);
 
   return (
     <HeaderStyles>

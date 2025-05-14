@@ -18,7 +18,9 @@ export default function SideBar() {
   const navigate = useNavigate();
 
   function handleLogout() {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('companySelect');
+    localStorage.removeItem('name');
     userContext.setTokenLS('');
     navigate('/');
   }
