@@ -14,7 +14,7 @@ export type OrderData = {
 
 export type OrderControl = {
   id: number | null;
-  shippingData: string | null;
+  shippingDate: string | null;
   num: number;
   typeId: number;
   branchOrder: number;
@@ -26,9 +26,9 @@ export type OrderControl = {
 export type StockControl = {
   id: number | null;
   nf: number;
-  nfData: string;
+  nfDate: string;
   accuracyDate: string;
-  entryData: string | null;
+  entryDate: string | null;
   orderDataId: number;
 };
 
@@ -36,7 +36,7 @@ export type ClientRelationship = {
   firstContact: string | null;
   secondContact: string | null;
   thirdContact: string | null;
-  agedaDate: string | null;
+  agendaDate: string | null;
   applicationDate: string | null;
   observations: string | null;
   orderDataId: number;

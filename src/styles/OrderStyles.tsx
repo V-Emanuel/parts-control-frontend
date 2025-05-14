@@ -32,6 +32,8 @@ export const OrderStyles = styled.div`
           color: ${theme.colors.secondary};
           strong {
             font-weight: 600;
+            font-size: 16px;
+            margin-right: 3px;
           }
         }
       }

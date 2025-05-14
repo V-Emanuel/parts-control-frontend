@@ -8,6 +8,7 @@ import {
 import { MergedData } from '../../../types/user';
 import { DashboardProps } from '../../../types/user';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from '../../../assets/functions/formatData';
 
 export default function DashBoard({
   filterData,
@@ -25,7 +26,9 @@ export default function DashBoard({
       { header: 'Empresa' },
     ),
     columnHelper.accessor('osOrc', { header: 'OS/Orçamento' }),
-    columnHelper.accessor('orderDate', { header: 'Data do Pedido' }),
+    columnHelper.accessor((row) => formatDate(row.orderDate), {
+      header: 'Data do Pedido',
+    }),
     columnHelper.accessor(
       (row) => users.find((u) => u.id === row.userId)?.fullName || '-',
       { header: 'Usuário' },
@@ -35,9 +38,12 @@ export default function DashBoard({
     columnHelper.accessor('description', { header: 'Descrição' }),
     columnHelper.accessor('quantity', { header: 'Quantidade' }),
 
-    columnHelper.accessor((row) => row.orderControl?.shippingData ?? '-', {
-      header: 'Data de Envio',
-    }),
+    columnHelper.accessor(
+      (row) => formatDate(row.orderControl?.shippingDate ?? '-'),
+      {
+        header: 'Data de Envio',
+      },
+    ),
     columnHelper.accessor((row) => row.orderControl?.num ?? '-', {
       header: 'Número',
     }),
@@ -52,6 +58,23 @@ export default function DashBoard({
     columnHelper.accessor((row) => row.orderControl?.guarantee ?? '-', {
       header: 'Garantia',
     }),
+
+    columnHelper.accessor(
+      (row) => {
+        const statusId = row.orderControl?.statusId;
+        const shippingDateStr = row.orderControl?.shippingDate;
+        if (statusId === 1 && shippingDateStr) {
+          const shippingDate = new Date(shippingDateStr);
+          const today = new Date();
+          const diffTime = today.getTime() - shippingDate.getTime();
+          const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+          return diffDays >= 0 ? diffDays : 0;
+        }
+        return '-';
+      },
+      { header: 'Dias Pendentes' },
+    ),
+
     columnHelper.accessor(
       (row) =>
         statuses.find((s) => s.id === row.orderControl?.statusId)?.name || '-',
@@ -61,39 +84,96 @@ export default function DashBoard({
     columnHelper.accessor((row) => row.stockControl?.nf ?? '-', {
       header: 'Nota Fiscal',
     }),
-    columnHelper.accessor((row) => row.stockControl?.nfData ?? '-', {
-      header: 'Data da NF',
-    }),
-    columnHelper.accessor((row) => row.stockControl?.accuracyDate ?? '-', {
-      header: 'Data de Acerto',
-    }),
-    columnHelper.accessor((row) => row.stockControl?.entryData ?? '-', {
-      header: 'Data de Entrada',
-    }),
+    columnHelper.accessor(
+      (row) => formatDate(row.stockControl?.nfDate ?? '-'),
+      {
+        header: 'Data da NF',
+      },
+    ),
+    columnHelper.accessor(
+      (row) => formatDate(row.stockControl?.accuracyDate ?? '-'),
+      {
+        header: 'Previsão',
+      },
+    ),
+    columnHelper.accessor(
+      (row) => formatDate(row.stockControl?.entryDate ?? '-'),
+      {
+        header: 'Data de Entrada',
+      },
+    ),
 
     columnHelper.accessor(
-      (row) => row.clientRelationship?.firstContact ?? '-',
+      (row) => {
+        const nfDateStr = row.stockControl?.nfDate;
+        const entryDateStr = row.stockControl?.entryDate;
+
+        if (!nfDateStr || !entryDateStr) return '-';
+
+        const nfDate = new Date(nfDateStr);
+        const entryDate = new Date(entryDateStr);
+
+        nfDate.setHours(0, 0, 0, 0);
+        entryDate.setHours(0, 0, 0, 0);
+
+        const diffTime = entryDate.getTime() - nfDate.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        return diffDays >= 0 ? diffDays : '-';
+      },
+      {
+        header: 'Dia TT',
+      },
+    ),
+
+    columnHelper.accessor(
+      (row) => {
+        const nfDateStr = row.stockControl?.nfDate;
+        if (!nfDateStr) return '-';
+
+        const nfDate = new Date(nfDateStr);
+        const today = new Date();
+
+        // Zera as horas
+        nfDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+
+        const diffTime = today.getTime() - nfDate.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        return diffDays >= 0 ? diffDays : '-';
+      },
+      {
+        header: 'Dias Estoque',
+      },
+    ),
+
+    columnHelper.accessor(
+      (row) => formatDate(row.clientRelationship?.firstContact ?? '-'),
       {
         header: '1º Contato',
       },
     ),
     columnHelper.accessor(
-      (row) => row.clientRelationship?.secondContact ?? '-',
+      (row) => formatDate(row.clientRelationship?.secondContact ?? '-'),
       {
         header: '2º Contato',
       },
     ),
     columnHelper.accessor(
-      (row) => row.clientRelationship?.thirdContact ?? '-',
+      (row) => formatDate(row.clientRelationship?.thirdContact ?? '-'),
       {
         header: '3º Contato',
       },
     ),
-    columnHelper.accessor((row) => row.clientRelationship?.agedaDate ?? '-', {
-      header: 'Data Agendada',
-    }),
     columnHelper.accessor(
-      (row) => row.clientRelationship?.applicationDate ?? '-',
+      (row) => formatDate(row.clientRelationship?.agendaDate ?? '-'),
+      {
+        header: 'Data Agendada',
+      },
+    ),
+    columnHelper.accessor(
+      (row) => formatDate(row.clientRelationship?.applicationDate ?? '-'),
       {
         header: 'Data de Aplicação',
       },
