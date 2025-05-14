@@ -10,7 +10,7 @@ export const HeaderStyles = styled.header`
   padding-left: 300px;
   position: fixed;
   top: 0px;
-  border-bottom: 1px solid #bbbbbb;
+  /* border-bottom: 1px solid #bbbbbb; */
 
   p {
     font-size: 22px;

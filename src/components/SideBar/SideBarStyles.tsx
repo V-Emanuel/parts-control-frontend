@@ -41,7 +41,7 @@ export const SideBarStyles = styled.header`
       height: max-content;
       display: flex;
       box-sizing: border-box;
-      padding: 12px 20px 12px 20px;
+      padding: 9px 20px 9px 20px;
       margin-bottom: 20px;
       text-decoration: none;
 

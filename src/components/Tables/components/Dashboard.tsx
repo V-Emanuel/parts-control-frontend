@@ -7,6 +7,7 @@ import {
 
 import { MergedData } from '../../../types/user';
 import { DashboardProps } from '../../../types/user';
+import { useNavigate } from 'react-router-dom';
 
 export default function DashBoard({
   filterData,
@@ -16,6 +17,7 @@ export default function DashBoard({
   companies,
 }: DashboardProps) {
   const columnHelper = createColumnHelper<MergedData>();
+  const navigate = useNavigate();
 
   const columns = [
     columnHelper.accessor(
@@ -110,6 +112,10 @@ export default function DashBoard({
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const handleRowClick = (rowId: number | string | null) => {
+    navigate(`/pedido/${rowId}`);
+  };
+
   return (
     <table className="dashboard-table">
       <thead>
@@ -128,7 +134,11 @@ export default function DashBoard({
       </thead>
       <tbody>
         {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
+          <tr
+            key={row.id}
+            onClick={() => handleRowClick(row.original.id)}
+            style={{ cursor: 'pointer' }}
+          >
             {row.getVisibleCells().map((cell) => (
               <td key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
