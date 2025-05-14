@@ -16,6 +16,36 @@ export default function DashBoard({
   companies,
 }: DashboardProps) {
   const columnHelper = createColumnHelper<MergedData>();
+
+  const safeData = filterData.map((row: any) => ({
+    ...row,
+    orderControl: {
+      shippingData: '',
+      num: '',
+      typeId: null,
+      branchOrder: '',
+      guarantee: '',
+      statusId: null,
+      ...(row.orderControl || {}),
+    },
+    stockControl: {
+      nf: '',
+      nfData: '',
+      accuracyDate: '',
+      entryData: '',
+      ...(row.stockControl || {}),
+    },
+    clientRelationship: {
+      firstContact: '',
+      secondContact: '',
+      thirdContact: '',
+      agedaDate: '',
+      applicationDate: '',
+      observations: '',
+      ...(row.clientRelationship || {}),
+    },
+  }));
+
   const columns = [
     columnHelper.accessor(
       (row) => companies.find((c) => c.id === row.companyId)?.name || '-',
@@ -31,6 +61,8 @@ export default function DashBoard({
     columnHelper.accessor('model', { header: 'Modelo' }),
     columnHelper.accessor('description', { header: 'Descrição' }),
     columnHelper.accessor('quantity', { header: 'Quantidade' }),
+
+    // ✅ Campos aninhados seguros
     columnHelper.accessor('orderControl.shippingData', {
       header: 'Data de Envio',
     }),
@@ -77,7 +109,7 @@ export default function DashBoard({
   ];
 
   const table = useReactTable({
-    data: filterData,
+    data: safeData,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
