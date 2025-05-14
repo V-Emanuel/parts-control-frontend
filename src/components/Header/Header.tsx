@@ -6,17 +6,15 @@ import UserContext from '../../Contexts/UserContext';
 import DataContext from '../../Contexts/DataContext';
 
 export default function Header() {
-  const { companySelect, setCompanySelect } = useContext(UserContext);
+  const { companySelect, setCompanySelectLS } = useContext(UserContext);
   const { companies } = useContext(DataContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log('bombinha agora via', e.target.value);
-
     const selectedCompany = companies.find(
       (el) => el.id === parseInt(e.target.value),
     );
 
-    setCompanySelect(selectedCompany);
+    setCompanySelectLS(selectedCompany);
   };
 
   useEffect(() => {

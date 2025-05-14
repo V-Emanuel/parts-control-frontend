@@ -22,6 +22,74 @@ export const OrderRegisterStyles = styled.div`
     padding-bottom: 60px;
     padding-left: 280px;
 
+    /*MODAISSS --------------------------------- */
+    .modal-display {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+
+      .modal-content {
+        background: #fcfcfc;
+        padding: 30px 60px 30px 60px;
+        border-radius: 8px;
+        width: max-content;
+        height: max-content;
+        text-align: center;
+        color: ${theme.colors.secondary};
+
+        p {
+          font-size: 26px;
+          font-weight: 900;
+          margin-bottom: 20px;
+          letter-spacing: 1px;
+        }
+
+        ul {
+          li {
+            margin-bottom: 5px;
+            font-size: 18px;
+            strong {
+              font-weight: 700;
+              font-size: 19px;
+            }
+          }
+        }
+
+        .options-btns {
+          width: 100%;
+          height: max-content;
+          margin-top: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          button {
+            width: 160px;
+            height: 50px;
+            border: none;
+            margin: 0px 26px 0px 26px;
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffffff;
+            border-radius: 8px;
+            transition: 200ms;
+
+            &:hover {
+              scale: 1.06;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+    /*MODAISSS --------------------------------- */
+
     h1 {
       font-size: 40px;
       color: ${theme.colors.secondary};
@@ -56,13 +124,14 @@ export const OrderRegisterStyles = styled.div`
             color: #ff0000;
           }
         }
+
         input,
         select {
           width: 100%;
           height: 42px;
           border-radius: 8px;
           border: 1px solid #ffffff;
-          background-color: #dddddd;
+          background-color: #ebebeb;
           box-sizing: border-box;
           padding: 0px 10px 0px 10px;
           margin-bottom: 26px;
@@ -74,6 +143,15 @@ export const OrderRegisterStyles = styled.div`
             border: 1px solid ${theme.colors.secondary} !important;
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
           }
+
+          &:hover {
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          }
+        }
+
+        .company-input {
+          font-weight: 600;
+          color: #000000;
         }
       }
 

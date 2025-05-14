@@ -11,7 +11,7 @@ export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [usage, setUsage] = useState(false);
-  const { token, setNameLS, setTokenLS } = userContext;
+  const { token, setNameLS, setTokenLS, setUserIdLS } = userContext;
   const [closedDiv, setClosedDiv] = useState('loading-close');
   const [invalidLogin, setInvalidLogin] = useState('text-close');
 
@@ -35,6 +35,7 @@ export default function Login() {
     promise.then((res) => {
       setTokenLS(res.data.data.token);
       setNameLS(res.data.fullName);
+      setUserIdLS(res.data.id);
       setClosedDiv('loading-close');
       setInvalidLogin('text-close');
       navigate('/dashboard');

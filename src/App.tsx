@@ -16,9 +16,15 @@ import Oss from './pages/Oss';
 function App() {
   const tokenLS = localStorage.getItem('token');
   const nameLS = localStorage.getItem('name');
+  const userIdLS = localStorage.getItem('userId');
+  const companySelectLS =
+    JSON.parse(localStorage.getItem('companySelect') as any) || [];
   const [token, setToken] = useState<string | null>(tokenLS);
   const [name, setName] = useState<string | null>(nameLS);
-  const [companySelect, setCompanySelect] = useState<Company | null>(null);
+  const [userId, setUserId] = useState<string | null>(userIdLS);
+  const [companySelect, setCompanySelect] = useState<Company | null>(
+    companySelectLS,
+  );
 
   const [mergedData, setMergedData] = useState<any[]>([]);
   const [statuses, setStatuses] = useState<any[]>([]);
@@ -34,6 +40,16 @@ function App() {
   function setNameLS(n: string) {
     setName(n);
     localStorage.setItem('name', n);
+  }
+
+  function setUserIdLS(id: string) {
+    setUserId(id);
+    localStorage.setItem('userId', id);
+  }
+
+  function setCompanySelectLS(company: Company) {
+    setCompanySelect(company);
+    localStorage.setItem('companySelect', JSON.stringify(company));
   }
 
   useEffect(() => {
@@ -117,7 +133,9 @@ function App() {
     name,
     setNameLS,
     companySelect,
-    setCompanySelect,
+    setCompanySelectLS,
+    userId,
+    setUserIdLS,
   };
 
   const dataContextValue = {

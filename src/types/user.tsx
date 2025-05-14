@@ -13,7 +13,9 @@ export interface UserContextType {
   name: string | null;
   setNameLS: (n: string) => void;
   companySelect: Company | null;
-  setCompanySelect: (company: Company) => void;
+  setCompanySelectLS: (company: Company) => void;
+  userId: string | null;
+  setUserIdLS: (id: string) => void;
 }
 
 export interface MergedData extends OrderData {
