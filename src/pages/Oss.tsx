@@ -17,8 +17,7 @@ export default function Oss() {
 
   const filter = mergedData.filter(
     (data) =>
-      data.companyId === baseCompanyId &&
-      data.orderControl?.statusId == null
+      data.companyId === baseCompanyId && data.orderControl?.statusId == null,
   );
 
   const [filterData, setFilterData] = useState<MergedData[]>(filter);
@@ -27,7 +26,7 @@ export default function Oss() {
     const newFilter = mergedData.filter(
       (data) =>
         data.companyId === (companySelect?.id ?? companies[0].id) &&
-        data.orderControl?.statusId == null
+        data.orderControl?.statusId == null,
     );
     setFilterData(newFilter);
   }, [companySelect, companies, mergedData]);
@@ -57,4 +56,3 @@ export default function Oss() {
     </HomeStyles>
   );
 }
-

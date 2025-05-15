@@ -58,15 +58,15 @@ export const HeaderStyles = styled.header`
 
   .new-register {
     position: absolute;
-    right: 24px;
+    right: 18px;
 
     :nth-child(1) {
       font-size: 38px;
-      color: #6bc213;
+      color: #5ab98d;
       transition: 200ms;
       &:hover {
-        scale: 1.04;
-        color: #457c0e;
+        scale: 1.02;
+        color: #4c9e78;
       }
     }
   }

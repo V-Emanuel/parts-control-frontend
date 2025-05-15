@@ -243,7 +243,10 @@ export default function DashBoard({
               }}
             >
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} style={{color:  highlight ? '#f1f1f1ff' : 'inherit'}}>
+                <td
+                  key={cell.id}
+                  style={{ color: highlight ? '#f1f1f1ff' : 'inherit' }}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

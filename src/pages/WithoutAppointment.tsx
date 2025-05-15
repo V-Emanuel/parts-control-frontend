@@ -19,7 +19,7 @@ export default function WithoutAppointment() {
   const filter = mergedData.filter(
     (data) =>
       data.companyId === baseCompanyId &&
-      data.clientRelationship?.agendaDate == null
+      data.clientRelationship?.agendaDate == null,
   );
 
   const [filterData, setFilterData] = useState<MergedData[]>(filter);
@@ -28,7 +28,7 @@ export default function WithoutAppointment() {
     const newFilter = mergedData.filter(
       (data) =>
         data.companyId === (companySelect?.id ?? companies[0].id) &&
-        data.clientRelationship?.agendaDate == null
+        data.clientRelationship?.agendaDate == null,
     );
     setFilterData(newFilter);
   }, [companySelect, companies, mergedData]);

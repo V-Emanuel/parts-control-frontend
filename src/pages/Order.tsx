@@ -39,16 +39,15 @@ export default function Order() {
     order?.orderDate && order?.stockControl?.entryDate
       ? differenceInBusinessDays(
           new Date(order.stockControl.entryDate),
-          new Date(order.orderDate)
+          new Date(order.orderDate),
         )
       : '-';
 
   const diasEstoque =
-    order?.stockControl?.entryDate &&
-    order?.clientRelationship?.applicationDate
+    order?.stockControl?.entryDate && order?.clientRelationship?.applicationDate
       ? differenceInBusinessDays(
           new Date(order.clientRelationship.applicationDate),
-          new Date(order.stockControl.entryDate)
+          new Date(order.stockControl.entryDate),
         )
       : '-';
 
@@ -57,6 +56,10 @@ export default function Order() {
       <SideBar />
       <Header />
       <div className="order-content">
+        <div className="order-title">
+          <h1 style={{ backgroundColor: '#3c8ec2' }}>Dados</h1>
+          <button className="update-data-btn">Atualizar</button>
+        </div>
         <div className="order-data">
           {order ? (
             <div className="order-card">
@@ -87,8 +90,19 @@ export default function Order() {
               <p>
                 <strong>Quantidade:</strong> {safe(order.quantity)}
               </p>
-
-              {/* Campos de controle */}
+            </div>
+          ) : (
+            <p>Registro não encontrado.</p>
+          )}
+        </div>
+        <div className="order-title">
+          <h1 style={{ backgroundColor: '#2d7db0' }}>Controle Pedidos</h1>
+          <button>Adicionar</button>
+          <button className="update-data-btn">Atualizar</button>
+        </div>
+        <div className="order-data">
+          {order ? (
+            <div className="order-card">
               <p>
                 <strong>Data de Envio:</strong>{' '}
                 {formatDate(safe(order.orderControl?.shippingDate))}
@@ -112,8 +126,21 @@ export default function Order() {
               <p>
                 <strong>Dias Pendentes:</strong> {diasPendentes}
               </p>
-
-              {/* Campos de estoque */}
+            </div>
+          ) : (
+            <p>Registro não encontrado.</p>
+          )}
+        </div>
+        <div className="order-title">
+          <h1 style={{ backgroundColor: '#1e6d9e' }}>
+            Controle Entrada Estoque
+          </h1>
+          <button>Adicionar</button>
+          <button className="update-data-btn">Atualizar</button>
+        </div>
+        <div className="order-data">
+          {order ? (
+            <div className="order-card">
               <p>
                 <strong>NF:</strong> {safe(order.stockControl?.nf)}
               </p>
@@ -135,8 +162,21 @@ export default function Order() {
               <p>
                 <strong>Dias Estoque:</strong> {diasEstoque}
               </p>
-
-              {/* Relacionamento com cliente */}
+            </div>
+          ) : (
+            <p>Registro não encontrado.</p>
+          )}
+        </div>
+        <div className="order-title">
+          <h1 style={{ backgroundColor: '#0f5c8c' }}>
+            Relacionamento com Cliente
+          </h1>
+          <button>Adicionar</button>
+          <button className="update-data-btn">Atualizar</button>
+        </div>
+        <div className="order-data">
+          {order ? (
+            <div className="order-card">
               <p>
                 <strong>1º Contato:</strong>{' '}
                 {formatDate(safe(order.clientRelationship?.firstContact))}

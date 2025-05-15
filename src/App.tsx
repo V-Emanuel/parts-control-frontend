@@ -179,7 +179,10 @@ function App() {
                 <Route path="/sempedidos" element={<Oss />} />
                 <Route path="/transito" element={<InTransit />} />
                 <Route path="/nao-faturados" element={<Oss />} />
-                <Route path="/sem-agendamento" element={<WithoutAppointment />} />
+                <Route
+                  path="/sem-agendamento"
+                  element={<WithoutAppointment />}
+                />
                 <Route path="/nao-aplicadas" element={<UnusedParts />} />
                 <Route path="/pedido/:id" element={<Order />} />
                 {Array.isArray(categories) &&

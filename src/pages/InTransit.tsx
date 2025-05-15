@@ -18,8 +18,7 @@ export default function InTransit() {
   // Filtrando pedidos da empresa selecionada que não possuem data de entrada
   const filter = mergedData.filter(
     (data) =>
-      data.companyId === baseCompanyId &&
-      data.stockControl?.entryDate == null
+      data.companyId === baseCompanyId && data.stockControl?.entryDate == null,
   );
 
   const [filterData, setFilterData] = useState<MergedData[]>(filter);
@@ -28,7 +27,7 @@ export default function InTransit() {
     const newFilter = mergedData.filter(
       (data) =>
         data.companyId === (companySelect?.id ?? companies[0].id) &&
-        data.stockControl?.entryDate == null
+        data.stockControl?.entryDate == null,
     );
     setFilterData(newFilter);
   }, [companySelect, companies, mergedData]);
