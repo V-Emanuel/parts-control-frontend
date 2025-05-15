@@ -7,7 +7,7 @@ import DataContext from '../Contexts/DataContext';
 import UserContext from '../Contexts/UserContext';
 import { MergedData } from '../types/user';
 
-export default function Oss() {
+export default function UnusedParts() {
   const { mergedData, users, statuses, types, companies } =
     useContext(DataContext);
 
@@ -15,10 +15,11 @@ export default function Oss() {
 
   const baseCompanyId = companySelect?.id ?? companies[0].id;
 
+  // Filtrando pedidos da empresa selecionada que não possuem "Data de Aplicação"
   const filter = mergedData.filter(
     (data) =>
       data.companyId === baseCompanyId &&
-      data.orderControl?.statusId == null
+      data.clientRelationship?.applicationDate == null,
   );
 
   const [filterData, setFilterData] = useState<MergedData[]>(filter);
@@ -27,7 +28,7 @@ export default function Oss() {
     const newFilter = mergedData.filter(
       (data) =>
         data.companyId === (companySelect?.id ?? companies[0].id) &&
-        data.orderControl?.statusId == null
+        data.clientRelationship?.applicationDate == null,
     );
     setFilterData(newFilter);
   }, [companySelect, companies, mergedData]);
@@ -57,4 +58,3 @@ export default function Oss() {
     </HomeStyles>
   );
 }
-

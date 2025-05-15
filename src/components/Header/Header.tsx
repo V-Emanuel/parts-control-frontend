@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { HeaderStyles } from './HeaderStyles';
 import { FaSquarePlus } from 'react-icons/fa6';
 import { useContext } from 'react';
@@ -17,22 +17,26 @@ export default function Header() {
 
     setCompanySelectLS(selectedCompany);
   };
+  const location = useLocation();
+  const isDashboard = location.pathname === '/dashboard';
 
   return (
     <HeaderStyles>
       <p>{`Controle de Peças`}</p>
-      <select className="company-select" onChange={handleChange}>
-        <option selected value="">
-          {companySelect?.name || 'Selecione'}
-        </option>
-        {companies
-          .filter((company) => company.id != companySelect?.id)
-          .map((company) => (
-            <option key={company.id} value={company.id}>
-              {company.name}
-            </option>
-          ))}
-      </select>
+      {isDashboard && (
+        <select className="company-select" onChange={handleChange}>
+          <option selected value="">
+            {companySelect?.name || 'Selecione'}
+          </option>
+          {companies
+            .filter((company) => company.id != companySelect?.id)
+            .map((company) => (
+              <option key={company.id} value={company.id}>
+                {company.name}
+              </option>
+            ))}
+        </select>
+      )}
       {Array.isArray(categories) &&
         categories.some(
           (category) => category.name === 'Consultor Técnico',

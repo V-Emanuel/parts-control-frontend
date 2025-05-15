@@ -213,19 +213,43 @@ export default function DashBoard({
         ))}
       </thead>
       <tbody>
-        {table.getRowModel().rows.map((row) => (
-          <tr
-            key={row.id}
-            onClick={() => handleRowClick(row.original.id)}
-            style={{ cursor: 'pointer' }}
-          >
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {table.getRowModel().rows.map((row) => {
+          const nfDateStr = row.original.stockControl?.nfDate;
+          let highlight = false;
+
+          if (nfDateStr) {
+            const nfDate = new Date(nfDateStr);
+            const today = new Date();
+
+            nfDate.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+
+            const diffDays = Math.floor(
+              (today.getTime() - nfDate.getTime()) / (1000 * 60 * 60 * 24),
+            );
+
+            if (diffDays > 10) {
+              highlight = true;
+            }
+          }
+
+          return (
+            <tr
+              key={row.id}
+              onClick={() => handleRowClick(row.original.id)}
+              style={{
+                cursor: 'pointer',
+                backgroundColor: highlight ? '#fe5455' : 'inherit',
+              }}
+            >
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} style={{color:  highlight ? '#f1f1f1ff' : 'inherit'}}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

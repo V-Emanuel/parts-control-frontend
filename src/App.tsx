@@ -13,6 +13,9 @@ import styled from 'styled-components';
 import theme from './styles/theme';
 import Oss from './pages/Oss';
 import Order from './pages/Order';
+import InTransit from './pages/InTransit';
+import WithoutAppointment from './pages/WithoutAppointment';
+import UnusedParts from './pages/UnusedParts';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
@@ -174,10 +177,10 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="/dashboard" element={<Home />} />
                 <Route path="/sempedidos" element={<Oss />} />
-                <Route path="/transito" element={<Oss />} />
+                <Route path="/transito" element={<InTransit />} />
                 <Route path="/nao-faturados" element={<Oss />} />
-                <Route path="/sem-agendamento" element={<Oss />} />
-                <Route path="/nao-aplicadas" element={<Oss />} />
+                <Route path="/sem-agendamento" element={<WithoutAppointment />} />
+                <Route path="/nao-aplicadas" element={<UnusedParts />} />
                 <Route path="/pedido/:id" element={<Order />} />
                 {Array.isArray(categories) &&
                   categories.some((cat) => cat.id === 1) && (

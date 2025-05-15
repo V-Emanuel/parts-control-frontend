@@ -5,10 +5,12 @@ import { OrderStyles } from '../styles/OrderStyles';
 import { useContext } from 'react';
 import DataContext from '../Contexts/DataContext';
 import { formatDate } from '../assets/functions/formatData';
+import { differenceInBusinessDays } from 'date-fns';
 
 export default function Order() {
   const { id } = useParams();
-  const { mergedData, companies, types, statuses } = useContext(DataContext);
+  const { mergedData, companies, types, statuses, users } =
+    useContext(DataContext);
   const order = mergedData.find((item) => String(item.id) === id);
 
   const safe = <T,>(value: T | undefined | null) =>
@@ -22,6 +24,33 @@ export default function Order() {
 
   const statusName =
     statuses.find((s) => s.id === order?.orderControl?.statusId)?.name || '-';
+
+  const userName = users.find((s) => s.id === order?.userId)?.fullName || '-';
+
+  // Cálculos de dias
+  const today = new Date();
+
+  const diasPendentes =
+    order?.orderDate && !order?.stockControl?.entryDate
+      ? differenceInBusinessDays(today, new Date(order.orderDate))
+      : '-';
+
+  const diasTT =
+    order?.orderDate && order?.stockControl?.entryDate
+      ? differenceInBusinessDays(
+          new Date(order.stockControl.entryDate),
+          new Date(order.orderDate)
+        )
+      : '-';
+
+  const diasEstoque =
+    order?.stockControl?.entryDate &&
+    order?.clientRelationship?.applicationDate
+      ? differenceInBusinessDays(
+          new Date(order.clientRelationship.applicationDate),
+          new Date(order.stockControl.entryDate)
+        )
+      : '-';
 
   return (
     <OrderStyles>
@@ -38,7 +67,7 @@ export default function Order() {
                 <strong>Empresa:</strong> {companyName}
               </p>
               <p>
-                <strong>Usuário:</strong> {safe(order.userId)}
+                <strong>Usuário:</strong> {safe(userName)}
               </p>
               <p>
                 <strong>OS/Orçamento:</strong> {safe(order.osOrc)}
@@ -71,10 +100,17 @@ export default function Order() {
                 <strong>Tipo:</strong> {typeName}
               </p>
               <p>
+                <strong>Pedido Filial:</strong>{' '}
+                {safe(order.orderControl?.branchOrder)}
+              </p>
+              <p>
                 <strong>Status:</strong> {statusName}
               </p>
               <p>
                 <strong>Garantia:</strong> {safe(order.orderControl?.guarantee)}
+              </p>
+              <p>
+                <strong>Dias Pendentes:</strong> {diasPendentes}
               </p>
 
               {/* Campos de estoque */}
@@ -84,6 +120,20 @@ export default function Order() {
               <p>
                 <strong>Data NF:</strong>{' '}
                 {formatDate(safe(order.stockControl?.nfDate))}
+              </p>
+              <p>
+                <strong>Previsão:</strong>{' '}
+                {formatDate(safe(order.stockControl?.accuracyDate))}
+              </p>
+              <p>
+                <strong>Data de Entrada:</strong>{' '}
+                {formatDate(safe(order.stockControl?.entryDate))}
+              </p>
+              <p>
+                <strong>Dias TT:</strong> {diasTT}
+              </p>
+              <p>
+                <strong>Dias Estoque:</strong> {diasEstoque}
               </p>
 
               {/* Relacionamento com cliente */}
@@ -98,6 +148,14 @@ export default function Order() {
               <p>
                 <strong>3º Contato:</strong>{' '}
                 {formatDate(safe(order.clientRelationship?.thirdContact))}
+              </p>
+              <p>
+                <strong>Data Agenda:</strong>{' '}
+                {formatDate(safe(order.clientRelationship?.agendaDate))}
+              </p>
+              <p>
+                <strong>Data Aplicação:</strong>{' '}
+                {formatDate(safe(order.clientRelationship?.applicationDate))}
               </p>
               <p>
                 <strong>Observações:</strong>{' '}

@@ -62,7 +62,7 @@ export const HomeStyles = styled.section`
               background-color: ${theme.colors.secondary};
               color: #fff;
               border: 1px solid #cacaca;
-              font-size: 14px;
+              font-size: 15px;
               font-weight: 700;
             }
           }
@@ -80,8 +80,9 @@ export const HomeStyles = styled.section`
               padding: 15px 10px 15px 10px;
               background-color: transparent;
               border: 1px solid #cacaca;
-              font-size: 13px;
-              font-weight: 500;
+              font-size: 14px;
+              font-weight: 600;
+              color: #4b4b4b;
             }
 
             &:hover {
