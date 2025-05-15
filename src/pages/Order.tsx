@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import DataContext from '../Contexts/DataContext';
 import { formatDate } from '../assets/functions/formatData';
 import { differenceInBusinessDays } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 export default function Order() {
   const { id } = useParams();
@@ -58,7 +59,7 @@ export default function Order() {
       <div className="order-content">
         <div className="order-title">
           <h1 style={{ backgroundColor: '#3c8ec2' }}>Dados</h1>
-          <button className="update-data-btn">Atualizar</button>
+          {/* <Link className="add-data-btn" to="">Atualizar</Link> */}
         </div>
         <div className="order-data">
           {order ? (
@@ -97,8 +98,10 @@ export default function Order() {
         </div>
         <div className="order-title">
           <h1 style={{ backgroundColor: '#2d7db0' }}>Controle Pedidos</h1>
-          <button>Adicionar</button>
-          <button className="update-data-btn">Atualizar</button>
+          <Link className="add-data-btn" to={`/controle-pedido/${order.id}`}>
+            Adicionar
+          </Link>
+          {/* <Link className="add-data-btn" className="update-data-btn">Atualizar</Link> */}
         </div>
         <div className="order-data">
           {order ? (
@@ -135,8 +138,10 @@ export default function Order() {
           <h1 style={{ backgroundColor: '#1e6d9e' }}>
             Controle Entrada Estoque
           </h1>
-          <button>Adicionar</button>
-          <button className="update-data-btn">Atualizar</button>
+          <Link className="add-data-btn" to={`controle-estoque/${order.id}`}>
+            Adicionar
+          </Link>
+          {/* <Link className="add-data-btn" className="update-data-btn">Atualizar</Link> */}
         </div>
         <div className="order-data">
           {order ? (
@@ -171,8 +176,13 @@ export default function Order() {
           <h1 style={{ backgroundColor: '#0f5c8c' }}>
             Relacionamento com Cliente
           </h1>
-          <button>Adicionar</button>
-          <button className="update-data-btn">Atualizar</button>
+          <Link
+            className="add-data-btn"
+            to={`relacionamento-cliente/${order.id}`}
+          >
+            Adicionar
+          </Link>
+          {/* <Link className="add-data-btn" className="update-data-btn">Atualizar</Link> */}
         </div>
         <div className="order-data">
           {order ? (

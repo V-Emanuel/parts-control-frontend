@@ -25,7 +25,7 @@ export const OrderStyles = styled.div`
       display: flex;
       margin-bottom: 3px;
       h1,
-      button {
+      .add-data-btn {
         height: 46px;
         display: flex;
         align-items: center;
@@ -43,7 +43,7 @@ export const OrderStyles = styled.div`
       .update-data-btn {
         background-color: #ee9b57;
       }
-      button {
+      .add-data-btn {
         width: 150px;
         justify-content: center;
         border: none;
@@ -51,6 +51,7 @@ export const OrderStyles = styled.div`
         border: 1px solid transparent;
         background-color: #5ab98d;
         transition: 300ms;
+        text-decoration: none;
         &:hover {
           cursor: pointer;
           background-color: #ffffff;

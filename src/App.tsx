@@ -16,6 +16,7 @@ import Order from './pages/Order';
 import InTransit from './pages/InTransit';
 import WithoutAppointment from './pages/WithoutAppointment';
 import UnusedParts from './pages/UnusedParts';
+import OrderControlRegister from './pages/OrderControlRegister';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
@@ -190,6 +191,10 @@ function App() {
                     <Route path="/novo-registro" element={<OrderRegister />} />
                   )}
               </Route>
+              <Route
+                path="controle-pedido/:id"
+                element={<OrderControlRegister />}
+              />
             </Routes>
           </BrowserRouter>
         </DataContext.Provider>
