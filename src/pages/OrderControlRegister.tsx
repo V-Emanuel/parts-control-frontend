@@ -7,6 +7,7 @@ import UserContext from '../Contexts/UserContext';
 import { formatDate } from '../assets/functions/formatData';
 import { api_url } from '../assets/consts/url';
 import DataContext from '../Contexts/DataContext';
+import { useParams } from 'react-router-dom';
 
 export default function OrderControlRegister() {
   const [shipping_date, setShippingDate] = useState('');
@@ -17,10 +18,11 @@ export default function OrderControlRegister() {
   const [status_id, setStatusId] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { orderid } = useParams();
+  const parsedOrderid = orderid ? parseInt(orderid) : null;
 
   const { types, statuses } = useContext(DataContext);
-  const { userId, token } = useContext(UserContext);
-  const parsedUserId = userId ? parseInt(userId) : null;
+  const { token } = useContext(UserContext);
 
   function handleOrder(e: React.FormEvent) {
     e.preventDefault();
@@ -31,23 +33,25 @@ export default function OrderControlRegister() {
     setIsSubmitting(true);
 
     const body = {
+      shipping_date,
       num,
       type_id,
       branch_order,
       guarantee,
       status_id,
-      user_id: parsedUserId,
+      order_data_id: parsedOrderid,
     };
 
     axios
-      .post(`${api_url}/orderdata`, body, {
+      .post(`${api_url}/ordercontrol`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then(() => {
-        alert('Pedido Cadastrado com Sucesso!');
         setShowModal(false);
+        alert('Controle de Pedido adicionado com Sucesso!');
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
@@ -64,7 +68,7 @@ export default function OrderControlRegister() {
       <SideBar />
       <Header />
       <div className="form-content">
-        <h1>Cadastrar Novo Controle de Pedido</h1>
+        <h1>Adicionar Controle de Pedido</h1>
         <form className="order-form" onSubmit={handleOrder}>
           <div className="type-date input-container">
             <label>
@@ -84,7 +88,7 @@ export default function OrderControlRegister() {
             </label>
             <input
               type="number"
-              placeholder="os-orc"
+              placeholder="número"
               value={num}
               onChange={(e) => setNum(e.target.value)}
               required
@@ -115,7 +119,7 @@ export default function OrderControlRegister() {
             </label>
             <input
               type="text"
-              placeholder="modelo"
+              placeholder="filial"
               value={branch_order}
               onChange={(e) => setBranchOrder(e.target.value)}
               required
@@ -132,8 +136,8 @@ export default function OrderControlRegister() {
               required
             >
               <option value="">Selecione</option>
-              <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
             </select>
           </div>
 
@@ -173,7 +177,7 @@ export default function OrderControlRegister() {
                 </li>
                 <li>
                   <strong>Tipo</strong>{' '}
-                  {types.find((i) => i.id === type_id)?.name}
+                  {types.find((i) => i.id === parseInt(type_id))?.name}
                 </li>
                 <li>
                   <strong>Pedido Filial:</strong> {branch_order}
@@ -183,7 +187,7 @@ export default function OrderControlRegister() {
                 </li>
                 <li>
                   <strong>Status do Pedido:</strong>{' '}
-                  {statuses.find((i) => i.id === status_id)?.name}
+                  {statuses.find((i) => i.id === parseInt(status_id))?.name}
                 </li>
               </ul>
               <div className="options-btns">

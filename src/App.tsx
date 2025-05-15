@@ -192,7 +192,7 @@ function App() {
                   )}
               </Route>
               <Route
-                path="controle-pedido/:id"
+                path="controle-pedido/:orderid"
                 element={<OrderControlRegister />}
               />
             </Routes>
