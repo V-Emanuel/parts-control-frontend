@@ -157,7 +157,7 @@ export default function OrderRegister() {
           </div>
 
           <div className="btn-container">
-            <button type="submit">Cadastrar</button>
+            <button type="submit">CADASTRAR</button>
           </div>
         </form>
 

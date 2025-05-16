@@ -159,7 +159,7 @@ export default function OrderControlRegister() {
             </select>
           </div>
           <div className="btn-container">
-            <button type="submit">Adicionar</button>
+            <button type="submit">ADICIONAR</button>
           </div>
         </form>
 

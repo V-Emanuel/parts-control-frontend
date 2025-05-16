@@ -37,7 +37,6 @@ export default function DashBoard({
     columnHelper.accessor('model', { header: 'Modelo' }),
     columnHelper.accessor('description', { header: 'Descrição' }),
     columnHelper.accessor('quantity', { header: 'Quantidade' }),
-
     columnHelper.accessor(
       (row) => formatDate(row.orderControl?.shippingDate ?? '-'),
       {
@@ -50,7 +49,9 @@ export default function DashBoard({
     columnHelper.accessor(
       (row) =>
         types.find((t) => t.id === row.orderControl?.typeId)?.name || '-',
-      { header: 'Tipo' },
+      {
+        header: 'Tipo',
+      },
     ),
     columnHelper.accessor((row) => row.orderControl?.branchOrder ?? '-', {
       header: 'Pedido Filial',
@@ -58,7 +59,6 @@ export default function DashBoard({
     columnHelper.accessor((row) => row.orderControl?.guarantee ?? '-', {
       header: 'Garantia',
     }),
-
     columnHelper.accessor(
       (row) => {
         const statusId = row.orderControl?.statusId;
@@ -72,15 +72,17 @@ export default function DashBoard({
         }
         return '-';
       },
-      { header: 'Dias Pendentes' },
+      {
+        header: 'Dias Pendentes',
+      },
     ),
-
     columnHelper.accessor(
       (row) =>
         statuses.find((s) => s.id === row.orderControl?.statusId)?.name || '-',
-      { header: 'Status' },
+      {
+        header: 'Status',
+      },
     ),
-
     columnHelper.accessor((row) => row.stockControl?.nf ?? '-', {
       header: 'Nota Fiscal',
     }),
@@ -102,7 +104,6 @@ export default function DashBoard({
         header: 'Data de Entrada',
       },
     ),
-
     columnHelper.accessor(
       (row) => {
         const nfDateStr = row.stockControl?.nfDate;
@@ -125,7 +126,6 @@ export default function DashBoard({
         header: 'Dia TT',
       },
     ),
-
     columnHelper.accessor(
       (row) => {
         const nfDateStr = row.stockControl?.nfDate;
@@ -134,7 +134,6 @@ export default function DashBoard({
         const nfDate = new Date(nfDateStr);
         const today = new Date();
 
-        // Zera as horas
         nfDate.setHours(0, 0, 0, 0);
         today.setHours(0, 0, 0, 0);
 
@@ -147,7 +146,6 @@ export default function DashBoard({
         header: 'Dias Estoque',
       },
     ),
-
     columnHelper.accessor(
       (row) => formatDate(row.clientRelationship?.firstContact ?? '-'),
       {
@@ -215,21 +213,37 @@ export default function DashBoard({
       <tbody>
         {table.getRowModel().rows.map((row) => {
           const nfDateStr = row.original.stockControl?.nfDate;
-          let highlight = false;
+          const shippingDateStr = row.original.orderControl?.shippingDate;
+          const statusId = row.original.orderControl?.statusId;
 
-          if (nfDateStr) {
+          let highlightColor: string | null = null;
+
+          // Condição 1: Status PENDENTE (id === 1) e +5 dias
+          if (statusId === 1 && shippingDateStr) {
+            const shippingDate = new Date(shippingDateStr);
+            const today = new Date();
+            shippingDate.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            const diffDays = Math.floor(
+              (today.getTime() - shippingDate.getTime()) /
+                (1000 * 60 * 60 * 24),
+            );
+            if (diffDays > 5) {
+              highlightColor = '#f7e877';
+            }
+          }
+
+          // Condição 2: NF com +10 dias (só aplica se não tiver amarelo)
+          if (!highlightColor && nfDateStr) {
             const nfDate = new Date(nfDateStr);
             const today = new Date();
-
             nfDate.setHours(0, 0, 0, 0);
             today.setHours(0, 0, 0, 0);
-
             const diffDays = Math.floor(
               (today.getTime() - nfDate.getTime()) / (1000 * 60 * 60 * 24),
             );
-
             if (diffDays > 10) {
-              highlight = true;
+              highlightColor = '#fe5455';
             }
           }
 
@@ -239,13 +253,16 @@ export default function DashBoard({
               onClick={() => handleRowClick(row.original.id)}
               style={{
                 cursor: 'pointer',
-                backgroundColor: highlight ? '#fe5455' : 'inherit',
+                backgroundColor: highlightColor || 'inherit',
               }}
             >
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  style={{ color: highlight ? '#f1f1f1ff' : 'inherit' }}
+                  style={{
+                    color:
+                      highlightColor === '#fe5455' ? '#f1f1f1ff' : 'inherit',
+                  }}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
