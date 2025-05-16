@@ -17,6 +17,7 @@ import InTransit from './pages/InTransit';
 import WithoutAppointment from './pages/WithoutAppointment';
 import UnusedParts from './pages/UnusedParts';
 import OrderControlRegister from './pages/OrderControlRegister';
+import StockControlRegister from './pages/StockControlRegister';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
@@ -192,8 +193,12 @@ function App() {
                   )}
               </Route>
               <Route
-                path="controle-pedido/:orderid"
+                path="/controle-pedido/:orderid"
                 element={<OrderControlRegister />}
+              />
+              <Route
+                path="/controle-estoque/:orderid"
+                element={<StockControlRegister />}
               />
             </Routes>
           </BrowserRouter>

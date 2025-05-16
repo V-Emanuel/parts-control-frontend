@@ -138,7 +138,7 @@ export default function Order() {
           <h1 style={{ backgroundColor: '#1e6d9e' }}>
             Controle Entrada Estoque
           </h1>
-          <Link className="add-data-btn" to={`controle-estoque/${order.id}`}>
+          <Link className="add-data-btn" to={`/controle-estoque/${order.id}`}>
             Adicionar
           </Link>
           {/* <Link className="add-data-btn" className="update-data-btn">Atualizar</Link> */}
@@ -178,7 +178,7 @@ export default function Order() {
           </h1>
           <Link
             className="add-data-btn"
-            to={`relacionamento-cliente/${order.id}`}
+            to={`/relacionamento-cliente/${order.id}`}
           >
             Adicionar
           </Link>
