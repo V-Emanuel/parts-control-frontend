@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import UserContext from '../Contexts/UserContext';
 import axios from 'axios';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { api_url } from '../assets/consts/url';
 
 export default function ProtectedRoute() {
   const { token, setTokenLS, setNameLS } = useContext(UserContext);
@@ -14,7 +15,7 @@ export default function ProtectedRoute() {
       }
 
       try {
-        const res = await axios.get('http://localhost:1234/validate-token', {
+        const res = await axios.get(`${api_url}/validate-token`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setNameLS(res.data.fullName);

@@ -1,13 +1,13 @@
-import SideBar from '../components/SideBar/SideBar';
-import Header from '../components/Header/Header';
-import { HomeStyles } from '../styles/HomeStyles';
-import DashBoard from '../components/Tables/components/Dashboard';
+import SideBar from '../../components/SideBar/SideBar';
+import Header from '../../components/Header/Header';
+import { HomeStyles } from '../../styles/HomeStyles';
+import DashBoard from '../../components/Tables/components/Dashboard';
 import { useContext, useEffect, useState } from 'react';
-import DataContext from '../Contexts/DataContext';
-import UserContext from '../Contexts/UserContext';
-import { MergedData } from '../types/user';
+import DataContext from '../../Contexts/DataContext';
+import UserContext from '../../Contexts/UserContext';
+import { MergedData } from '../../types/user';
 
-export default function Oss() {
+export default function InTransit() {
   const { mergedData, users, statuses, types, companies } =
     useContext(DataContext);
 
@@ -15,9 +15,10 @@ export default function Oss() {
 
   const baseCompanyId = companySelect?.id ?? companies[0].id;
 
+  // Filtrando pedidos da empresa selecionada que não possuem data de entrada
   const filter = mergedData.filter(
     (data) =>
-      data.companyId === baseCompanyId && data.orderControl?.statusId == null,
+      data.companyId === baseCompanyId && data.stockControl?.entryDate == null,
   );
 
   const [filterData, setFilterData] = useState<MergedData[]>(filter);
@@ -26,7 +27,7 @@ export default function Oss() {
     const newFilter = mergedData.filter(
       (data) =>
         data.companyId === (companySelect?.id ?? companies[0].id) &&
-        data.orderControl?.statusId == null,
+        data.stockControl?.entryDate == null,
     );
     setFilterData(newFilter);
   }, [companySelect, companies, mergedData]);

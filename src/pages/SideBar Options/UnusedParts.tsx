@@ -1,13 +1,13 @@
-import SideBar from '../components/SideBar/SideBar';
-import Header from '../components/Header/Header';
-import { HomeStyles } from '../styles/HomeStyles';
-import DashBoard from '../components/Tables/components/Dashboard';
+import SideBar from '../../components/SideBar/SideBar';
+import Header from '../../components/Header/Header';
+import { HomeStyles } from '../../styles/HomeStyles';
+import DashBoard from '../../components/Tables/components/Dashboard';
 import { useContext, useEffect, useState } from 'react';
-import DataContext from '../Contexts/DataContext';
-import UserContext from '../Contexts/UserContext';
-import { MergedData } from '../types/user';
+import DataContext from '../../Contexts/DataContext';
+import UserContext from '../../Contexts/UserContext';
+import { MergedData } from '../../types/user';
 
-export default function WithoutAppointment() {
+export default function UnusedParts() {
   const { mergedData, users, statuses, types, companies } =
     useContext(DataContext);
 
@@ -15,11 +15,11 @@ export default function WithoutAppointment() {
 
   const baseCompanyId = companySelect?.id ?? companies[0].id;
 
-  // Filtrando pedidos da empresa selecionada que não possuem data agendada
+  // Filtrando pedidos da empresa selecionada que não possuem "Data de Aplicação"
   const filter = mergedData.filter(
     (data) =>
       data.companyId === baseCompanyId &&
-      data.clientRelationship?.agendaDate == null,
+      data.clientRelationship?.applicationDate == null,
   );
 
   const [filterData, setFilterData] = useState<MergedData[]>(filter);
@@ -28,7 +28,7 @@ export default function WithoutAppointment() {
     const newFilter = mergedData.filter(
       (data) =>
         data.companyId === (companySelect?.id ?? companies[0].id) &&
-        data.clientRelationship?.agendaDate == null,
+        data.clientRelationship?.applicationDate == null,
     );
     setFilterData(newFilter);
   }, [companySelect, companies, mergedData]);

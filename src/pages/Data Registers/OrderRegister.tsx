@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
 import axios from 'axios';
-import SideBar from '../components/SideBar/SideBar';
-import { OrderRegisterStyles } from '../styles/OrderRegisterStyles';
-import Header from '../components/Header/Header';
-import UserContext from '../Contexts/UserContext';
-import { formatDate } from '../assets/functions/formatData';
-import { api_url } from '../assets/consts/url';
+import SideBar from '../../components/SideBar/SideBar';
+import { OrderRegisterStyles } from '../../styles/OrderRegisterStyles';
+import Header from '../../components/Header/Header';
+import UserContext from '../../Contexts/UserContext';
+import { formatDate } from '../../assets/functions/formatData';
+import { api_url } from '../../assets/consts/url';
 
 export default function OrderRegister() {
   const [os_orc, setOs_orc] = useState('');

@@ -8,16 +8,18 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
-import OrderRegister from './pages/OrderRegister';
+import OrderRegister from './pages/Data Registers/OrderRegister';
 import styled from 'styled-components';
 import theme from './styles/theme';
-import Oss from './pages/Oss';
+import Oss from './pages/SideBar Options/Oss';
 import Order from './pages/Order';
-import InTransit from './pages/InTransit';
-import WithoutAppointment from './pages/WithoutAppointment';
-import UnusedParts from './pages/UnusedParts';
-import OrderControlRegister from './pages/OrderControlRegister';
-import StockControlRegister from './pages/StockControlRegister';
+import InTransit from './pages/SideBar Options/InTransit';
+import WithoutAppointment from './pages/SideBar Options/WithoutAppointment';
+import UnusedParts from './pages/SideBar Options/UnusedParts';
+import OrderControlRegister from './pages/Data Registers/OrderControlRegister';
+import StockControlRegister from './pages/Data Registers/StockControlRegister';
+import ClientRelationshipRegister from './pages/Data Registers/ClientRelationshipRegister';
+import { api_url } from './assets/consts/url';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
@@ -67,15 +69,15 @@ function App() {
     if (!token) return;
 
     const urls = {
-      orderData: 'http://localhost:1234/orderdata',
-      orderControl: 'http://localhost:1234/ordercontrol',
-      stockControl: 'http://localhost:1234/stockcontrol',
-      clientRelationship: 'http://localhost:1234/clientrelationship',
-      usersnames: 'http://localhost:1234/usersnames',
-      statusesUrl: 'http://localhost:1234/statuses',
-      typesUrl: 'http://localhost:1234/types',
-      companiesUrl: 'http://localhost:1234/user-companies',
-      categoriesUrl: 'http://localhost:1234/user-categories',
+      orderData: `${api_url}/orderdata`,
+      orderControl: `${api_url}/ordercontrol`,
+      stockControl: `${api_url}/stockcontrol`,
+      clientRelationship: `${api_url}/clientrelationship`,
+      usersnames: `${api_url}/usersnames`,
+      statusesUrl: `${api_url}/statuses`,
+      typesUrl: `${api_url}/types`,
+      companiesUrl: `${api_url}/user-companies`,
+      categoriesUrl: `${api_url}/user-categories`,
     };
 
     const config = {
@@ -199,6 +201,10 @@ function App() {
               <Route
                 path="/controle-estoque/:orderid"
                 element={<StockControlRegister />}
+              />
+              <Route
+                path="/relacionamento-cliente/:orderid"
+                element={<ClientRelationshipRegister />}
               />
             </Routes>
           </BrowserRouter>

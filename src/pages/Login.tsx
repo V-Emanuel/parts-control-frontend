@@ -4,6 +4,7 @@ import UserContext from '../Contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import loadingGif from '../assets/imgs/loading.gif';
+import { api_url } from '../assets/consts/url';
 
 export default function Login() {
   const userContext = useContext(UserContext);
@@ -28,7 +29,7 @@ export default function Login() {
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setClosedDiv('loading-open');
-    const URL = 'http://localhost:1234/login';
+    const URL = `${api_url}/login`;
     const body = { email, password };
     setUsage(true);
     const promise = axios.post(URL, body);

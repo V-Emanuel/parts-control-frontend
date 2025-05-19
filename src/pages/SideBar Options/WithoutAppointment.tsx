@@ -1,13 +1,13 @@
-import SideBar from '../components/SideBar/SideBar';
-import Header from '../components/Header/Header';
-import { HomeStyles } from '../styles/HomeStyles';
-import DashBoard from '../components/Tables/components/Dashboard';
+import SideBar from '../../components/SideBar/SideBar';
+import Header from '../../components/Header/Header';
+import { HomeStyles } from '../../styles/HomeStyles';
+import DashBoard from '../../components/Tables/components/Dashboard';
 import { useContext, useEffect, useState } from 'react';
-import DataContext from '../Contexts/DataContext';
-import UserContext from '../Contexts/UserContext';
-import { MergedData } from '../types/user';
+import DataContext from '../../Contexts/DataContext';
+import UserContext from '../../Contexts/UserContext';
+import { MergedData } from '../../types/user';
 
-export default function InTransit() {
+export default function WithoutAppointment() {
   const { mergedData, users, statuses, types, companies } =
     useContext(DataContext);
 
@@ -15,10 +15,11 @@ export default function InTransit() {
 
   const baseCompanyId = companySelect?.id ?? companies[0].id;
 
-  // Filtrando pedidos da empresa selecionada que não possuem data de entrada
+  // Filtrando pedidos da empresa selecionada que não possuem data agendada
   const filter = mergedData.filter(
     (data) =>
-      data.companyId === baseCompanyId && data.stockControl?.entryDate == null,
+      data.companyId === baseCompanyId &&
+      data.clientRelationship?.agendaDate == null,
   );
 
   const [filterData, setFilterData] = useState<MergedData[]>(filter);
@@ -27,7 +28,7 @@ export default function InTransit() {
     const newFilter = mergedData.filter(
       (data) =>
         data.companyId === (companySelect?.id ?? companies[0].id) &&
-        data.stockControl?.entryDate == null,
+        data.clientRelationship?.agendaDate == null,
     );
     setFilterData(newFilter);
   }, [companySelect, companies, mergedData]);

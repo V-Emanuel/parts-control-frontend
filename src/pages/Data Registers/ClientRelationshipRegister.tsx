@@ -1,27 +1,26 @@
 import { useContext, useState } from 'react';
 import axios from 'axios';
-import SideBar from '../components/SideBar/SideBar';
-import { OrderRegisterStyles } from '../styles/OrderRegisterStyles';
-import Header from '../components/Header/Header';
-import UserContext from '../Contexts/UserContext';
-import { formatDate } from '../assets/functions/formatData';
-import { api_url } from '../assets/consts/url';
-import DataContext from '../Contexts/DataContext';
+import SideBar from '../../components/SideBar/SideBar';
+import { OrderRegisterStyles } from '../../styles/OrderRegisterStyles';
+import Header from '../../components/Header/Header';
+import UserContext from '../../Contexts/UserContext';
+import { formatDate } from '../../assets/functions/formatData';
+import { api_url } from '../../assets/consts/url';
 import { useParams } from 'react-router-dom';
 
-export default function OrderControlRegister() {
-  const [shipping_date, setShippingDate] = useState('');
-  const [num, setNum] = useState('');
-  const [type_id, setTypeId] = useState('');
-  const [branch_order, setBranchOrder] = useState('');
-  const [guarantee, setGuarantee] = useState('');
-  const [status_id, setStatusId] = useState('');
+export default function ClientRelationshipRegister() {
+  const [first_contact, setFirst_contact] = useState('');
+  const [second_contact, setSecond_contact] = useState('');
+  const [third_contact, setThird_contact] = useState('');
+  const [agenda_date, setAgenda_date] = useState('');
+  const [application_date, setApplication_date] = useState('');
+  const [observations, setObservations] = useState('');
+
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { orderid } = useParams();
   const parsedOrderid = orderid ? parseInt(orderid) : null;
-
-  const { types, statuses } = useContext(DataContext);
   const { token } = useContext(UserContext);
 
   function handleOrder(e: React.FormEvent) {
@@ -33,30 +32,30 @@ export default function OrderControlRegister() {
     setIsSubmitting(true);
 
     const body = {
-      shipping_date,
-      num,
-      type_id,
-      branch_order,
-      guarantee,
-      status_id,
+      first_contact,
+      second_contact,
+      third_contact,
+      agenda_date,
+      application_date,
+      observations,
       order_data_id: parsedOrderid,
     };
 
     axios
-      .post(`${api_url}/ordercontrol`, body, {
+      .post(`${api_url}/clientrelationship`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then(() => {
         setShowModal(false);
-        alert('Controle de Pedido adicionado com Sucesso!');
+        alert('Registro de Atendimento adicionado com Sucesso!');
         window.location.reload();
       })
       .catch((err) => {
         console.error(err);
         setShowModal(false);
-        alert('Erro ao cadastrar pedido');
+        alert('Erro ao Adicionar Registro de Atendimento');
       })
       .finally(() => {
         setIsSubmitting(false);
@@ -68,95 +67,75 @@ export default function OrderControlRegister() {
       <SideBar />
       <Header />
       <div className="form-content">
-        <h1>Adicionar Controle de Pedido</h1>
+        <h1>Registro de Atendimento com Cliente</h1>
         <form className="order-form" onSubmit={handleOrder}>
           <div className="type-date input-container">
             <label>
-              Data de Envio: <strong>*</strong>
+              Primeiro Contato: <strong>*</strong>
             </label>
             <input
               type="date"
-              value={shipping_date}
-              onChange={(e) => setShippingDate(e.target.value)}
+              value={first_contact}
+              onChange={(e) => setFirst_contact(e.target.value)}
               required
             />
           </div>
-
           <div className="type-date input-container">
             <label>
-              Nº: <strong>*</strong>
+              Segundo Contato: <strong>*</strong>
             </label>
             <input
-              type="number"
-              placeholder="número"
-              value={num}
-              onChange={(e) => setNum(e.target.value)}
+              type="date"
+              value={second_contact}
+              onChange={(e) => setSecond_contact(e.target.value)}
+              required
+            />
+          </div>
+          <div className="type-date input-container">
+            <label>
+              Terceiro Contato: <strong>*</strong>
+            </label>
+            <input
+              type="date"
+              value={third_contact}
+              onChange={(e) => setThird_contact(e.target.value)}
+              required
+            />
+          </div>
+          <div className="type-date input-container">
+            <label>
+              Data Agenda: <strong>*</strong>
+            </label>
+            <input
+              type="date"
+              value={agenda_date}
+              onChange={(e) => setAgenda_date(e.target.value)}
               required
             />
           </div>
 
           <div className="type-date input-container">
             <label>
-              Tipo: <strong>*</strong>
+              Data de Aplicação: <strong>*</strong>
             </label>
-            <select
-              value={type_id}
-              onChange={(e) => setTypeId(e.target.value)}
+            <input
+              type="date"
+              value={application_date}
+              onChange={(e) => setApplication_date(e.target.value)}
               required
-            >
-              <option value="">Selecione um tipo</option>
-              {types.map((type) => (
-                <option key={type.id} value={type.id}>
-                  {type.name}
-                </option>
-              ))}
-            </select>
+            />
           </div>
-
           <div className="type-date input-container">
             <label>
-              Pedido Filial: <strong>*</strong>
+              Observações: <strong>*</strong>
             </label>
             <input
               type="text"
-              placeholder="filial"
-              value={branch_order}
-              onChange={(e) => setBranchOrder(e.target.value)}
+              placeholder="número"
+              value={observations}
+              onChange={(e) => setObservations(e.target.value)}
               required
             />
-          </div>
-
-          <div className="type-date input-container">
-            <label>
-              Garantia: <strong>*</strong>
-            </label>
-            <select
-              value={guarantee}
-              onChange={(e) => setGuarantee(e.target.value)}
-              required
-            >
-              <option value="">Selecione</option>
-              <option value="SIM">SIM</option>
-              <option value="NÃO">NÃO</option>
-            </select>
-          </div>
-
-          <div className="type-date input-container">
-            <label>
-              Status: <strong>*</strong>
-            </label>
-            <select
-              value={status_id}
-              onChange={(e) => setStatusId(e.target.value)}
-              required
-            >
-              <option value="">Selecione</option>
-              {statuses.map((status) => (
-                <option key={status.id} value={status.id}>
-                  {status.name}
-                </option>
-              ))}
-            </select>
           </div>
           <div className="btn-container">
             <button type="submit">ADICIONAR</button>
@@ -170,24 +149,23 @@ export default function OrderControlRegister() {
               <p>VERIFIQUE OS DADOS ANTES DE CONFIRMAR:</p>
               <ul style={{ textAlign: 'left' }}>
                 <li>
-                  <strong>Data de Envio:</strong> {formatDate(shipping_date)}
+                  <strong>Primeiro Contato:</strong> {formatDate(first_contact)}
                 </li>
                 <li>
-                  <strong>Número:</strong> {num}
+                  <strong>Segundo Contato:</strong> {formatDate(second_contact)}
                 </li>
                 <li>
-                  <strong>Tipo</strong>{' '}
-                  {types.find((i) => i.id === parseInt(type_id))?.name}
+                  <strong>Terceiro Contato:</strong> {formatDate(third_contact)}
                 </li>
                 <li>
-                  <strong>Pedido Filial:</strong> {branch_order}
+                  <strong>Data Agenda:</strong> {formatDate(agenda_date)}
                 </li>
                 <li>
-                  <strong>Garantia:</strong> {guarantee}
+                  <strong>Data Aplicação:</strong>{' '}
+                  {formatDate(application_date)}
                 </li>
                 <li>
-                  <strong>Status do Pedido:</strong>{' '}
-                  {statuses.find((i) => i.id === parseInt(status_id))?.name}
+                  <strong>Observações:</strong> {observations}
                 </li>
               </ul>
               <div className="options-btns">
