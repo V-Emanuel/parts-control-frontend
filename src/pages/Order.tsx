@@ -28,7 +28,12 @@ export default function Order() {
 
   const userName = users.find((s) => s.id === order?.userId)?.fullName || '-';
 
-  // Cálculos de dias
+  const statusDoPedido = statuses.find(
+    (s) => s.id === order?.orderControl?.statusId,
+  )?.name;
+
+  const mostrarDiasPendentes = statusDoPedido === 'PENDENTE';
+
   const today = new Date();
 
   const diasPendentes =
@@ -59,7 +64,9 @@ export default function Order() {
       <div className="order-content">
         <div className="order-title">
           <h1 style={{ backgroundColor: '#3c8ec2' }}>Dados</h1>
-          {/* <Link className="add-data-btn" to="">Atualizar</Link> */}
+          <Link to="/" className="add-data-btn">
+            Atualizar
+          </Link>
         </div>
         <div className="order-data">
           {order ? (
@@ -98,10 +105,18 @@ export default function Order() {
         </div>
         <div className="order-title">
           <h1 style={{ backgroundColor: '#2d7db0' }}>Controle Pedidos</h1>
-          <Link className="add-data-btn" to={`/controle-pedido/${order.id}`}>
-            Adicionar
-          </Link>
-          {/* <Link className="add-data-btn" className="update-data-btn">Atualizar</Link> */}
+          {order?.orderControl?.orderDataId ? (
+            <Link
+              className="update-data-btn"
+              to={`/controle-pedido/${order.id}`}
+            >
+              Atualizar
+            </Link>
+          ) : (
+            <Link className="add-data-btn" to={`/controle-pedido/${order.id}`}>
+              Adicionar
+            </Link>
+          )}
         </div>
         <div className="order-data">
           {order ? (
@@ -126,9 +141,11 @@ export default function Order() {
               <p>
                 <strong>Garantia:</strong> {safe(order.orderControl?.guarantee)}
               </p>
-              <p>
-                <strong>Dias Pendentes:</strong> {diasPendentes}
-              </p>
+              {mostrarDiasPendentes && (
+                <p>
+                  <strong>Dias Pendentes:</strong> {diasPendentes}
+                </p>
+              )}
             </div>
           ) : (
             <p>Registro não encontrado.</p>
@@ -138,10 +155,18 @@ export default function Order() {
           <h1 style={{ backgroundColor: '#1e6d9e' }}>
             Controle Entrada Estoque
           </h1>
-          <Link className="add-data-btn" to={`/controle-estoque/${order.id}`}>
-            Adicionar
-          </Link>
-          {/* <Link className="add-data-btn" className="update-data-btn">Atualizar</Link> */}
+          {order?.stockControl?.orderDataId ? (
+            <Link
+              className="update-data-btn"
+              to={`/controle-estoque/${order.id}`}
+            >
+              Atualizar
+            </Link>
+          ) : (
+            <Link className="add-data-btn" to={`/controle-estoque/${order.id}`}>
+              Adicionar
+            </Link>
+          )}
         </div>
         <div className="order-data">
           {order ? (
@@ -176,13 +201,21 @@ export default function Order() {
           <h1 style={{ backgroundColor: '#0f5c8c' }}>
             Relacionamento com Cliente
           </h1>
-          <Link
-            className="add-data-btn"
-            to={`/relacionamento-cliente/${order.id}`}
-          >
-            Adicionar
-          </Link>
-          {/* <Link className="add-data-btn" className="update-data-btn">Atualizar</Link> */}
+          {order?.clientRelationship?.orderDataId ? (
+            <Link
+              className="update-data-btn"
+              to={`/relacionamento-cliente/${order.id}`}
+            >
+              Atualizar
+            </Link>
+          ) : (
+            <Link
+              className="add-data-btn"
+              to={`/relacionamento-cliente/${order.id}`}
+            >
+              Adicionar
+            </Link>
+          )}
         </div>
         <div className="order-data">
           {order ? (

@@ -162,6 +162,8 @@ function App() {
     categories,
   };
 
+  console.log('dadinhos', mergedData);
+
   const dataContextValue = {
     mergedData,
     users,
