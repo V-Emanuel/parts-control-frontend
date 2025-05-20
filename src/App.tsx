@@ -20,6 +20,9 @@ import OrderControlRegister from './pages/Data Registers/OrderControlRegister';
 import StockControlRegister from './pages/Data Registers/StockControlRegister';
 import ClientRelationshipRegister from './pages/Data Registers/ClientRelationshipRegister';
 import { api_url } from './assets/consts/url';
+import OrderControlUpdate from './pages/Data Update/OrderControlUpdate';
+import StockControlUpdate from './pages/Data Update/StockControlUpdate';
+import ClientRelationshipUpdate from './pages/Data Update/ClientRelationshipUpdate';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
@@ -162,8 +165,6 @@ function App() {
     categories,
   };
 
-  console.log('dadinhos', mergedData);
-
   const dataContextValue = {
     mergedData,
     users,
@@ -207,6 +208,19 @@ function App() {
               <Route
                 path="/relacionamento-cliente/:orderid"
                 element={<ClientRelationshipRegister />}
+              />
+
+              <Route
+                path="/controle-pedido-update/:orderid"
+                element={<OrderControlUpdate />}
+              />
+              <Route
+                path="/controle-estoque-update/:orderid"
+                element={<StockControlUpdate />}
+              />
+              <Route
+                path="/relacionamento-cliente-update/:orderid"
+                element={<ClientRelationshipUpdate />}
               />
             </Routes>
           </BrowserRouter>

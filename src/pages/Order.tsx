@@ -108,7 +108,7 @@ export default function Order() {
           {order?.orderControl?.orderDataId ? (
             <Link
               className="update-data-btn"
-              to={`/controle-pedido/${order.id}`}
+              to={`/controle-pedido-update/${order.id}`}
             >
               Atualizar
             </Link>
@@ -158,7 +158,7 @@ export default function Order() {
           {order?.stockControl?.orderDataId ? (
             <Link
               className="update-data-btn"
-              to={`/controle-estoque/${order.id}`}
+              to={`/controle-estoque-update/${order.id}`}
             >
               Atualizar
             </Link>
@@ -204,7 +204,7 @@ export default function Order() {
           {order?.clientRelationship?.orderDataId ? (
             <Link
               className="update-data-btn"
-              to={`/relacionamento-cliente/${order.id}`}
+              to={`/relacionamento-cliente-update/${order.id}`}
             >
               Atualizar
             </Link>
