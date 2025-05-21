@@ -7,11 +7,13 @@ import DataContext from '../Contexts/DataContext';
 import { formatDate } from '../assets/functions/formatData';
 import { differenceInBusinessDays } from 'date-fns';
 import { Link } from 'react-router-dom';
+import UserContext from '../Contexts/UserContext';
 
 export default function Order() {
   const { id } = useParams();
   const { mergedData, companies, types, statuses, users } =
     useContext(DataContext);
+  const { categories } = useContext(UserContext);
   const order = mergedData.find((item) => String(item.id) === id);
 
   const safe = <T,>(value: T | undefined | null) =>
@@ -105,18 +107,23 @@ export default function Order() {
         </div>
         <div className="order-title">
           <h1 style={{ backgroundColor: '#2d7db0' }}>Controle Pedidos</h1>
-          {order?.orderControl?.orderDataId ? (
-            <Link
-              className="update-data-btn"
-              to={`/controle-pedido-update/${order.id}`}
-            >
-              Atualizar
-            </Link>
-          ) : (
-            <Link className="add-data-btn" to={`/controle-pedido/${order.id}`}>
-              Adicionar
-            </Link>
-          )}
+          {Array.isArray(categories) &&
+            categories.some((category) => category.name === 'Estoquista') &&
+            (order?.orderControl?.orderDataId ? (
+              <Link
+                className="update-data-btn"
+                to={`/controle-pedido-update/${order.id}`}
+              >
+                Atualizar
+              </Link>
+            ) : (
+              <Link
+                className="add-data-btn"
+                to={`/controle-pedido/${order.id}`}
+              >
+                Adicionar
+              </Link>
+            ))}
         </div>
         <div className="order-data">
           {order ? (
@@ -155,18 +162,23 @@ export default function Order() {
           <h1 style={{ backgroundColor: '#1e6d9e' }}>
             Controle Entrada Estoque
           </h1>
-          {order?.stockControl?.orderDataId ? (
-            <Link
-              className="update-data-btn"
-              to={`/controle-estoque-update/${order.id}`}
-            >
-              Atualizar
-            </Link>
-          ) : (
-            <Link className="add-data-btn" to={`/controle-estoque/${order.id}`}>
-              Adicionar
-            </Link>
-          )}
+          {Array.isArray(categories) &&
+            categories.some((category) => category.name === 'Estoquista') &&
+            (order?.stockControl?.orderDataId ? (
+              <Link
+                className="update-data-btn"
+                to={`/controle-estoque-update/${order.id}`}
+              >
+                Atualizar
+              </Link>
+            ) : (
+              <Link
+                className="add-data-btn"
+                to={`/controle-estoque/${order.id}`}
+              >
+                Adicionar
+              </Link>
+            ))}
         </div>
         <div className="order-data">
           {order ? (
@@ -201,21 +213,23 @@ export default function Order() {
           <h1 style={{ backgroundColor: '#0f5c8c' }}>
             Relacionamento com Cliente
           </h1>
-          {order?.clientRelationship?.orderDataId ? (
-            <Link
-              className="update-data-btn"
-              to={`/relacionamento-cliente-update/${order.id}`}
-            >
-              Atualizar
-            </Link>
-          ) : (
-            <Link
-              className="add-data-btn"
-              to={`/relacionamento-cliente/${order.id}`}
-            >
-              Adicionar
-            </Link>
-          )}
+          {Array.isArray(categories) &&
+            categories.some((category) => category.name === 'CRM') &&
+            (order?.clientRelationship?.orderDataId ? (
+              <Link
+                className="update-data-btn"
+                to={`/relacionamento-cliente-update/${order.id}`}
+              >
+                Atualizar
+              </Link>
+            ) : (
+              <Link
+                className="add-data-btn"
+                to={`/relacionamento-cliente/${order.id}`}
+              >
+                Adicionar
+              </Link>
+            ))}
         </div>
         <div className="order-data">
           {order ? (

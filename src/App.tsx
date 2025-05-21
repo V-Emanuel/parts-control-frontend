@@ -203,35 +203,49 @@ function App() {
                 <Route path="/nao-aplicadas" element={<UnusedParts />} />
                 <Route path="/pedido/:id" element={<Order />} />
                 {Array.isArray(categories) &&
-                  categories.some((cat) => cat.id === 1) && (
+                  categories.some(
+                    (cat) => cat.name === 'Consultor Técnico',
+                  ) && (
                     <Route path="/novo-registro" element={<OrderRegister />} />
                   )}
               </Route>
-              <Route
-                path="/controle-pedido/:orderid"
-                element={<OrderControlRegister />}
-              />
-              <Route
-                path="/controle-estoque/:orderid"
-                element={<StockControlRegister />}
-              />
-              <Route
-                path="/relacionamento-cliente/:orderid"
-                element={<ClientRelationshipRegister />}
-              />
 
-              <Route
-                path="/controle-pedido-update/:orderid"
-                element={<OrderControlUpdate />}
-              />
-              <Route
-                path="/controle-estoque-update/:orderid"
-                element={<StockControlUpdate />}
-              />
-              <Route
-                path="/relacionamento-cliente-update/:orderid"
-                element={<ClientRelationshipUpdate />}
-              />
+              {Array.isArray(categories) &&
+                categories.some((cat) => cat.name === 'Estoquista') && (
+                  <>
+                    <Route
+                      path="/controle-pedido/:orderid"
+                      element={<OrderControlRegister />}
+                    />
+                    <Route
+                      path="/controle-estoque/:orderid"
+                      element={<StockControlRegister />}
+                    />
+                    <Route
+                      path="/controle-pedido-update/:orderid"
+                      element={<OrderControlUpdate />}
+                    />
+                    <Route
+                      path="/controle-estoque-update/:orderid"
+                      element={<StockControlUpdate />}
+                    />
+                  </>
+                )}
+
+              {Array.isArray(categories) &&
+                categories.some((cat) => cat.name === 'CRM') && (
+                  <>
+                    <Route
+                      path="/relacionamento-cliente/:orderid"
+                      element={<ClientRelationshipRegister />}
+                    />
+
+                    <Route
+                      path="/relacionamento-cliente-update/:orderid"
+                      element={<ClientRelationshipUpdate />}
+                    />
+                  </>
+                )}
             </Routes>
           </BrowserRouter>
         </DataContext.Provider>
