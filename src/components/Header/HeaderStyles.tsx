@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { sideBarWidth } from '../../styles/theme';
 
 export const HeaderStyles = styled.header`
   width: 100%;
@@ -7,7 +8,7 @@ export const HeaderStyles = styled.header`
   align-items: center;
   box-sizing: border-box;
   background-color: #fff;
-  padding-left: 300px;
+  padding-left: calc(${sideBarWidth} + 12px);
   position: fixed;
   top: 0px;
   /* border-bottom: 1px solid #bbbbbb; */

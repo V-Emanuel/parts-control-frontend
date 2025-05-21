@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from './theme';
+import theme, { sideBarWidth } from './theme';
 
 export const OrderStyles = styled.div`
   width: 100%;
@@ -11,7 +11,7 @@ export const OrderStyles = styled.div`
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding-left: 280px;
+    padding-left: ${sideBarWidth};
     padding-top: 80px;
     display: flex;
     flex-direction: column;

@@ -4,10 +4,12 @@ import {
   FaFileInvoiceDollar,
   FaCalendarTimes,
   FaTools,
+  FaUsers,
 } from 'react-icons/fa';
+
 import { FiTruck } from 'react-icons/fi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { BiSolidDashboard } from 'react-icons/bi';
+import { BiSolidDashboard, BiCategoryAlt } from 'react-icons/bi';
 import UserContext from '../../Contexts/UserContext';
 import { useContext } from 'react';
 import { CiLogout } from 'react-icons/ci';
@@ -21,6 +23,7 @@ export default function SideBar() {
     localStorage.removeItem('token');
     localStorage.removeItem('companySelect');
     localStorage.removeItem('name');
+    userContext.setUserAdmin(false);
     userContext.setTokenLS('');
     navigate('/');
   }
@@ -38,6 +41,7 @@ export default function SideBar() {
         >
           <BiSolidDashboard />
           <h1>Dashboard</h1>
+          <div className="left-div"></div>
         </Link>
         <Link
           to="/sempedidos"
@@ -45,6 +49,7 @@ export default function SideBar() {
         >
           <FaClipboardList />
           <h1>OSs sem Pedido</h1>
+          <div className="left-div"></div>
         </Link>
         <Link
           to="/transito"
@@ -52,6 +57,7 @@ export default function SideBar() {
         >
           <FiTruck />
           <h1>Pedidos em Trânsito</h1>
+          <div className="left-div"></div>
         </Link>
         <Link
           to="/nao-faturados"
@@ -59,6 +65,7 @@ export default function SideBar() {
         >
           <FaFileInvoiceDollar />
           <h1>Pedidos não Faturados</h1>
+          <div className="left-div"></div>
         </Link>
         <Link
           to="/sem-agendamento"
@@ -66,6 +73,7 @@ export default function SideBar() {
         >
           <FaCalendarTimes />
           <h1>Peças sem Agendamento</h1>
+          <div className="left-div"></div>
         </Link>
         <Link
           to="/nao-aplicadas"
@@ -73,7 +81,29 @@ export default function SideBar() {
         >
           <FaTools />
           <h1>Peças Não aplicadas</h1>
+          <div className="left-div"></div>
         </Link>
+        {Boolean(userContext.userAdmin) && (
+          <>
+            <p className="admin-division">Administrador</p>
+            <Link
+              to="/nao-aplicadas"
+              className={`${location.pathname === '/usuarios' ? 'active' : ''} option`}
+            >
+              <FaUsers />
+              <h1>Usuários</h1>
+              <div className="left-div"></div>
+            </Link>
+            <Link
+              to="/nao-aplicadas"
+              className={`${location.pathname === '/tipos-status' ? 'active' : ''} option`}
+            >
+              <BiCategoryAlt />
+              <h1>Tipos e Status</h1>
+              <div className="left-div"></div>
+            </Link>
+          </>
+        )}
       </ul>
 
       <button className="logout-btn" onClick={handleLogout}>

@@ -1,3 +1,5 @@
+export const sideBarWidth = '260px';
+
 const theme = {
   colors: {
     primary: '#e7f3fa',

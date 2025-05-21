@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from './theme';
+import theme, { sideBarWidth } from './theme';
 
 export const HomeStyles = styled.section`
   display: flex;
@@ -13,7 +13,7 @@ export const HomeStyles = styled.section`
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding-left: 300px;
+    padding-left: calc(${sideBarWidth} + 12px);
     padding-top: 106px;
     padding-right: 14px;
     padding-bottom: 14px;

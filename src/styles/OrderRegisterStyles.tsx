@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from './theme';
+import theme, { sideBarWidth } from './theme';
 
 export const OrderRegisterStyles = styled.div`
   width: 100%;
@@ -20,7 +20,7 @@ export const OrderRegisterStyles = styled.div`
     justify-content: flex-start;
     flex-direction: column;
     padding-bottom: 60px;
-    padding-left: 280px;
+    padding-left: ${sideBarWidth};
 
     /*MODAISSS --------------------------------- */
     .modal-display {

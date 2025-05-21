@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import theme from '../../styles/theme';
+import theme, { sideBarWidth } from '../../styles/theme';
 
 export const SideBarStyles = styled.header`
-  min-width: 280px;
+  min-width: ${sideBarWidth};
   height: 100%;
   background-color: ${theme.colors.secondary};
   display: flex;
@@ -33,7 +33,6 @@ export const SideBarStyles = styled.header`
   .options {
     width: 100%;
     box-sizing: border-box;
-    padding-left: 26px;
     margin-top: 20px;
     background-color: transparent;
     .option {
@@ -41,31 +40,62 @@ export const SideBarStyles = styled.header`
       height: max-content;
       display: flex;
       box-sizing: border-box;
-      padding: 9px 20px 9px 20px;
-      margin-bottom: 20px;
+      padding: 12px 20px 12px 20px;
+      margin-bottom: 4px;
       text-decoration: none;
+      transition: 300ms;
+      position: relative;
+      align-items: center;
 
       :nth-child(1) {
-        color: #fff;
+        color: #cfcfcf;
         margin-right: 10px;
-        font-size: 16px;
+        font-size: 17px;
       }
 
       h1 {
-        color: #fff;
-        font-size: 14px;
+        color: #cfcfcf;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .left-div {
+        width: 4px;
+        height: 100%;
+        background-color: transparent;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+      }
+
+      &:hover {
+        background-color: #081946;
       }
     }
 
     .active {
-      background-color: #fff;
-      border-bottom-left-radius: 20px;
-      border-top-left-radius: 20px;
-      background-color: ${theme.colors.primary};
+      background: linear-gradient(
+        to right,
+        rgba(71, 139, 240, 0.3),
+        transparent
+      );
       :nth-child(1),
       h1 {
-        color: ${theme.colors.secondary};
+        color: #fff;
       }
+
+      .left-div {
+        background-color: #3d76df;
+      }
+    }
+
+    .admin-division {
+      padding-left: 20px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
     }
   }
 
@@ -92,6 +122,7 @@ export const SideBarStyles = styled.header`
 
     h6 {
       font-size: 16px;
+      font-weight: 500;
       color: #e6b33d;
       margin-left: 6px;
     }

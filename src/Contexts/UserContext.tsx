@@ -9,6 +9,8 @@ const defaultUserContext: UserContextType = {
   companySelect: null,
   setCompanySelectLS: () => {},
   userId: null,
+  userAdmin: false,
+  setUserAdmin: () => {},
   setUserIdLS: () => {},
   categories: [],
 };

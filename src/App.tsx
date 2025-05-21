@@ -30,6 +30,7 @@ function App() {
   const userIdLS = localStorage.getItem('userId');
   const companySelectLS =
     JSON.parse(localStorage.getItem('companySelect') as any) || [];
+  const [userAdmin, setUserAdmin] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(tokenLS);
   const [name, setName] = useState<string | null>(nameLS);
   const [userId, setUserId] = useState<string | null>(userIdLS);
@@ -161,6 +162,8 @@ function App() {
     companySelect,
     setCompanySelectLS,
     userId,
+    userAdmin,
+    setUserAdmin,
     setUserIdLS,
     categories,
   };

@@ -12,7 +12,8 @@ export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [usage, setUsage] = useState(false);
-  const { token, setNameLS, setTokenLS, setUserIdLS } = userContext;
+  const { token, setNameLS, setTokenLS, setUserIdLS, setUserAdmin } =
+    userContext;
   const [closedDiv, setClosedDiv] = useState('loading-close');
   const [invalidLogin, setInvalidLogin] = useState('text-close');
 
@@ -37,6 +38,7 @@ export default function Login() {
       setTokenLS(res.data.data.token);
       setNameLS(res.data.fullName);
       setUserIdLS(res.data.id);
+      setUserAdmin(res.data.admin);
       setClosedDiv('loading-close');
       setInvalidLogin('text-close');
       navigate('/dashboard');
