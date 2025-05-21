@@ -21,6 +21,11 @@ export default function DashBoard({
   const navigate = useNavigate();
 
   const columns = [
+    columnHelper.display({
+      id: 'index',
+      header: 'Pedido Nº',
+      cell: (info) => info.row.index + 1,
+    }),
     columnHelper.accessor(
       (row) => companies.find((c) => c.id === row.companyId)?.name || '-',
       { header: 'Empresa' },
@@ -218,7 +223,6 @@ export default function DashBoard({
 
           let highlightColor: string | null = null;
 
-          // Condição 1: Status PENDENTE (id === 1) e +5 dias
           if (statusId === 1 && shippingDateStr) {
             const shippingDate = new Date(shippingDateStr);
             const today = new Date();
@@ -233,7 +237,6 @@ export default function DashBoard({
             }
           }
 
-          // Condição 2: NF com +10 dias (só aplica se não tiver amarelo)
           if (!highlightColor && nfDateStr) {
             const nfDate = new Date(nfDateStr);
             const today = new Date();

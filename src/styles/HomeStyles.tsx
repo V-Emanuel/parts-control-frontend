@@ -13,7 +13,7 @@ export const HomeStyles = styled.section`
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding-left: calc(${sideBarWidth} + 4px);
+    padding-left: calc(${sideBarWidth});
     padding-top: 106px;
     padding-right: 4px;
     padding-bottom: 4px;
@@ -23,22 +23,38 @@ export const HomeStyles = styled.section`
       height: max-content;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       position: fixed;
-      top: 60px;
+      top: 50px;
       box-sizing: border-box;
-      padding-right: 314px;
+      padding-right: calc(${sideBarWidth} + 4px);
+      background-color: #fff;
+      border-top-width: 2px;
+      border-bottom-width: 2px;
+      border-style: solid;
+      border-color: #8d8d8d;
 
       .table-option {
         width: max-content;
         height: max-content;
         box-sizing: border-box;
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 700;
+        color: #535353;
         padding: 7px 22px 7px 22px;
+        border: none;
         background-color: #fff;
-        border: 1px solid #fdfdfd;
-        border-radius: 4px;
+        transition: 300ms;
+
+        &:hover {
+          cursor: pointer;
+          background-color: #dadada;
+        }
+      }
+
+      .active-option {
+        background-color: #8d8d8d;
+        color: #ffffff;
       }
     }
 
@@ -48,6 +64,7 @@ export const HomeStyles = styled.section`
       overflow-y: auto;
       overflow-x: auto;
       border-radius: 10px;
+      margin-left: 4px;
       .dashboard-table {
         background-color: #fff;
         width: 100%;
@@ -58,7 +75,7 @@ export const HomeStyles = styled.section`
               min-width: 250px;
               height: max-content;
               box-sizing: border-box;
-              padding: 15px 20px 15px 20px;
+              padding: 12px 20px 12px 20px;
               background-color: ${theme.colors.secondary};
               color: #fff;
               border: 1px solid #cacaca;

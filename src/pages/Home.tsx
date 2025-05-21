@@ -2,17 +2,19 @@ import SideBar from '../components/SideBar/SideBar';
 import Header from '../components/Header/Header';
 import { HomeStyles } from '../styles/HomeStyles';
 import DashBoard from '../components/Tables/components/Dashboard';
-// import Data from '../components/Tables/components/Data';
+import Data from '../components/Tables/components/Data';
 import { useContext, useEffect, useState } from 'react';
 import DataContext from '../Contexts/DataContext';
 import UserContext from '../Contexts/UserContext';
 import { MergedData } from '../types/user';
-// import OrderControl from '../components/Tables/components/OrderControl';
+import OrderControl from '../components/Tables/components/OrderControl';
+import EntryControl from '../components/Tables/components/EntryControl';
+import CustomerService from '../components/Tables/components/CustomerService';
+import MyRegisters from '../components/Tables/components/MyRegisters';
 
 export default function Home() {
   const { mergedData, users, statuses, types, companies } =
     useContext(DataContext);
-
   const { companySelect } = useContext(UserContext);
 
   const filter = mergedData.filter(
@@ -20,6 +22,10 @@ export default function Home() {
   );
 
   const [filterData, setFilterData] = useState<MergedData | any>(filter);
+
+  const [activeTab, setActiveTab] = useState<
+    'dashboard' | 'data' | 'order' | 'entry' | 'customer' | 'myregisters'
+  >('dashboard');
 
   useEffect(() => {
     const newFilter = mergedData.filter(
@@ -34,32 +40,99 @@ export default function Home() {
       <Header />
       <div className="table-content">
         <div className="sub-options">
-          <button className="table-option">Tabela Completa</button>
-          <button className="table-option">Dados</button>
-          <button className="table-option">Controle Pedidos</button>
-          <button className="table-option">Controle Entrada - Estoque</button>
-          <button className="table-option">Relacionamento com Cliente</button>
+          <button
+            className={`table-option ${activeTab === 'dashboard' ? 'active-option' : ''}`}
+            onClick={() => setActiveTab('dashboard')}
+          >
+            Tabela Completa
+          </button>
+          <button
+            className={`table-option ${activeTab === 'data' ? 'active-option' : ''}`}
+            onClick={() => setActiveTab('data')}
+          >
+            Dados
+          </button>
+          <button
+            className={`table-option ${activeTab === 'order' ? 'active-option' : ''}`}
+            onClick={() => setActiveTab('order')}
+          >
+            Controle Pedidos
+          </button>
+          <button
+            className={`table-option ${activeTab === 'entry' ? 'active-option' : ''}`}
+            onClick={() => setActiveTab('entry')}
+          >
+            Controle Entrada - Estoque
+          </button>
+          <button
+            className={`table-option ${activeTab === 'customer' ? 'active-option' : ''}`}
+            onClick={() => setActiveTab('customer')}
+          >
+            Relacionamento com Cliente
+          </button>
+          <button
+            className={`table-option ${activeTab === 'myregisters' ? 'active-option' : ''}`}
+            onClick={() => setActiveTab('myregisters')}
+          >
+            Meus Registros
+          </button>
         </div>
+
         <div className="table-container">
-          <DashBoard
-            filterData={filterData}
-            users={users}
-            statuses={statuses}
-            types={types}
-            companies={companies}
-          />
-          {/* <Data
-            filterData={filterData}
-            users={users}
-            statuses={statuses}
-            types={types}
-            companies={companies}
-          /> */}
-          {/* <OrderControl
-          filterData={filterData}
-          statuses={statuses}
-          types={types}
-          /> */}
+          {activeTab === 'dashboard' && (
+            <DashBoard
+              filterData={filterData}
+              users={users}
+              statuses={statuses}
+              types={types}
+              companies={companies}
+            />
+          )}
+          {activeTab === 'data' && (
+            <Data
+              filterData={filterData}
+              users={users}
+              statuses={statuses}
+              types={types}
+              companies={companies}
+            />
+          )}
+          {activeTab === 'order' && (
+            <OrderControl
+              filterData={filterData}
+              users={users}
+              statuses={statuses}
+              types={types}
+              companies={companies}
+            />
+          )}
+          {activeTab === 'entry' && (
+            <EntryControl
+              filterData={filterData}
+              users={users}
+              statuses={statuses}
+              types={types}
+              companies={companies}
+            />
+          )}
+          {activeTab === 'customer' && (
+            <CustomerService
+              filterData={filterData}
+              users={users}
+              statuses={statuses}
+              types={types}
+              companies={companies}
+            />
+          )}
+          {activeTab === 'myregisters' && (
+            <MyRegisters
+              filterData={filterData}
+              users={users}
+              statuses={statuses}
+              types={types}
+              companies={companies}
+            />
+          )}
         </div>
       </div>
     </HomeStyles>
