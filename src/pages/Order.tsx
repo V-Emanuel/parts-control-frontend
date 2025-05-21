@@ -64,9 +64,9 @@ export default function Order() {
       <div className="order-content">
         <div className="order-title">
           <h1 style={{ backgroundColor: '#3c8ec2' }}>Dados</h1>
-          <Link to="/" className="add-data-btn">
+          {/* <Link to="/" className="add-data-btn">
             Atualizar
-          </Link>
+          </Link> */}
         </div>
         <div className="order-data">
           {order ? (

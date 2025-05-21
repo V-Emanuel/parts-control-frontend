@@ -8,7 +8,7 @@ export const HeaderStyles = styled.header`
   align-items: center;
   box-sizing: border-box;
   background-color: #fff;
-  padding-left: calc(${sideBarWidth} + 12px);
+  padding-left: calc(${sideBarWidth} + 8px);
   position: fixed;
   top: 0px;
   /* border-bottom: 1px solid #bbbbbb; */

@@ -15,8 +15,8 @@ export interface UserContextType {
   companySelect: Company | null;
   setCompanySelectLS: (company: Company) => void;
   userId: string | null;
-  userAdmin: boolean;
-  setUserAdmin: (b: boolean) => void;
+  userAdmin: boolean | null;
+  setUserAdminLS: (b: boolean) => void;
   setUserIdLS: (id: string) => void;
   categories: [] | any;
 }

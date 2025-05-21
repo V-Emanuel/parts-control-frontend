@@ -13,10 +13,10 @@ export const HomeStyles = styled.section`
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding-left: calc(${sideBarWidth} + 12px);
+    padding-left: calc(${sideBarWidth} + 4px);
     padding-top: 106px;
-    padding-right: 14px;
-    padding-bottom: 14px;
+    padding-right: 4px;
+    padding-bottom: 4px;
 
     .sub-options {
       width: 100%;

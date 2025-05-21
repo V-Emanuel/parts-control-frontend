@@ -28,9 +28,11 @@ function App() {
   const tokenLS = localStorage.getItem('token');
   const nameLS = localStorage.getItem('name');
   const userIdLS = localStorage.getItem('userId');
+  const userAdminLS = JSON.parse(localStorage.getItem('userAdmin') as any);
+
   const companySelectLS =
     JSON.parse(localStorage.getItem('companySelect') as any) || [];
-  const [userAdmin, setUserAdmin] = useState<boolean>(false);
+  const [userAdmin, setUserAdmin] = useState<boolean | null>(userAdminLS);
   const [token, setToken] = useState<string | null>(tokenLS);
   const [name, setName] = useState<string | null>(nameLS);
   const [userId, setUserId] = useState<string | null>(userIdLS);
@@ -63,6 +65,11 @@ function App() {
   function setCompanySelectLS(company: Company) {
     setCompanySelect(company);
     localStorage.setItem('companySelect', JSON.stringify(company));
+  }
+
+  function setUserAdminLS(admin: boolean) {
+    setUserAdmin(admin);
+    localStorage.setItem('userAdmin', JSON.stringify(admin));
   }
 
   useEffect(() => {
@@ -163,7 +170,7 @@ function App() {
     setCompanySelectLS,
     userId,
     userAdmin,
-    setUserAdmin,
+    setUserAdminLS,
     setUserIdLS,
     categories,
   };

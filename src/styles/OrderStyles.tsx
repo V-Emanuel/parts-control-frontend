@@ -43,10 +43,22 @@ export const OrderStyles = styled.div`
       }
       .update-data-btn {
         background-color: #ee9b57;
+        &:hover {
+          cursor: pointer;
+          background-color: #ffffff;
+          color: #ee9b57;
+          border-color: #ee9b57;
+        }
       }
 
       .add-data-btn {
         background-color: #5ab98d;
+        &:hover {
+          cursor: pointer;
+          background-color: #ffffff;
+          color: #5ab98d;
+          border-color: #5ab98d;
+        }
       }
 
       .add-data-btn,
@@ -58,12 +70,6 @@ export const OrderStyles = styled.div`
         border: 1px solid transparent;
         transition: 300ms;
         text-decoration: none;
-        &:hover {
-          cursor: pointer;
-          background-color: #ffffff;
-          color: #5ab98d;
-          border-color: #5ab98d;
-        }
       }
     }
 

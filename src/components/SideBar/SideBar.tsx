@@ -23,7 +23,7 @@ export default function SideBar() {
     localStorage.removeItem('token');
     localStorage.removeItem('companySelect');
     localStorage.removeItem('name');
-    userContext.setUserAdmin(false);
+    userContext.setUserAdminLS(false);
     userContext.setTokenLS('');
     navigate('/');
   }
