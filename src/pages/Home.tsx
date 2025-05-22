@@ -16,22 +16,57 @@ export default function Home() {
     useContext(DataContext);
   const { companySelect } = useContext(UserContext);
 
-  const filter = mergedData.filter(
-    (data) => data.companyId === (companySelect?.id ?? companies[0].id),
-  );
-
-  const [filterData, setFilterData] = useState<MergedData | any>(filter);
-
+  const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
+  const [filterData, setFilterData] = useState<MergedData[]>([]);
   const [activeTab, setActiveTab] = useState<
     'dashboard' | 'data' | 'order' | 'entry' | 'customer'
   >('dashboard');
 
   useEffect(() => {
-    const newFilter = mergedData.filter(
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search.toLowerCase());
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [search]);
+
+  useEffect(() => {
+    const baseFilter = mergedData.filter(
       (data) => data.companyId === (companySelect?.id ?? companies[0].id),
     );
-    setFilterData(newFilter);
-  }, [companySelect, companies]);
+
+    const fullFilter = baseFilter.filter((item) => {
+      const user = users.find((u) => u.id === item.userId);
+      const status = statuses.find((s) => s.id === item.orderControl?.statusId);
+      const type = types.find((t) => t.id === item.orderControl?.typeId);
+      const company = companies.find((c) => c.id === item.companyId);
+
+      return (
+        (typeof item.osOrc === 'string' &&
+          item.osOrc.toLowerCase().includes(debouncedSearch)) ||
+        (typeof item.client === 'string' &&
+          item.client.toLowerCase().includes(debouncedSearch)) ||
+        (typeof item.model === 'string' &&
+          item.model.toLowerCase().includes(debouncedSearch)) ||
+        (typeof item.description === 'string' &&
+          item.description.toLowerCase().includes(debouncedSearch)) ||
+        user?.fullName?.toLowerCase().includes(debouncedSearch) ||
+        status?.name?.toLowerCase().includes(debouncedSearch) ||
+        type?.name?.toLowerCase().includes(debouncedSearch) ||
+        company?.name?.toLowerCase().includes(debouncedSearch)
+      );
+    });
+
+    setFilterData(fullFilter);
+  }, [
+    debouncedSearch,
+    companySelect,
+    companies,
+    mergedData,
+    users,
+    statuses,
+    types,
+  ]);
 
   return (
     <HomeStyles>
@@ -69,6 +104,26 @@ export default function Home() {
           >
             Relacionamento com Cliente
           </button>
+        </div>
+
+        <div style={{ margin: '16px 0' }}>
+          <input
+            type="text"
+            placeholder="🔍 Pesquisar cliente, modelo, OS, usuário..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{
+              padding: '10px 14px',
+              fontSize: '14px',
+              width: '100%',
+              maxWidth: '400px',
+              border: '1px solid #ccc',
+              borderRadius: '10px',
+              outline: 'none',
+              boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
+              marginLeft: '4px',
+            }}
+          />
         </div>
 
         <div className="table-container">

@@ -3,7 +3,7 @@ import theme, { sideBarWidth } from './theme';
 
 export const HomeStyles = styled.section`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
   min-height: 100vh;
