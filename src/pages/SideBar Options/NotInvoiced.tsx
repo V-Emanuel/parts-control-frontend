@@ -11,7 +11,7 @@ import OrderControl from '../../components/Tables/components/OrderControl';
 import EntryControl from '../../components/Tables/components/EntryControl';
 import CustomerService from '../../components/Tables/components/CustomerService';
 
-export default function WithoutAppointment() {
+export default function NotInvoiced() {
   const { mergedData, users, statuses, types, companies } =
     useContext(DataContext);
   const { companySelect } = useContext(UserContext);
@@ -34,7 +34,8 @@ export default function WithoutAppointment() {
     const baseFilter = mergedData.filter(
       (data) =>
         data.companyId === (companySelect?.id ?? companies[0].id) &&
-        !data.clientRelationship?.applicationDate,
+        !data.orderControl?.shippingDate &&
+        (data.orderControl?.statusId === 1 || !data.orderControl?.statusId),
     );
 
     const fullFilter = baseFilter.filter((item) => {

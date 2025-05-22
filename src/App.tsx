@@ -24,6 +24,7 @@ import OrderControlUpdate from './pages/Data Update/OrderControlUpdate';
 import StockControlUpdate from './pages/Data Update/StockControlUpdate';
 import ClientRelationshipUpdate from './pages/Data Update/ClientRelationshipUpdate';
 import Users from './pages/SideBar Options/Users';
+import NotInvoiced from './pages/SideBar Options/NotInvoiced';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
@@ -199,7 +200,7 @@ function App() {
                 <Route path="/dashboard" element={<Home />} />
                 <Route path="/sempedidos" element={<Oss />} />
                 <Route path="/transito" element={<InTransit />} />
-                <Route path="/nao-faturados" element={<Oss />} />
+                <Route path="/nao-faturados" element={<NotInvoiced />} />
                 <Route
                   path="/sem-agendamento"
                   element={<WithoutAppointment />}
