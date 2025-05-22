@@ -29,7 +29,8 @@ export default function Header() {
             {companySelect?.name || 'Selecione'}
           </option>
           {companies
-            .filter((company) => company.id != companySelect?.id)
+            .filter((company) => company.id !== companySelect?.id)
+            .sort((a, b) => a.name.localeCompare(b.name))
             .map((company) => (
               <option key={company.id} value={company.id}>
                 {company.name}

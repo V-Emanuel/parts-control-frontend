@@ -27,8 +27,8 @@ export const HeaderStyles = styled.header`
     padding: 4px 30px 4px 8px;
     border-radius: 4px;
     border: none;
-    background-color: #ececec;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 2px rgba(141, 141, 141, 0.2);
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
