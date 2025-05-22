@@ -10,7 +10,6 @@ import { MergedData } from '../types/user';
 import OrderControl from '../components/Tables/components/OrderControl';
 import EntryControl from '../components/Tables/components/EntryControl';
 import CustomerService from '../components/Tables/components/CustomerService';
-import MyRegisters from '../components/Tables/components/MyRegisters';
 
 export default function Home() {
   const { mergedData, users, statuses, types, companies } =
@@ -24,7 +23,7 @@ export default function Home() {
   const [filterData, setFilterData] = useState<MergedData | any>(filter);
 
   const [activeTab, setActiveTab] = useState<
-    'dashboard' | 'data' | 'order' | 'entry' | 'customer' | 'myregisters'
+    'dashboard' | 'data' | 'order' | 'entry' | 'customer'
   >('dashboard');
 
   useEffect(() => {
@@ -70,12 +69,6 @@ export default function Home() {
           >
             Relacionamento com Cliente
           </button>
-          <button
-            className={`table-option ${activeTab === 'myregisters' ? 'active-option' : ''}`}
-            onClick={() => setActiveTab('myregisters')}
-          >
-            Meus Registros
-          </button>
         </div>
 
         <div className="table-container">
@@ -117,15 +110,6 @@ export default function Home() {
           )}
           {activeTab === 'customer' && (
             <CustomerService
-              filterData={filterData}
-              users={users}
-              statuses={statuses}
-              types={types}
-              companies={companies}
-            />
-          )}
-          {activeTab === 'myregisters' && (
-            <MyRegisters
               filterData={filterData}
               users={users}
               statuses={statuses}

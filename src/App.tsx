@@ -23,15 +23,16 @@ import { api_url } from './assets/consts/url';
 import OrderControlUpdate from './pages/Data Update/OrderControlUpdate';
 import StockControlUpdate from './pages/Data Update/StockControlUpdate';
 import ClientRelationshipUpdate from './pages/Data Update/ClientRelationshipUpdate';
+import Users from './pages/SideBar Options/Users';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
   const nameLS = localStorage.getItem('name');
   const userIdLS = localStorage.getItem('userId');
   const userAdminLS = JSON.parse(localStorage.getItem('userAdmin') as any);
-
   const companySelectLS =
     JSON.parse(localStorage.getItem('companySelect') as any) || [];
+
   const [userAdmin, setUserAdmin] = useState<boolean | null>(userAdminLS);
   const [token, setToken] = useState<string | null>(tokenLS);
   const [name, setName] = useState<string | null>(nameLS);
@@ -39,8 +40,8 @@ function App() {
   const [companySelect, setCompanySelect] = useState<Company | null>(
     companySelectLS,
   );
-  const [categories, setCategories] = useState<any[]>([]);
 
+  const [categories, setCategories] = useState<any[]>([]);
   const [mergedData, setMergedData] = useState<any[]>([]);
   const [statuses, setStatuses] = useState<any[]>([]);
   const [types, setTypes] = useState<any[]>([]);
@@ -84,7 +85,7 @@ function App() {
       orderControl: `${api_url}/ordercontrol`,
       stockControl: `${api_url}/stockcontrol`,
       clientRelationship: `${api_url}/clientrelationship`,
-      usersnames: `${api_url}/usersnames`,
+      usersnames: `${api_url}/users`,
       statusesUrl: `${api_url}/statuses`,
       typesUrl: `${api_url}/types`,
       companiesUrl: `${api_url}/user-companies`,
@@ -100,7 +101,9 @@ function App() {
       axios.get(urls.orderControl, config),
       axios.get(urls.stockControl, config),
       axios.get(urls.clientRelationship, config),
-      axios.get(urls.usersnames, config),
+      userAdmin
+        ? axios.get(urls.usersnames, config)
+        : Promise.resolve({ data: [] }),
       axios.get(urls.statusesUrl, config),
       axios.get(urls.typesUrl, config),
       axios.get(urls.companiesUrl, config),
@@ -146,6 +149,7 @@ function App() {
           setTypes(typesData);
           setCompanies(companiesData);
           setCategories(categoriesData);
+
           if (
             !companySelectLS ||
             (Array.isArray(companySelectLS) && companySelectLS.length === 0)
@@ -202,50 +206,52 @@ function App() {
                 />
                 <Route path="/nao-aplicadas" element={<UnusedParts />} />
                 <Route path="/pedido/:id" element={<Order />} />
+
                 {Array.isArray(categories) &&
                   categories.some(
                     (cat) => cat.name === 'Consultor Técnico',
                   ) && (
                     <Route path="/novo-registro" element={<OrderRegister />} />
                   )}
+
+                {Array.isArray(categories) &&
+                  categories.some((cat) => cat.name === 'Estoquista') && (
+                    <>
+                      <Route
+                        path="/controle-pedido/:orderid"
+                        element={<OrderControlRegister />}
+                      />
+                      <Route
+                        path="/controle-estoque/:orderid"
+                        element={<StockControlRegister />}
+                      />
+                      <Route
+                        path="/controle-pedido-update/:orderid"
+                        element={<OrderControlUpdate />}
+                      />
+                      <Route
+                        path="/controle-estoque-update/:orderid"
+                        element={<StockControlUpdate />}
+                      />
+                    </>
+                  )}
+
+                {Array.isArray(categories) &&
+                  categories.some((cat) => cat.name === 'CRM') && (
+                    <>
+                      <Route
+                        path="/relacionamento-cliente/:orderid"
+                        element={<ClientRelationshipRegister />}
+                      />
+                      <Route
+                        path="/relacionamento-cliente-update/:orderid"
+                        element={<ClientRelationshipUpdate />}
+                      />
+                    </>
+                  )}
+
+                {userAdmin && <Route path="/usuarios" element={<Users />} />}
               </Route>
-
-              {Array.isArray(categories) &&
-                categories.some((cat) => cat.name === 'Estoquista') && (
-                  <>
-                    <Route
-                      path="/controle-pedido/:orderid"
-                      element={<OrderControlRegister />}
-                    />
-                    <Route
-                      path="/controle-estoque/:orderid"
-                      element={<StockControlRegister />}
-                    />
-                    <Route
-                      path="/controle-pedido-update/:orderid"
-                      element={<OrderControlUpdate />}
-                    />
-                    <Route
-                      path="/controle-estoque-update/:orderid"
-                      element={<StockControlUpdate />}
-                    />
-                  </>
-                )}
-
-              {Array.isArray(categories) &&
-                categories.some((cat) => cat.name === 'CRM') && (
-                  <>
-                    <Route
-                      path="/relacionamento-cliente/:orderid"
-                      element={<ClientRelationshipRegister />}
-                    />
-
-                    <Route
-                      path="/relacionamento-cliente-update/:orderid"
-                      element={<ClientRelationshipUpdate />}
-                    />
-                  </>
-                )}
             </Routes>
           </BrowserRouter>
         </DataContext.Provider>

@@ -8,10 +8,10 @@ export const HeaderStyles = styled.header`
   align-items: center;
   box-sizing: border-box;
   background-color: #fff;
-  padding-left: calc(${sideBarWidth} + 8px);
+  padding-left: calc(${sideBarWidth} + 50px);
   position: fixed;
   top: 0px;
-  /* border-bottom: 1px solid #bbbbbb; */
+  z-index: 99;
 
   p {
     font-size: 22px;
@@ -29,7 +29,7 @@ export const HeaderStyles = styled.header`
     border: none;
     background-color: #ececec;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    appearance: none; /* tira o estilo padrão da seta */
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='16' viewBox='0 0 20 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
@@ -42,8 +42,8 @@ export const HeaderStyles = styled.header`
 
     &:focus {
       outline: none;
-      border: 1px solid #389fff; /* muda a borda ao focar */
-      box-shadow: 0 0 0 2px rgba(141, 141, 141, 0.2); /* efeito mais suave */
+      border: 1px solid #389fff;
+      box-shadow: 0 0 0 2px rgba(141, 141, 141, 0.2);
       transition: 200ms;
 
       option {

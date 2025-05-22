@@ -4,15 +4,15 @@ import theme, { sideBarWidth } from './theme';
 export const OrderStyles = styled.div`
   width: 100%;
   min-height: 100vh;
-  /* background-color: ${theme.colors.primary}; */
-  background-color: #e9e9e9;
+  background-color: ${theme.colors.primary};
 
   .order-content {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding-left: ${sideBarWidth};
+    padding-left: calc(${sideBarWidth} + 32px);
     padding-top: 80px;
+    padding-right: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,6 +24,7 @@ export const OrderStyles = styled.div`
       height: max-content;
       display: flex;
       margin-bottom: 3px;
+
       h1,
       .add-data-btn,
       .update-data-btn {
@@ -81,6 +82,7 @@ export const OrderStyles = styled.div`
       border-radius: 8px;
       background-color: #ffffff;
       margin-bottom: 20px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
       .order-card {
         p {

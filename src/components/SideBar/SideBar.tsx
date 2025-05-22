@@ -87,7 +87,7 @@ export default function SideBar() {
           <>
             <p className="admin-division">Administrador</p>
             <Link
-              to="/nao-aplicadas"
+              to="/usuarios"
               className={`${location.pathname === '/usuarios' ? 'active' : ''} option`}
             >
               <FaUsers />
@@ -95,7 +95,7 @@ export default function SideBar() {
               <div className="left-div"></div>
             </Link>
             <Link
-              to="/nao-aplicadas"
+              to="/tipos"
               className={`${location.pathname === '/tipos-status' ? 'active' : ''} option`}
             >
               <BiCategoryAlt />

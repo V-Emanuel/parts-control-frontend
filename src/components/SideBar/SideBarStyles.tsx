@@ -1,136 +1,142 @@
 import styled from 'styled-components';
-import theme, { sideBarWidth } from '../../styles/theme';
 
-export const SideBarStyles = styled.header`
-  min-width: ${sideBarWidth};
-  height: 100%;
-  background-color: ${theme.colors.secondary};
+export const SideBarStyles = styled.aside`
+  min-width: 250px;
+  height: 100vh;
+  background: linear-gradient(180deg, #0f172a, #1e293b);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  padding: 32px 20px 0;
   box-sizing: border-box;
-  padding-top: 30px;
-  color: #fff;
+  color: #ffffff;
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   z-index: 999;
+  gap: 24px;
 
   .box-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    width: 100%;
+    padding-left: 6px;
   }
 
   .line {
-    margin-top: 5px;
-    width: 50px;
+    width: 100%;
     height: 1px;
-    background-color: #fff;
-    margin-bottom: 50px;
+    background-color: #334155;
   }
 
   .options {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    box-sizing: border-box;
-    margin-top: 20px;
-    background-color: transparent;
-    .option {
-      width: 100%;
-      height: max-content;
-      display: flex;
-      box-sizing: border-box;
-      padding: 12px 20px 12px 20px;
-      margin-bottom: 4px;
-      text-decoration: none;
-      transition: 300ms;
-      position: relative;
-      align-items: center;
 
-      :nth-child(1) {
-        color: #cfcfcf;
-        margin-right: 10px;
-        font-size: 17px;
+    .option {
+      display: flex;
+      align-items: center;
+      padding: 10px 16px;
+      border-radius: 8px;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 500;
+      gap: 10px;
+      text-decoration: none;
+      position: relative;
+      transition:
+        background 0.2s ease,
+        transform 0.1s ease;
+
+      svg {
+        font-size: 18px;
       }
 
       h1 {
-        color: #cfcfcf;
-        font-size: 13px;
-        font-weight: 700;
-      }
-
-      .left-div {
-        width: 4px;
-        height: 100%;
-        background-color: transparent;
-        position: absolute;
-        left: 0px;
-        top: 0px;
+        font-size: 14px;
+        font-weight: 600;
       }
 
       &:hover {
-        background-color: #081946;
-      }
-    }
+        background-color: rgba(255, 255, 255, 0.05);
+        transform: translateX(4px);
+        color: #ffffff;
 
-    .active {
-      background: linear-gradient(
-        to right,
-        rgba(71, 139, 240, 0.3),
-        transparent
-      );
-      :nth-child(1),
-      h1 {
-        color: #fff;
+        h1 {
+          color: #ffffff;
+        }
+
+        svg {
+          color: #ffffff;
+        }
       }
 
-      .left-div {
-        background-color: #3d76df;
+      &.active {
+        background-color: #1e40af;
+        color: #ffffff;
+
+        h1 {
+          color: #ffffff;
+        }
+
+        svg {
+          color: #ffffff;
+        }
       }
     }
 
     .admin-division {
-      padding-left: 20px;
-      margin-top: 30px;
-      margin-bottom: 20px;
-      color: #fff;
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 600;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin: 24px 0 8px;
+      padding-left: 6px;
     }
   }
 
   .logout-btn {
     display: flex;
-    background-color: transparent;
-    position: absolute;
+    align-items: center;
+    background-color: #facc15;
     border: none;
-    bottom: 50px;
-    width: max-content;
-    height: max-content;
-    box-sizing: border-box;
-    padding: 12px 2px 2px 2px;
-    border-width: 0px;
-    border-bottom-width: 1px;
-    border-color: transparent;
-    border-style: solid;
-    transition: 200ms;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 14px;
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    transition: 0.2s ease;
+    gap: 8px;
 
-    :nth-child(1) {
+    svg {
       font-size: 18px;
-      color: #e6b33d;
     }
 
     h6 {
-      font-size: 16px;
-      font-weight: 500;
-      color: #e6b33d;
-      margin-left: 6px;
+      margin: 0;
     }
 
     &:hover {
-      scale: 1.02;
+      background-color: #fde047;
+      transform: scale(1.03);
       cursor: pointer;
-      border-color: #e6b33d;
+    }
+  }
+
+  @media (max-width: 768px) {
+    min-width: 220px;
+    .box-title {
+      font-size: 16px;
+    }
+    .option {
+      h1 {
+        font-size: 13px;
+      }
     }
   }
 `;

@@ -6,55 +6,62 @@ export const HomeStyles = styled.section`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: ${theme.colors.primary};
 
   .table-content {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding-left: calc(${sideBarWidth});
+    padding-left: calc(${sideBarWidth} + 35px);
     padding-top: 106px;
     padding-right: 4px;
     padding-bottom: 4px;
 
     .sub-options {
       width: 100%;
-      height: max-content;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      gap: 8px;
+      padding: 10px 24px;
       position: fixed;
       top: 50px;
-      box-sizing: border-box;
-      padding-right: calc(${sideBarWidth} + 4px);
-      background-color: #fff;
-      border-top-width: 2px;
-      border-bottom-width: 2px;
-      border-style: solid;
-      border-color: #8d8d8d;
+      background-color: ${theme.colors.primary};
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 98;
+      overflow-x: auto;
 
       .table-option {
-        width: max-content;
-        height: max-content;
-        box-sizing: border-box;
+        padding: 6px 16px;
         font-size: 14px;
-        font-weight: 700;
-        color: #535353;
-        padding: 7px 22px 7px 22px;
+        font-weight: 600;
+        background-color: transparent;
         border: none;
-        background-color: #fff;
-        transition: 300ms;
+        border-radius: 6px;
+        color: #4b5563;
+        transition: all 0.2s ease;
+        white-space: nowrap;
 
         &:hover {
+          background-color: #f3f4f6;
+          color: #111827;
           cursor: pointer;
-          background-color: #dadada;
         }
       }
 
       .active-option {
-        background-color: #8d8d8d;
-        color: #ffffff;
+        background-color: #10b981;
+        color: #fff;
+        font-weight: 700;
+        box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sub-options {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 10px 16px;
       }
     }
 
@@ -66,45 +73,69 @@ export const HomeStyles = styled.section`
       border-radius: 10px;
       margin-left: 4px;
       .dashboard-table {
-        background-color: #fff;
         width: 100%;
-        height: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background-color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
         thead {
+          background-color: ${theme.colors.secondary};
+
           tr {
             th {
-              min-width: 250px;
-              height: max-content;
-              box-sizing: border-box;
-              padding: 12px 20px 12px 20px;
-              background-color: ${theme.colors.secondary};
-              color: #fff;
-              border: 1px solid #cacaca;
-              font-size: 15px;
+              min-width: 180px;
+              padding: 14px 16px;
+              font-size: 14px;
               font-weight: 700;
+              color: #ffffff;
+              text-align: left;
+              border-bottom: 2px solid #ddd;
+              position: sticky;
+              top: 0;
+              z-index: 2;
             }
           }
         }
 
         tbody {
           tr {
-            background-color: #fff;
-            transition: 200ms;
-            td {
-              width: 200px;
-              height: max-content;
-              flex-wrap: wrap;
-              box-sizing: border-box;
-              padding: 15px 10px 15px 10px;
-              background-color: transparent;
-              border: 1px solid #cacaca;
-              font-size: 14px;
-              font-weight: 600;
-              color: #4b4b4b;
-            }
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #e0e0e0;
 
             &:hover {
-              background: rgba(0, 0, 0, 0.08);
-              cursor: pointer;
+              background-color: #f5f7fa;
+            }
+
+            td {
+              padding: 12px 16px;
+              font-size: 14px;
+              color: #333;
+              vertical-align: top;
+              border-right: 1px solid #f0f0f0;
+
+              &:last-child {
+                border-right: none;
+              }
+            }
+
+            &.highlight-yellow {
+              background-color: #fffacc;
+
+              td {
+                color: #333;
+              }
+            }
+
+            &.highlight-red {
+              background-color: #fe5455;
+
+              td {
+                color: #fff;
+              }
             }
           }
         }

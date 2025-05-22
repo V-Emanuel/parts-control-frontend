@@ -2,7 +2,7 @@ export const sideBarWidth = '260px';
 
 const theme = {
   colors: {
-    primary: '#e7f3fa',
+    primary: '#f0f0f0',
     secondary: '#020b1f',
     third: '#316d9f',
     fourt: '#5dc2f9',
