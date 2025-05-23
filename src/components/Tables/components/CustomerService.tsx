@@ -41,7 +41,7 @@ export default function CustomerService({ filterData }: DashboardProps) {
     columnHelper.accessor(
       (row) => formatDate(row.clientRelationship?.agendaDate ?? '-'),
       {
-        header: 'Data Agendada',
+        header: 'Data Agendamento',
       },
     ),
     columnHelper.accessor(

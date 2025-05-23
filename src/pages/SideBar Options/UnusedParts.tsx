@@ -11,7 +11,7 @@ import OrderControl from '../../components/Tables/components/OrderControl';
 import EntryControl from '../../components/Tables/components/EntryControl';
 import CustomerService from '../../components/Tables/components/CustomerService';
 
-export default function WithoutAppointment() {
+export default function UnusedParts() {
   const { mergedData, users, statuses, types, companies } =
     useContext(DataContext);
   const { companySelect } = useContext(UserContext);

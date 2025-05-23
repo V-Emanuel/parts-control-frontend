@@ -172,7 +172,7 @@ export default function DashBoard({
     columnHelper.accessor(
       (row) => formatDate(row.clientRelationship?.agendaDate ?? '-'),
       {
-        header: 'Data Agendada',
+        header: 'Data Agendamento',
       },
     ),
     columnHelper.accessor(

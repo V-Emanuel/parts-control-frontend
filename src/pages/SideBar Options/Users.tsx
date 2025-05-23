@@ -21,7 +21,7 @@ export default function Users() {
         <ul className="users-list">
           {users.map((user) => (
             <Link
-              to="/"
+              to={`/usuarios/${user.id}`}
               key={user.id}
               className={`user-div ${!user.active ? 'inactive' : ''}`}
             >

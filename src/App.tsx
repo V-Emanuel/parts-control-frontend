@@ -25,6 +25,7 @@ import StockControlUpdate from './pages/Data Update/StockControlUpdate';
 import ClientRelationshipUpdate from './pages/Data Update/ClientRelationshipUpdate';
 import Users from './pages/SideBar Options/Users';
 import NotInvoiced from './pages/SideBar Options/NotInvoiced';
+import User from './pages/User';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
@@ -251,7 +252,12 @@ function App() {
                     </>
                   )}
 
-                {userAdmin && <Route path="/usuarios" element={<Users />} />}
+                {userAdmin && (
+                  <>
+                    <Route path="/usuarios" element={<Users />} />
+                    <Route path="/usuarios/:id" element={<User />} />
+                  </>
+                )}
               </Route>
             </Routes>
           </BrowserRouter>
