@@ -12,8 +12,8 @@ import { useParams } from 'react-router-dom';
 export default function StockControlUpdate() {
   const [nf, setNf] = useState('');
   const [nf_date, setNfDate] = useState('');
-  const [accuracy_date, setAccuracy_date] = useState('');
-  const [entry_date, setEntry_date] = useState('');
+  const [accuracy_date, setAccuracy_date] = useState<any>(null);
+  const [entry_date, setEntry_date] = useState<any>(null);
 
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

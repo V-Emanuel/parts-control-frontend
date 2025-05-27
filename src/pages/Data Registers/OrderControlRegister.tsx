@@ -72,13 +72,12 @@ export default function OrderControlRegister() {
         <form className="order-form" onSubmit={handleOrder}>
           <div className="type-date input-container">
             <label>
-              Data de Envio: <strong>*</strong>
+              Data de Envio: <strong></strong>
             </label>
             <input
               type="date"
               value={shipping_date}
               onChange={(e) => setShippingDate(e.target.value)}
-              required
             />
           </div>
 

@@ -12,7 +12,7 @@ import { formatDate } from '../../../assets/functions/formatData';
 
 export default function DashBoard({
   filterData,
-  users,
+  usersNames,
   statuses,
   types,
   companies,
@@ -35,7 +35,7 @@ export default function DashBoard({
       header: 'Data do Pedido',
     }),
     columnHelper.accessor(
-      (row) => users.find((u) => u.id === row.userId)?.fullName || '-',
+      (row) => usersNames.find((u) => u.id === row.userId)?.fullName || '-',
       { header: 'Usuário' },
     ),
     columnHelper.accessor('client', { header: 'Cliente' }),

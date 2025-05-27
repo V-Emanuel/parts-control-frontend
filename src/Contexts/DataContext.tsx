@@ -6,6 +6,7 @@ export type DataContextType = {
   statuses: any[];
   types: any[];
   companies: any[];
+  usersNames: any[];
 };
 
 const DataContext = createContext<DataContextType>({
@@ -14,6 +15,7 @@ const DataContext = createContext<DataContextType>({
   statuses: [],
   types: [],
   companies: [],
+  usersNames: [],
 });
 
 export default DataContext;

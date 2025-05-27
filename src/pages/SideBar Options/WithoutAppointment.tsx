@@ -12,7 +12,7 @@ import EntryControl from '../../components/Tables/components/EntryControl';
 import CustomerService from '../../components/Tables/components/CustomerService';
 
 export default function WithoutAppointment() {
-  const { mergedData, users, statuses, types, companies } =
+  const { mergedData, usersNames, statuses, types, companies } =
     useContext(DataContext);
   const { companySelect } = useContext(UserContext);
 
@@ -38,7 +38,7 @@ export default function WithoutAppointment() {
     );
 
     const fullFilter = baseFilter.filter((item) => {
-      const user = users.find((u) => u.id === item.userId);
+      const user = usersNames.find((u) => u.id === item.userId);
       const status = statuses.find((s) => s.id === item.orderControl?.statusId);
       const type = types.find((t) => t.id === item.orderControl?.typeId);
       const company = companies.find((c) => c.id === item.companyId);
@@ -65,7 +65,7 @@ export default function WithoutAppointment() {
     companySelect,
     companies,
     mergedData,
-    users,
+    usersNames,
     statuses,
     types,
   ]);
@@ -132,7 +132,7 @@ export default function WithoutAppointment() {
           {activeTab === 'dashboard' && (
             <DashBoard
               filterData={filterData}
-              users={users}
+              usersNames={usersNames}
               statuses={statuses}
               types={types}
               companies={companies}
@@ -141,7 +141,7 @@ export default function WithoutAppointment() {
           {activeTab === 'data' && (
             <Data
               filterData={filterData}
-              users={users}
+              usersNames={usersNames}
               statuses={statuses}
               types={types}
               companies={companies}
@@ -150,7 +150,7 @@ export default function WithoutAppointment() {
           {activeTab === 'order' && (
             <OrderControl
               filterData={filterData}
-              users={users}
+              usersNames={usersNames}
               statuses={statuses}
               types={types}
               companies={companies}
@@ -159,7 +159,7 @@ export default function WithoutAppointment() {
           {activeTab === 'entry' && (
             <EntryControl
               filterData={filterData}
-              users={users}
+              usersNames={usersNames}
               statuses={statuses}
               types={types}
               companies={companies}
@@ -168,7 +168,7 @@ export default function WithoutAppointment() {
           {activeTab === 'customer' && (
             <CustomerService
               filterData={filterData}
-              users={users}
+              usersNames={usersNames}
               statuses={statuses}
               types={types}
               companies={companies}

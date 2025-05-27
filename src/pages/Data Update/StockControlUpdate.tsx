@@ -12,8 +12,8 @@ import { useParams } from 'react-router-dom';
 export default function StockControlUpdate() {
   const [nf, setNf] = useState('');
   const [nf_date, setNfDate] = useState('');
-  const [accuracy_date, setAccuracy_date] = useState('');
-  const [entry_date, setEntry_date] = useState('');
+  const [accuracy_date, setAccuracy_date] = useState<any>(null);
+  const [entry_date, setEntry_date] = useState<any>(null);
 
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,7 +54,7 @@ export default function StockControlUpdate() {
     };
 
     axios
-      .post(`${api_url}/stockcontrol/${orderid}`, body, {
+      .put(`${api_url}/stockcontrol/${orderid}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -106,25 +106,23 @@ export default function StockControlUpdate() {
           </div>
           <div className="type-date input-container">
             <label>
-              Previsão: <strong>*</strong>
+              Previsão: <strong></strong>
             </label>
             <input
               type="date"
               value={accuracy_date}
               onChange={(e) => setAccuracy_date(e.target.value)}
-              required
             />
           </div>
 
           <div className="type-date input-container">
             <label>
-              Data de Entrada: <strong>*</strong>
+              Data de Entrada: <strong></strong>
             </label>
             <input
               type="date"
               value={entry_date}
               onChange={(e) => setEntry_date(e.target.value)}
-              required
             />
           </div>
           <div className="btn-container">

@@ -30,7 +30,7 @@ export interface MergedData extends OrderData {
 
 export interface DashboardProps {
   filterData: MergedData | any;
-  users: any[];
+  usersNames: any[];
   statuses: any[];
   types: any[];
   companies: any[];

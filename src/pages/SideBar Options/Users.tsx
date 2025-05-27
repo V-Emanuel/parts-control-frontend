@@ -7,7 +7,7 @@ import DataContext from '../../Contexts/DataContext';
 import { Link } from 'react-router-dom';
 
 export default function Users() {
-  const { users } = useContext(DataContext);
+  const { usersNames } = useContext(DataContext);
 
   return (
     <HomeStyles>
@@ -19,7 +19,7 @@ export default function Users() {
           <div className="underline"></div>
         </div>
         <ul className="users-list">
-          {users.map((user) => (
+          {usersNames.map((user) => (
             <Link
               to={`/usuarios/${user.id}`}
               key={user.id}

@@ -49,6 +49,7 @@ function App() {
   const [types, setTypes] = useState<any[]>([]);
   const [users, setUsers] = useState<any[]>([]);
   const [companies, setCompanies] = useState<any[]>([]);
+  const [usersNames, setUsersNames] = useState<any[]>([]);
 
   function setTokenLS(t: string) {
     setToken(t);
@@ -92,6 +93,7 @@ function App() {
       typesUrl: `${api_url}/types`,
       companiesUrl: `${api_url}/user-companies`,
       categoriesUrl: `${api_url}/user-categories`,
+      usersData: `${api_url}/usersnames`,
     };
 
     const config = {
@@ -110,6 +112,7 @@ function App() {
       axios.get(urls.typesUrl, config),
       axios.get(urls.companiesUrl, config),
       axios.get(urls.categoriesUrl, config),
+      axios.get(urls.usersData, config),
     ])
       .then(
         ([
@@ -122,6 +125,7 @@ function App() {
           typesRes,
           companiesRes,
           categoriesRes,
+          usersNamesRes,
         ]) => {
           const orderData = orderRes.data;
           const orderControl = controlRes.data;
@@ -132,6 +136,7 @@ function App() {
           const typesData = typesRes.data;
           const companiesData = companiesRes.data;
           const categoriesData = categoriesRes.data;
+          const usersNamesData = usersNamesRes.data;
 
           const combinedData = orderData.map((order: any) => ({
             ...order,
@@ -151,6 +156,7 @@ function App() {
           setTypes(typesData);
           setCompanies(companiesData);
           setCategories(categoriesData);
+          setUsersNames(usersNamesData);
 
           if (
             !companySelectLS ||
@@ -187,6 +193,7 @@ function App() {
     statuses,
     types,
     companies,
+    usersNames,
   };
 
   return (

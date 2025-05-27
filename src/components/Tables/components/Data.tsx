@@ -10,7 +10,7 @@ import { DashboardProps } from '../../../types/user';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../../assets/functions/formatData';
 
-export default function Data({ filterData, users, companies }: DashboardProps) {
+export default function Data({ filterData, usersNames, companies }: DashboardProps) {
   const columnHelper = createColumnHelper<MergedData>();
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ export default function Data({ filterData, users, companies }: DashboardProps) {
       header: 'Data do Pedido',
     }),
     columnHelper.accessor(
-      (row) => users.find((u) => u.id === row.userId)?.fullName || '-',
+      (row) => usersNames.find((u) => u.id === row.userId)?.fullName || '-',
       { header: 'Usuário' },
     ),
     columnHelper.accessor('client', { header: 'Cliente' }),
