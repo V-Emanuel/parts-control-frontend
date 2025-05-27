@@ -83,14 +83,13 @@ export default function OrderControlRegister() {
 
           <div className="type-date input-container">
             <label>
-              Nº: <strong>*</strong>
+              Nº: <strong></strong>
             </label>
             <input
               type="number"
               placeholder="número"
               value={num}
               onChange={(e) => setNum(e.target.value)}
-              required
             />
           </div>
 
@@ -114,14 +113,13 @@ export default function OrderControlRegister() {
 
           <div className="type-date input-container">
             <label>
-              Pedido Filial: <strong>*</strong>
+              Pedido Filial: <strong></strong>
             </label>
             <input
               type="text"
               placeholder="filial"
               value={branch_order}
               onChange={(e) => setBranchOrder(e.target.value)}
-              required
             />
           </div>
 
@@ -142,12 +140,11 @@ export default function OrderControlRegister() {
 
           <div className="type-date input-container">
             <label>
-              Status: <strong>*</strong>
+              Status: <strong></strong>
             </label>
             <select
               value={status_id}
               onChange={(e) => setStatusId(e.target.value)}
-              required
             >
               <option value="">Selecione</option>
               {statuses.map((status) => (

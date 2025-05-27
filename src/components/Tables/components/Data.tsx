@@ -10,7 +10,11 @@ import { DashboardProps } from '../../../types/user';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../../assets/functions/formatData';
 
-export default function Data({ filterData, usersNames, companies }: DashboardProps) {
+export default function Data({
+  filterData,
+  usersNames,
+  companies,
+}: DashboardProps) {
   const columnHelper = createColumnHelper<MergedData>();
   const navigate = useNavigate();
 

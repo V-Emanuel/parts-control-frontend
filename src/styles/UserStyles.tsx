@@ -51,7 +51,7 @@ export const UserStyles = styled.div`
         background-color: ${theme.colors.secondary};
         border-radius: 8px;
         margin-bottom: 8px;
-        color: #FFFFFF;
+        color: #ffffff;
         font-size: 15px;
       }
     }
