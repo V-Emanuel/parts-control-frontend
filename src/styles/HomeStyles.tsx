@@ -10,13 +10,13 @@ export const HomeStyles = styled.section`
   background-color: ${theme.colors.primary};
 
   .table-content {
-    width: 100%;
+    max-width: 100%;
     height: 100%;
     box-sizing: border-box;
     padding-left: calc(${sideBarWidth} + 35px);
     padding-top: 106px;
-    padding-right: 4px;
-    padding-bottom: 4px;
+    /* padding-right: 14px; */
+    /* padding-bottom: 4px; */
 
     .sub-options {
       width: 100%;
@@ -56,15 +56,6 @@ export const HomeStyles = styled.section`
         box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
       }
     }
-
-    @media (max-width: 768px) {
-      .sub-options {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding: 10px 16px;
-      }
-    }
-
     .table-container {
       width: 100%;
       height: 100%;
@@ -88,6 +79,7 @@ export const HomeStyles = styled.section`
           tr {
             th {
               min-width: 180px;
+              box-sizing: border-box;
               padding: 14px 16px;
               font-size: 14px;
               font-weight: 700;

@@ -127,7 +127,7 @@ export default function ClientRelationshipRegister() {
             </label>
             <input
               type="text"
-              placeholder="número"
+              placeholder="texto"
               value={observations}
               onChange={(e) => setObservations(e.target.value)}
               required
