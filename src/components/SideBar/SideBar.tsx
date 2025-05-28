@@ -10,7 +10,7 @@ import {
 
 import { FiTruck } from 'react-icons/fi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { BiSolidDashboard, BiCategoryAlt } from 'react-icons/bi';
+import { BiSolidDashboard } from 'react-icons/bi';
 import UserContext from '../../Contexts/UserContext';
 import { useContext } from 'react';
 import { CiLogout } from 'react-icons/ci';
@@ -93,14 +93,6 @@ export default function SideBar() {
             >
               <FaUsers />
               <h1>Usuários</h1>
-              <div className="left-div"></div>
-            </Link>
-            <Link
-              to="/tipos"
-              className={`${location.pathname === '/tipos-status' ? 'active' : ''} option`}
-            >
-              <BiCategoryAlt />
-              <h1>Tipos e Status</h1>
               <div className="left-div"></div>
             </Link>
             <Link

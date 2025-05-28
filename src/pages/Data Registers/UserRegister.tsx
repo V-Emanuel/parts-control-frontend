@@ -6,12 +6,14 @@ import UserContext from '../../Contexts/UserContext';
 import DataContext from '../../Contexts/DataContext';
 import { UserRegisterStyles } from '../../styles/UserRegisterStyles';
 import { api_url } from '../../assets/consts/url';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserRegister() {
   const { token, categories } = useContext(UserContext);
   const { companies } = useContext(DataContext);
+  const navigate = useNavigate();
 
-  const [name, setName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -47,10 +49,11 @@ export default function UserRegister() {
     setIsSubmitting(true);
 
     const body = {
-      name,
+      fullName,
       email,
       password,
       admin,
+      active: true,
       companies: selectedCompanies,
       categories: selectedCategories,
     };
@@ -63,12 +66,14 @@ export default function UserRegister() {
       alert('Usuário registrado com sucesso!');
       setShowModal(false);
 
-      setName('');
+      setFullName('');
       setEmail('');
       setPassword('');
       setAdmin(false);
       setSelectedCompanies([]);
       setSelectedCategories([]);
+      navigate('/usuarios');
+      window.location.reload();
     } catch (err) {
       console.error(err);
       alert('Erro ao registrar usuário');
@@ -91,8 +96,8 @@ export default function UserRegister() {
             <input
               type="text"
               placeholder="Nome completo"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               required
               autoComplete="off"
             />
@@ -174,14 +179,13 @@ export default function UserRegister() {
           </div>
         </form>
 
-        {/* Modal de confirmação */}
         {showModal && (
           <div className="modal-display">
             <div className="modal-content">
               <p>Confira os dados antes de confirmar:</p>
               <ul>
                 <li>
-                  <strong>Nome:</strong> {name}
+                  <strong>Nome:</strong> {fullName}
                 </li>
                 <li>
                   <strong>Email:</strong> {email}
