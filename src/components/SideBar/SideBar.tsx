@@ -5,6 +5,7 @@ import {
   FaCalendarTimes,
   FaTools,
   FaUsers,
+  FaUserPlus,
 } from 'react-icons/fa';
 
 import { FiTruck } from 'react-icons/fi';
@@ -100,6 +101,14 @@ export default function SideBar() {
             >
               <BiCategoryAlt />
               <h1>Tipos e Status</h1>
+              <div className="left-div"></div>
+            </Link>
+            <Link
+              to="/add-usuario"
+              className={`${location.pathname === '/add-usuario' ? 'active' : ''} option`}
+            >
+              <FaUserPlus />
+              <h1>Adicionar Usuário</h1>
               <div className="left-div"></div>
             </Link>
           </>

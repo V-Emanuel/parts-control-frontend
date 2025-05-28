@@ -26,6 +26,7 @@ import ClientRelationshipUpdate from './pages/Data Update/ClientRelationshipUpda
 import Users from './pages/SideBar Options/Users';
 import NotInvoiced from './pages/SideBar Options/NotInvoiced';
 import User from './pages/User';
+import UserRegister from './pages/Data Registers/UserRegister';
 
 function App() {
   const tokenLS = localStorage.getItem('token');
@@ -263,6 +264,7 @@ function App() {
                   <>
                     <Route path="/usuarios" element={<Users />} />
                     <Route path="/usuarios/:id" element={<User />} />
+                    <Route path="/add-usuario" element={<UserRegister />} />
                   </>
                 )}
               </Route>
