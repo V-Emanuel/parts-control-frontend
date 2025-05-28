@@ -11,10 +11,10 @@ import { useParams } from 'react-router-dom';
 
 export default function ClientRelationshipUpdate() {
   const [first_contact, setFirst_contact] = useState('');
-  const [second_contact, setSecond_contact] = useState('');
-  const [third_contact, setThird_contact] = useState('');
-  const [agenda_date, setAgenda_date] = useState('');
-  const [application_date, setApplication_date] = useState('');
+  const [second_contact, setSecond_contact] = useState<any>(null);
+  const [third_contact, setThird_contact] = useState<any>(null);
+  const [agenda_date, setAgenda_date] = useState<any>(null);
+  const [application_date, setApplication_date] = useState<any>(null);
   const [observations, setObservations] = useState('');
 
   const [showModal, setShowModal] = useState(false);
@@ -22,6 +22,7 @@ export default function ClientRelationshipUpdate() {
 
   const { orderid } = useParams();
   const parsedOrderid = orderid ? parseInt(orderid) : null;
+  const [clientRelationshipId, setClientRelationshipId] = useState('');
   const { token } = useContext(UserContext);
   const { mergedData } = useContext(DataContext);
 
@@ -29,24 +30,25 @@ export default function ClientRelationshipUpdate() {
     if (!parsedOrderid || !mergedData) return;
 
     const order = mergedData.find((item) => item.id === parsedOrderid);
-    const rel = order?.clientRelationship;
+    const relationship = order?.clientRelationship;
 
-    if (rel) {
-      setFirst_contact(rel.firstContact?.slice(0, 10) || '');
-      setSecond_contact(rel.secondContact?.slice(0, 10) || '');
-      setThird_contact(rel.thirdContact?.slice(0, 10) || '');
-      setAgenda_date(rel.agendaDate?.slice(0, 10) || '');
-      setApplication_date(rel.applicationDate?.slice(0, 10) || '');
-      setObservations(rel.observations || '');
+    if (relationship) {
+      setClientRelationshipId(relationship.id);
+      setFirst_contact(relationship.firstContact?.slice(0, 10) || '');
+      setSecond_contact(relationship.secondContact?.slice(0, 10) || '');
+      setThird_contact(relationship.thirdContact?.slice(0, 10) || '');
+      setAgenda_date(relationship.agendaDate?.slice(0, 10) || '');
+      setApplication_date(relationship.applicationDate?.slice(0, 10) || '');
+      setObservations(relationship.observations || '');
     }
   }, [parsedOrderid, mergedData]);
 
-  function handleOrder(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setShowModal(true);
   }
 
-  function postOrder() {
+  function updateRelationship() {
     setIsSubmitting(true);
 
     const body = {
@@ -60,7 +62,7 @@ export default function ClientRelationshipUpdate() {
     };
 
     axios
-      .post(`${api_url}/clientrelationship/${orderid}`, body, {
+      .put(`${api_url}/clientrelationship/${clientRelationshipId}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -86,7 +88,7 @@ export default function ClientRelationshipUpdate() {
       <Header />
       <div className="form-content">
         <h1>Atualizar Registro de Atendimento</h1>
-        <form className="order-form" onSubmit={handleOrder}>
+        <form className="order-form" onSubmit={handleSubmit}>
           <div className="type-date input-container">
             <label>
               Primeiro Contato: <strong>*</strong>
@@ -99,47 +101,35 @@ export default function ClientRelationshipUpdate() {
             />
           </div>
           <div className="type-date input-container">
-            <label>
-              Segundo Contato: <strong>*</strong>
-            </label>
+            <label>Segundo Contato:</label>
             <input
               type="date"
-              value={second_contact}
+              value={second_contact || ''}
               onChange={(e) => setSecond_contact(e.target.value)}
-              required
             />
           </div>
           <div className="type-date input-container">
-            <label>
-              Terceiro Contato: <strong>*</strong>
-            </label>
+            <label>Terceiro Contato:</label>
             <input
               type="date"
-              value={third_contact}
+              value={third_contact || ''}
               onChange={(e) => setThird_contact(e.target.value)}
-              required
             />
           </div>
           <div className="type-date input-container">
-            <label>
-              Data Agenda: <strong>*</strong>
-            </label>
+            <label>Data da Agenda:</label>
             <input
               type="date"
-              value={agenda_date}
+              value={agenda_date || ''}
               onChange={(e) => setAgenda_date(e.target.value)}
-              required
             />
           </div>
           <div className="type-date input-container">
-            <label>
-              Data de Aplicação: <strong>*</strong>
-            </label>
+            <label>Data da Aplicação:</label>
             <input
               type="date"
-              value={application_date}
+              value={application_date || ''}
               onChange={(e) => setApplication_date(e.target.value)}
-              required
             />
           </div>
           <div className="type-date input-container">
@@ -148,7 +138,6 @@ export default function ClientRelationshipUpdate() {
             </label>
             <input
               type="text"
-              placeholder="Observações"
               value={observations}
               onChange={(e) => setObservations(e.target.value)}
               required
@@ -174,10 +163,10 @@ export default function ClientRelationshipUpdate() {
                   <strong>Terceiro Contato:</strong> {formatDate(third_contact)}
                 </li>
                 <li>
-                  <strong>Data Agenda:</strong> {formatDate(agenda_date)}
+                  <strong>Data da Agenda:</strong> {formatDate(agenda_date)}
                 </li>
                 <li>
-                  <strong>Data Aplicação:</strong>{' '}
+                  <strong>Data da Aplicação:</strong>{' '}
                   {formatDate(application_date)}
                 </li>
                 <li>
@@ -187,7 +176,7 @@ export default function ClientRelationshipUpdate() {
               <div className="options-btns">
                 <button
                   style={{ backgroundColor: '#5ab98d' }}
-                  onClick={postOrder}
+                  onClick={updateRelationship}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Enviando...' : 'Confirmar'}

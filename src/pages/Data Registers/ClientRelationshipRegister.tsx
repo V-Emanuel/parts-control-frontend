@@ -10,10 +10,10 @@ import { useParams } from 'react-router-dom';
 
 export default function ClientRelationshipRegister() {
   const [first_contact, setFirst_contact] = useState('');
-  const [second_contact, setSecond_contact] = useState('');
-  const [third_contact, setThird_contact] = useState('');
-  const [agenda_date, setAgenda_date] = useState('');
-  const [application_date, setApplication_date] = useState('');
+  const [second_contact, setSecond_contact] = useState<any>(null);
+  const [third_contact, setThird_contact] = useState<any>(null);
+  const [agenda_date, setAgenda_date] = useState<any>(null);
+  const [application_date, setApplication_date] = useState<any>(null);
   const [observations, setObservations] = useState('');
 
   const [showModal, setShowModal] = useState(false);
@@ -82,47 +82,43 @@ export default function ClientRelationshipRegister() {
           </div>
           <div className="type-date input-container">
             <label>
-              Segundo Contato: <strong>*</strong>
+              Segundo Contato: <strong></strong>
             </label>
             <input
               type="date"
               value={second_contact}
               onChange={(e) => setSecond_contact(e.target.value)}
-              required
             />
           </div>
           <div className="type-date input-container">
             <label>
-              Terceiro Contato: <strong>*</strong>
+              Terceiro Contato: <strong></strong>
             </label>
             <input
               type="date"
               value={third_contact}
               onChange={(e) => setThird_contact(e.target.value)}
-              required
             />
           </div>
           <div className="type-date input-container">
             <label>
-              Data Agenda: <strong>*</strong>
+              Data Agenda: <strong></strong>
             </label>
             <input
               type="date"
               value={agenda_date}
               onChange={(e) => setAgenda_date(e.target.value)}
-              required
             />
           </div>
 
           <div className="type-date input-container">
             <label>
-              Data de Aplicação: <strong>*</strong>
+              Data de Aplicação: <strong></strong>
             </label>
             <input
               type="date"
               value={application_date}
               onChange={(e) => setApplication_date(e.target.value)}
-              required
             />
           </div>
           <div className="type-date input-container">
