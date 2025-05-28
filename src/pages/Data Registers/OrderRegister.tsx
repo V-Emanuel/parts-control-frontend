@@ -48,6 +48,7 @@ export default function OrderRegister() {
       .then(() => {
         alert('Pedido Cadastrado com Sucesso!');
         setShowModal(false);
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
