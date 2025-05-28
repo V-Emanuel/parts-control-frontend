@@ -16,8 +16,8 @@ export const LoginStyles = styled.div`
   background-position: center center;
 
   .login-content {
-    width: 76%;
-    height: 76%;
+    width: 80%;
+    height: 80%;
     display: flex;
     border: 1px solid #f4f4f4;
     box-shadow:
@@ -143,6 +143,100 @@ export const LoginStyles = styled.div`
           background-color: #ffffff;
           border-color: ${theme.colors.secondary};
           color: ${theme.colors.secondary};
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1650px) {
+    .login-content {
+      .left-content {
+        h1 {
+          font-size: 64px;
+        }
+      }
+
+      .login-form {
+        .loading {
+          img {
+            width: 50px;
+          }
+        }
+
+        p {
+          font-size: 48px;
+          margin-bottom: 6px;
+        }
+
+        label {
+          width: 300px;
+          margin-bottom: 2px;
+          margin-top: 16px;
+          font-size: 14px;
+        }
+
+        input {
+          width: 300px;
+          height: 36px;
+          border-radius: 6px;
+          padding: 0px 6px 0px 6px;
+          margin-bottom: 4px;
+        }
+
+        .failed-login {
+          width: 300px;
+          font-size: 12px;
+        }
+
+        button {
+          width: 130px;
+          height: 42px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1270px) {
+    .login-content {
+      max-width: 500px;
+      min-width: 340px;
+      height: 90%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      .left-content {
+        width: 100%;
+        height: 70px;
+        position: absolute;
+        z-index: 999;
+        h1 {
+          font-size: 24px;
+          text-align: center;
+        }
+      }
+
+      .login-form {
+        box-sizing: border-box;
+        padding-top: 160px;
+        width: 100%;
+        height: 100%;
+
+        p {
+          font-size: 46px;
+        }
+
+        label {
+          width: 80%;
+        }
+
+        input {
+          width: 80%;
+        }
+
+        .failed-login {
+          width: 80%;
         }
       }
     }
