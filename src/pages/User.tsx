@@ -29,6 +29,7 @@ export default function User() {
     email: '',
     password: '',
     admin: false,
+    active: true,
     companyIds: [] as number[],
     categoryIds: [] as number[],
   });
@@ -62,6 +63,7 @@ export default function User() {
         email: user.email || '',
         password: '',
         admin: user.admin || false,
+        active: user.active ?? true,
         companyIds: user.companies?.map((c: any) => c.id) || [],
         categoryIds: user.categories?.map((c: any) => c.id) || [],
       });
@@ -80,10 +82,12 @@ export default function User() {
         setUser(res.data);
         setShowModal(false);
         navigate(`/usuarios`);
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
         alert('Erro ao atualizar usuário');
+        window.location.reload();
       });
   }
 
@@ -118,8 +122,13 @@ export default function User() {
                 </ul>
               </>
             )}
-            <button onClick={() => setShowModal(true)}>Atualizar</button>
           </div>
+          <ModalButton
+            style={{ backgroundColor: '#5ab98d' }}
+            onClick={() => setShowModal(true)}
+          >
+            Atualizar
+          </ModalButton>
           {showModal && (
             <ModalBackdrop>
               <ModalContainer>
@@ -236,6 +245,26 @@ export default function User() {
                       </label>
                     ))}
                   </div>
+                  <ModalLabel>Usuário Ativo:</ModalLabel>
+                  <label
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={updatedUser.active}
+                      onChange={(e) =>
+                        setUpdatedUser({
+                          ...updatedUser,
+                          active: e.target.checked,
+                        })
+                      }
+                    />
+                    {updatedUser.active ? 'Ativo' : 'Desativado'}
+                  </label>
 
                   <ModalButtonGroup>
                     <ModalButton

@@ -82,6 +82,12 @@ export const UserStyles = styled.div`
         font-weight: 700;
         margin-bottom: 4px;
         color: #1e1e1e;
+
+        strong {
+          margin-left: 8px;
+          color: #969696;
+          font-size: 19px;
+        }
       }
 
       .user-email {
